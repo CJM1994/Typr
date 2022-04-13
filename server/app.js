@@ -1,14 +1,20 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
-const dotenv = require('dotenv');
+const morgan = require('morgan'); // Server logs
+const dotenv = require('dotenv'); // Load ENV
 
 PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(morgan('dev'));
+app.use(express.static('public')); // Serve static files
 dotenv.config();
 
-app.get('/', (req, res) => {
+// Initialize Routes
+const userRoutes = require('./routes/userRoutes');
+app.use(userRoutes);
+
+app.get('/test', (req, res) => {
   res.send('Hello|World');
 })
 
