@@ -14,7 +14,7 @@ dotenv.config();
 const userRoutes = require('./routes/userRoutes');
 app.use(userRoutes);
 
-app.get('/test', (req, res) => {
+app.get('/home', (req, res) => {
   res.send('Hello|World');
 })
 
