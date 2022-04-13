@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios.get("/test").then((res) => {
-      setState({ testResponse: res.data });
+      setState({ testResponse: JSON.stringify(res.data) });
       console.log(res.data);
     });
   }, []);
