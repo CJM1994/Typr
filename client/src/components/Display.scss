@@ -1,6 +1,9 @@
 .display {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  background-color: black;
+  border: 1px solid #D7D0CF;
+  border-right: none;
 }
