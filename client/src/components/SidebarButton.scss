@@ -1,0 +1,14 @@
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 65px;
+  color: black;
+  border-bottom: 1px solid #E0D9D9;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #f2ebe8;
+}
