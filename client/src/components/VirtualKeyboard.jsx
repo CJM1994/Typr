@@ -141,7 +141,6 @@ function VirtualKeyboard() {
 
   return (
     <section>
-      <input className="input" />
       <div className="simple-keyboard"></div>
     </section>
   );
