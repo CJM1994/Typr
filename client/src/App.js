@@ -1,10 +1,10 @@
 import React from "react";
-import Keyboard from "./components/Keyboard"
+import VirtualKeyboard from "./components/VirtualKeyboard"
 
 function App() {
   return (
   <main>
-    <Keyboard />
+    <VirtualKeyboard />
   </main>
   );
 }
