@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import Keyboard from "simple-keyboard";
 import 'simple-keyboard/build/css/index.css';
 
+// Useful sandbox for testing keyboard component and viewing options
+// https://codesandbox.io/s/n5mllkkmyl?file=/src/index.js
+
 function VirtualKeyboard() {
 
   useEffect(() => {
