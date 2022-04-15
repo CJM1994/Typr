@@ -1,17 +1,22 @@
 .lineContainer {
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
-p {
+.ch {
   color: #444256;
   font-size: 20px;
   margin: 0;
 }
 
+.ch--wrong {
+  background-color: rgb(248, 155, 155);
+}
+
 .ticker {
-  display: inline-flex;
   background-color: black;
+  border: 1px solid black;
   width: 2px;
   height: 25px;
 }

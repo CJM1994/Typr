@@ -6,16 +6,11 @@ import Keyboard from "./Keyboard";
 import "./Display.scss";
 
 export default function Display() {
-  const code = "const files = [ 'foo.txt ', '.bar', '   ', 'baz.foo' ];\n\
-let filePaths = [];\n\
+  const code = 'const animals = ["Cat", "Dog", "Rat"];\n\
 \n\
-for (let file of files) {\n\
-  const fileName = file.trim();\n\
-  if(fileName) {\n\
-    const filePath = `~/cool_app/${fileName}`;\n\
-    filePaths.push(filePath);\n\
-  }\n\
-}";
+for (const animals of animals) {\n\
+  console.log(animal);\n\
+}';
 
   return(
     <div className="display">

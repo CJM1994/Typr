@@ -4,80 +4,80 @@ import "./Block.scss";
 
 import Line from "./Line";
 
+const getIndexes = (arr) => {
+  let lengths = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    if (i === 0) {
+      lengths.push([0, arr[i].length])
+    } else {
+      lengths.push([lengths[i - 1][1], arr[i].length + lengths[i - 1][1]])
+    }
+  }
+
+  return lengths
+};
+
 export default function Block(props) {
   const { text } = props;
   const [input, setInput] = useState({
     keys: [""],
-    counter: 0
+    counter: 0,
+    wrongIndexes: [],
+    queue: null
   });
-  const lines = text.split("\n");
+
+  const lines = text.split("\n").map((el) => {
+    const newEl = el.split("");
+    newEl.push("\n");
+    return newEl;
+  });
+  const lineLengths = getIndexes(lines);
 
   useEffect(() => {
     document.addEventListener("keypress", (event) => {
-      if (event.which !== 13) {
-        setInput((prev) =>  ({
-          keys: [...prev.keys.slice(0, prev.keys.length - 1), prev.keys[prev.keys.length - 1] + event.key],
-          counter: prev.counter + 1
-        }));
-      }
-    });
+      setInput((prev) =>  {
+        const indexes = [...prev.wrongIndexes];
+        if (prev.queue) indexes.push(prev.queue);
 
-    document.addEventListener("keydown", (event) => {
-      const key = event.which;
-
-      if (key === 8) {
-        setInput((prev) =>  {
-          if (prev[prev.length - 1] === "" && prev.length > 1) {
-            return {
-              keys: [...prev.keys.slice(0, prev.keys.length - 1)],
-              counter: prev.counter - (prev.counter - 1 < 0 ? 0 : 1)
-            };
-          } else {
-            return {
-              keys: [...prev.keys.slice(0, prev.keys.length - 1), prev.keys[prev.keys.length - 1].slice(0, -1)],
-              counter: prev.counter - (prev.counter - 1 < 0 ? 0 : 1)
-            };
-          }
-        });
-      } else if (key === 13) {
-        setInput((prev) =>  ({
-          keys: [...prev.keys, ""],
-          counter: prev.counter + 1
-        }));
-      }
+        if (event.key === lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]]) {
+          return {
+            ...prev,
+            keys: [...prev.keys.slice(0, prev.keys.length - 1), prev.keys[prev.keys.length - 1] + event.key],
+            counter: prev.counter + 1,
+            wrongIndexes: indexes,
+            queue: null
+          };
+        } else if (event.keyCode === 13 && lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]] === "\n") {
+          return {
+            ...prev,
+            keys: [...prev.keys, ""],
+            counter: prev.counter + 1,
+            wrongIndexes: indexes,
+            queue: null
+          };
+        } else if (!prev.wrongIndexes.includes(prev.counter) ) {
+          return { ...prev, queue: prev.counter };
+        } else {
+          return { ...prev }
+        }
+      });
     });
   }, []);
 
-  const getIndexes = (arr) => {
-    let lengths = [];
-    
-    for (let i = 0; i < arr.length; i++) {
-      if (i === 0) {
-        lengths.push([0, arr[i].length])
-      } else {
-        lengths.push([lengths[i - 1][1] + 1, arr[i].length + lengths[i - 1][1]])
-      }
-    }
-
-    return lengths
-  };
+  console.log(input);
 
   const codeBlock = [];
-  const lineLengths = getIndexes(lines);
 
   for (let i = 0; i < lines.length; i++) {
-
     codeBlock.push(<Line 
       key={i}
       text={lines[i]}
       start={lineLengths[i][0]}
-      end={lineLengths[i][1]}
+      wrong={input.wrongIndexes}
       index={input.counter}
     />);
   }
-
-  console.log(input);
-  console.log(lineLengths)
 
   return (
     <pre className="codeContainer">
