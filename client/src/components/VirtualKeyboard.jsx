@@ -7,8 +7,8 @@ function VirtualKeyboard() {
   useEffect(() => {
 
     const keyboard = new Keyboard({
-      onChange: input => onChange(input),
-      onKeyPress: button => onKeyPress(button),
+      // onChange: input => onChange(input),
+      // onKeyPress: button => onKeyPress(button),
       layout: {
         'default': [
           '` 1 2 3 4 5 6 7 8 9 0 - = {backspace}',
@@ -40,58 +40,72 @@ function VirtualKeyboard() {
         '{shiftleft}': 'shift',
         '{shiftright}': 'shift',
         '{space}': 'space',
-        // 'a': 'A',
-        // 'b': 'B',
-        // 'c': 'C',
-        // 'd': 'D',
-        // 'e': 'E',
-        // 'f': 'F',
-        // 'g': 'G',
-        // 'h': 'H',
-        // 'i': 'I',
-        // 'j': 'J',
-        // 'k': 'K',
-        // 'l': 'L',
-        // 'm': 'M',
-        // 'n': 'N',
-        // 'o': 'O',
-        // 'p': 'P',
-        // 'q': 'Q',
-        // 'r': 'R',
-        // 's': 'S',
-        // 't': 'T',
-        // 'u': 'U',
-        // 'v': 'V',
-        // 'w': 'W',
-        // 'x': 'X',
-        // 'y': 'Y',
-        // 'z': 'Z'
       },
       physicalKeyboardHighlight: true,
       physicalKeyboardHighlightPress: true,
       physicalKeyboardHighlightBgColor: "#42403E",
       physicalKeyboardHighlightTextColor: "white",
-      debug: true
+      // debug: true
     });
 
-    function onChange(input) {
-      document.querySelector(".input").value = input;
-      console.log("Input changed", input);
-    }
+    document.addEventListener("keydown", (event) => {
+      if (event.key === 'Shift') enableShiftMode(event);
+    })
 
-    function onKeyPress(button) {
-      console.log("Button pressed", button);
-      if (button === "{shiftleft}" || "{shiftright}") handleShiftButton();
-    }
+    document.addEventListener("keyup", (event) => {
+      if (event.key === "Shift") disableShiftMode(event);
+    });
 
-    function handleShiftButton() {
-      let currentLayout = keyboard.options.layoutName;
-      let shiftToggle = currentLayout === "shift" ? "default" : "shift";
-
+    function enableShiftMode(event) {
       keyboard.setOptions({
-        layoutName: shiftToggle
+        layoutName: "shift"
       });
+    
+      highlightButton(event);
     }
+    
+    function disableShiftMode(event) {
+      keyboard.setOptions({
+        layoutName: "default"
+      });
+    
+      unhighlightButton(event);
+    }
+
+    function highlightButton(event) {
+      let layoutKeyName = keyboard.physicalKeyboard.getSimpleKeyboardLayoutKey(
+        event
+      );
+    
+      let buttonElement =
+        keyboard.getButtonElement(layoutKeyName) ||
+        keyboard.getButtonElement(`{${layoutKeyName}}`);
+    
+      /**
+       * Highlighting that key manually...
+       */
+      buttonElement.style.background = "#42403E";
+      buttonElement.style.color = "white";
+    
+      console.log(buttonElement);
+    }
+
+    function unhighlightButton(event) {
+      let layoutKeyName = keyboard.physicalKeyboard.getSimpleKeyboardLayoutKey(
+        event
+      );
+    
+      let buttonElement =
+        keyboard.getButtonElement(layoutKeyName) ||
+        keyboard.getButtonElement(`{${layoutKeyName}}`);
+    
+      /**
+       * Highlighting that key manually...
+       */
+      buttonElement.removeAttribute("style");
+    
+      console.log(buttonElement);
+    }    
 
   }, [])
 
