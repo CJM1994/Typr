@@ -1,0 +1,17 @@
+.lineContainer {
+  display: flex;
+  align-items: center;
+}
+
+p {
+  color: #444256;
+  font-size: 20px;
+  margin: 0;
+}
+
+.ticker {
+  display: inline-flex;
+  background-color: black;
+  width: 2px;
+  height: 25px;
+}

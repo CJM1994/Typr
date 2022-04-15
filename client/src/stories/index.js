@@ -12,15 +12,15 @@ storiesOf("Sidebar", module)
     <Sidebar />
   ));
 
-const code = "const files = [ 'foo.txt ', '.bar', '   ', 'baz.foo' ]\;\n\
-let filePaths = []\;\n\
+const code = "const files = [ 'foo.txt ', '.bar', '   ', 'baz.foo' ];\n\
+let filePaths = [];\n\
 \n\
-for (let file of files) \{\n\
-  const fileName = file.trim()\;\n\
-  if(fileName) \{\n\
-    const filePath = `~/cool_app/${fileName}`\;\n\
-    filePaths.push(filePath)\;\n\
-  \}\n\
+for (let file of files) {\n\
+  const fileName = file.trim();\n\
+  if(fileName) {\n\
+    const filePath = `~/cool_app/${fileName}`;\n\
+    filePaths.push(filePath);\n\
+  }\n\
 }";
 
 storiesOf("Code Block", module)
