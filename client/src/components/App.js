@@ -1,9 +1,9 @@
 import React from "react";
 
-import Sidebar from "./Sidebar/Sidebar";
-import Display from "./Display";
-
 import "./App.scss";
+
+import Sidebar from "./Sidebar/Sidebar";
+import Display from "./Main/Display";
 
 function App() {
   return (
