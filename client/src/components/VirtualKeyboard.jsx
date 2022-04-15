@@ -23,6 +23,13 @@ function VirtualKeyboard() {
           '{capslock} A S D F G H J K L : " {enter}',
           "{shiftleft} Z X C V B N M < > ? {shiftright}",
           "{space}"
+        ],
+        'capslock': [
+          '` 1 2 3 4 5 6 7 8 9 0 - = {backspace}',
+          '{tab} Q W E R T Y U I O P [ ] \\',
+          '{capslock} A S D F G H J K L ; \' {enter}',
+          '{shiftleft} Z X C V B N M , . / {shiftright}',
+          '{space}'
         ]
       },
       display: {
@@ -61,24 +68,26 @@ function VirtualKeyboard() {
         // 'z': 'Z'
       },
       physicalKeyboardHighlight: true,
+      physicalKeyboardHighlightPress: true,
       physicalKeyboardHighlightBgColor: "#42403E",
       physicalKeyboardHighlightTextColor: "white",
+      debug: true
     });
 
     function onChange(input) {
       document.querySelector(".input").value = input;
       console.log("Input changed", input);
     }
-    
+
     function onKeyPress(button) {
       console.log("Button pressed", button);
-      if (button === "{shift}") handleShiftButton();
+      if (button === "{shiftleft}" || "{shiftright}") handleShiftButton();
     }
-    
+
     function handleShiftButton() {
       let currentLayout = keyboard.options.layoutName;
       let shiftToggle = currentLayout === "shift" ? "default" : "shift";
-    
+
       keyboard.setOptions({
         layoutName: shiftToggle
       });
