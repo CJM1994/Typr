@@ -8,8 +8,13 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 97.5%;
   height: 95vh;
+}
+
+.simple-keyboard {
+  width: 60vw;
 }

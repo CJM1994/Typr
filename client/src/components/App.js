@@ -2,6 +2,7 @@ import React from "react";
 
 import Sidebar from "./Sidebar";
 import Display from "./Display";
+import VirtualKeyboard from "./VirtualKeyboard";
 
 import "./App.scss";
 
@@ -10,8 +11,9 @@ function App() {
     <main className="layout">
       <div className="container">
         <Display />
-        <Sidebar />
+        <VirtualKeyboard id="virtual-keyboard" />
       </div>
+      <Sidebar />
     </main>
   );
 }
