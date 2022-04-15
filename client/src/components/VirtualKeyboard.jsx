@@ -36,12 +36,12 @@ function VirtualKeyboard() {
         ]
       },
       display: {
-        '{backspace}': 'backspace',
-        '{enter}': 'enter',
+        '{backspace}': 'backspace ⌫',
+        '{enter}': 'enter ↵',
         '{tab}': 'tab',
-        '{capslock}': 'caps',
-        '{shiftleft}': 'shift',
-        '{shiftright}': 'shift',
+        '{capslock}': 'caps lock ⇪',
+        '{shiftleft}': 'shift ⇧',
+        '{shiftright}': 'shift ⇧',
         '{space}': 'space',
       },
       physicalKeyboardHighlight: true,
@@ -69,9 +69,10 @@ function VirtualKeyboard() {
     }
 
     function disableShiftMode(event) {
-
       let capsLockIsOn = event.getModifierState("CapsLock");
-
+      /**
+       * If caps is on set back to caps, set to default otherwise
+       */
       if (capsLockIsOn) {
         keyboard.setOptions({
           layoutName: "capslock"
@@ -88,7 +89,7 @@ function VirtualKeyboard() {
     function toggleCapsMode(event) {
       let currentLayout = keyboard.options.layoutName;
       /**
-       * If currentLayout is default, set to shift, and vice versa
+       * If currentLayout is default, set to caps, and vice versa
        */
       let capsToggle = currentLayout === "default" ? "capslock" : "default";
 
