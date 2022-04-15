@@ -50,6 +50,7 @@ function VirtualKeyboard() {
 
     document.addEventListener("keydown", (event) => {
       if (event.key === 'Shift') enableShiftMode(event);
+      if (event.key === "CapsLock") toggleCapsMode(event);
     })
 
     document.addEventListener("keyup", (event) => {
@@ -60,33 +61,58 @@ function VirtualKeyboard() {
       keyboard.setOptions({
         layoutName: "shift"
       });
-    
+
       highlightButton(event);
     }
-    
+
     function disableShiftMode(event) {
-      keyboard.setOptions({
-        layoutName: "default"
-      });
-    
+
+      let capsLockIsOn = event.getModifierState("CapsLock");
+
+      if (capsLockIsOn) {
+        keyboard.setOptions({
+          layoutName: "capslock"
+        });
+      } else {
+        keyboard.setOptions({
+          layoutName: "default"
+        });
+      }
+
       unhighlightButton(event);
+    }
+
+    function toggleCapsMode(event) {
+      let currentLayout = keyboard.options.layoutName;
+      /**
+       * If currentLayout is default, set to shift, and vice versa
+       */
+      let capsToggle = currentLayout === "default" ? "capslock" : "default";
+
+      keyboard.setOptions({
+        layoutName: capsToggle
+      });
+
+      if (event) {
+        highlightButton(event);
+      }
     }
 
     function highlightButton(event) {
       let layoutKeyName = keyboard.physicalKeyboard.getSimpleKeyboardLayoutKey(
         event
       );
-    
+
       let buttonElement =
         keyboard.getButtonElement(layoutKeyName) ||
         keyboard.getButtonElement(`{${layoutKeyName}}`);
-    
+
       /**
        * Highlighting that key manually...
        */
       buttonElement.style.background = "#42403E";
       buttonElement.style.color = "white";
-    
+
       console.log(buttonElement);
     }
 
@@ -94,18 +120,18 @@ function VirtualKeyboard() {
       let layoutKeyName = keyboard.physicalKeyboard.getSimpleKeyboardLayoutKey(
         event
       );
-    
+
       let buttonElement =
         keyboard.getButtonElement(layoutKeyName) ||
         keyboard.getButtonElement(`{${layoutKeyName}}`);
-    
+
       /**
        * Highlighting that key manually...
        */
       buttonElement.removeAttribute("style");
-    
+
       console.log(buttonElement);
-    }    
+    }
 
   }, [])
 
