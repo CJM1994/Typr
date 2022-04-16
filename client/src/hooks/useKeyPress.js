@@ -84,12 +84,20 @@ export default function useKeyPress() {
     });
   }
 
+  function setLanguage(language) {
+    setPrompt((prev) => ({
+      ...prev,
+      language
+    }));
+  }
+
   return {
     prompt,
     lengths,
     input,
     handleKeypress,
     newPrompt,
-    resetInput
+    resetInput,
+    setLanguage
   };
 };
