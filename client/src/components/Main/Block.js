@@ -70,8 +70,6 @@ export default function Block(props) {
     });
   }, []);
 
-  console.log(input);
-
   const codeBlock = [];
 
   for (let i = 0; i < lines.length; i++) {
