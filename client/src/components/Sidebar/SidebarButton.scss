@@ -1,15 +1,23 @@
-a {
+.button {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 85%;
   height: 65px;
   color: #444256;
-  font-weight: bold;
   border-bottom: 1px solid #D7D0CF;
   text-decoration: none;
+  padding-left: 20px;
 }
 
-a:hover {
+.button:hover {
   background-color: #f2ebe8;
+}
+
+.button span {
+  margin: 10px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
 }
