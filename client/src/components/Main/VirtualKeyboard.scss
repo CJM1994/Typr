@@ -2,13 +2,40 @@ section {
   width: 100%;
   display: flex;
   justify-content: center;
-  .keyboardContainer {
-    display: flex;
-    width: 820px;
-    align-items: center;
-  }
 }
 
-.black {
-  background-color: black;
+.keyboardContainer {
+  display: flex;
+  padding: 25px;
+  width: 75%;
+  height: 380px;
+  align-items: center;
+  background-color: #E0D9D9;
+  border-radius: 15px;
+}
+
+.simple-keyboard-arrows {
+  background-color: #E0D9D9;
+  padding: 0;
+}
+
+.simple-keyboard-control {
+  background-color: #E0D9D9;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.simple-keyboard {
+  background-color: #E0D9D9;
+}
+
+.hg-button.smallButton {
+  height: 60px;
+  background-color: #EFEFEE;
+}
+
+.hg-button.other {
+  height: 60px;
+  width: 75px;
+  background-color: #E3E3E1;
 }

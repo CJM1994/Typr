@@ -45,6 +45,19 @@ function VirtualKeyboard() {
         '{shiftright}': 'shift ⇧',
         '{space}': 'space',
       },
+      buttonTheme: [
+        {
+          class: "smallButton",
+          buttons: "` 1 2 3 4 5 6 7 8 9 0 - = [ ] ; ' , . / \\ \n\
+                    ~ ! @ # $ % ^ & * ( ) _ + { } : \" < > ? | \n\
+                    Q W E R T Y U I O P A S D F G H J K L Z X C V B N M \n\
+                    q w e r t y u i o p a s d f g h j k l z x c v b n m"
+        },
+        {
+          class: "other",
+          buttons: "{space} {backspace} {tab} {capslock} {enter} {shiftleft} {shiftright}"
+        }
+      ],
       physicalKeyboardHighlight: true,
       physicalKeyboardHighlightPress: true,
       physicalKeyboardHighlightBgColor: "#42403E",
@@ -59,13 +72,27 @@ function VirtualKeyboard() {
           "{insert} {home} {pageup}",
           "{delete} {end} {pagedown}"
         ]
-      }
+      },
+      buttonTheme: [
+        {
+          class: "other",
+          buttons: "{prtscr} {scrolllock} {pause} \n\
+                    {insert} {home} {pageup} \n\
+                    {delete} {end} {pagedown}"
+        }
+      ]
     });
 
     const keyboardArrows = new Keyboard(".simple-keyboard-arrows", {
       layout: {
         default: ["{arrowup}", "{arrowleft} {arrowdown} {arrowright}"]
-      }
+      },
+      buttonTheme: [
+        {
+          class: "other",
+          buttons: "{arrowup} {arrowleft} {arrowdown} {arrowright}"
+        }
+      ]
     });
 
     document.addEventListener("keydown", (event) => {
@@ -133,8 +160,6 @@ function VirtualKeyboard() {
        */
       buttonElement.style.background = "#42403E";
       buttonElement.style.color = "white";
-
-      console.log(buttonElement);
     }
 
     function unhighlightButton(event) {
@@ -150,8 +175,6 @@ function VirtualKeyboard() {
        * Highlighting that key manually...
        */
       buttonElement.removeAttribute("style");
-
-      console.log(buttonElement);
     }
 
   }, [])

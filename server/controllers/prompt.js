@@ -14,10 +14,8 @@ const { codeBlock, language, difficulty, category } = req.body;
 
 
 const getPrompt = async (req, res) => {
-  const getPrompt = await promptSchema.find({})
+  const getPrompt = await promptSchema.find({ "language": req.params.language })
+  res.status(200).send(getPrompt);
 }
-module.exports = { addPrompt, getPrompt }
 
-
-
-
+module.exports = { addPrompt, getPrompt };

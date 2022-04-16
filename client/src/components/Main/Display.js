@@ -1,22 +1,50 @@
-import React from "react";
-
-import Block from "./Block";
-import VirtualKeyboard from "./VirtualKeyboard";
+import React, { useEffect } from "react";
+import useKeyPress from "../../hooks/useKeyPress";
 
 import "./Display.scss";
 
-export default function Display() {
-  const code = 'const animals = [];\n\
-\n\
-for (const animal of animals) {\n\
-  console.log(animal);\n\
-  doSomething(animal);\n\
-}';
+import Information from "./Information";
+import Lines from "./Lines";
+import VirtualKeyboard from "./VirtualKeyboard";
 
-  return(
+export default function Display() {
+  // deconstructing objects
+  const { prompt, input, lengths, newPrompt, handleKeypress, resetInput } = useKeyPress();
+  const { codeLines, language } = prompt;
+  const { wrongIndexes, counter } = input;
+
+  // side effect for language change
+  useEffect(() => {
+    newPrompt(language);
+  }, []);
+
+  // creates new event listener when component is unmounted (new prompt)
+  useEffect(() => {
+    document.addEventListener("keypress", handleKeypress);
+    return () => {
+      document.removeEventListener("keypress", handleKeypress);
+    };
+  }, [handleKeypress]);
+
+
+  return (
     <div className="display">
-      <Block text={code} />
+      <Information 
+        language={prompt.language}
+        setLanguage={newPrompt}
+      />
+      <div className="codeContainer">
+        <div className="line" />
+        <div className="code">
+          <Lines
+            lines={codeLines}
+            lengths={lengths}
+            indexes={wrongIndexes}
+            counter={counter}
+          />
+        </div>
+      </div>
       <VirtualKeyboard />
     </div>
-  )
+  );
 };
