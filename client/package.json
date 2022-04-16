@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "4": "0.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
+    "node-sass": "^4.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-hooks-testing-library": "^0.6.0",
@@ -41,15 +43,5 @@
     ]
   },
   "proxy": "http://localhost:3001",
-  "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@storybook/addon-actions": "^5.0.10",
-    "@storybook/addon-backgrounds": "^5.0.10",
-    "@storybook/addon-links": "^5.0.10",
-    "@storybook/addons": "^5.0.10",
-    "@storybook/react": "^5.0.10",
-    "babel-loader": "^8.0.5",
-    "node-sass": "^4.14.0",
-    "react-test-renderer": "^16.9.0"
-  }
+  "devDependencies": {}
 }
