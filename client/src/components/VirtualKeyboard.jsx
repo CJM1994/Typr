@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Keyboard from "simple-keyboard";
 import 'simple-keyboard/build/css/index.css';
+import './VirtualKeyboard.scss';
 
 // Useful sandbox for testing keyboard component and viewing options
 // https://codesandbox.io/s/n5mllkkmyl?file=/src/index.js
@@ -49,6 +50,22 @@ function VirtualKeyboard() {
       physicalKeyboardHighlightBgColor: "#42403E",
       physicalKeyboardHighlightTextColor: "white",
       // debug: true
+    });
+
+    const keyboardControlPad = new Keyboard(".simple-keyboard-control", {
+      layout: {
+        default: [
+          "{prtscr} {scrolllock} {pause}",
+          "{insert} {home} {pageup}",
+          "{delete} {end} {pagedown}"
+        ]
+      }
+    });
+
+    const keyboardArrows = new Keyboard(".simple-keyboard-arrows", {
+      layout: {
+        default: ["{arrowup}", "{arrowleft} {arrowdown} {arrowright}"]
+      }
     });
 
     document.addEventListener("keydown", (event) => {
@@ -141,7 +158,13 @@ function VirtualKeyboard() {
 
   return (
     <section>
-      <div className="simple-keyboard"></div>
+      <div class="keyboardContainer">
+        <div class="simple-keyboard simple-keyboard-main"></div>
+        <div class="controlArrows">
+          <div class="simple-keyboard-control"></div>
+          <div class="simple-keyboard-arrows"></div>
+        </div>
+      </div>
     </section>
   );
 
