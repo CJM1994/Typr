@@ -5,21 +5,28 @@
   align-items: center;
   width: 275px;
   height: 100%;
-  border-left: 1px solid #D7D0CF;
+  border: 1px solid #D7D0CF;
+  font-size: x-large;
+  color: #444256;
 }
 
 .login {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 85%;
   height: 175px;
+  border-bottom: 1px solid #D7D0CF;
   color: #444256;
   font-weight: bold;
-  border-bottom: 1px solid #D7D0CF;
   text-decoration: none;
 }
 
 .login:hover {
   background-color: #f2ebe8;
+}
+
+.login span {
+  margin-top: 5px;
 }
