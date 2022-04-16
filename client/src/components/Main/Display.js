@@ -9,15 +9,14 @@ import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
   // deconstructing objects
-  const { prompt, input, lengths, newPrompt, handleKeypress, resetInput, setLanguage } = useKeyPress();
+  const { prompt, input, lengths, newPrompt, handleKeypress, resetInput } = useKeyPress();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
 
   // side effect for language change
   useEffect(() => {
     newPrompt(language);
-    resetInput();
-  }, [language]);
+  }, []);
 
   // creates new event listener when component is unmounted (new prompt)
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function Display() {
     <div className="display">
       <Information 
         language={prompt.language}
-        setLanguage={setLanguage}
+        setLanguage={newPrompt}
       />
       <div className="codeContainer">
         <div className="line" />
