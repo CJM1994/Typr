@@ -26,15 +26,16 @@ export default function useKeyPress() {
   }
 
   // function for retrieving a prompt from db
-  //  -> add randomization of res.data index
   function newPrompt(language) {
     axios.get(`prompts/${language}`)
       .then((res) => {
-        setPrompt((prev) => ({ 
-          codeLines: res.data[res.data.length - 1].codeBlock.split("\n").map((el) => [...el, "\n"]),
+        setPrompt((prev) => ({
+          codeLines: res.data[Math.floor(Math.random() * res.data.length)].codeBlock.split("\n").map((el) => [...el, "\n"]),
           language
         }));
       });
+
+    resetInput();
   };
 
   // simpler variables
@@ -89,7 +90,6 @@ export default function useKeyPress() {
     lengths,
     input,
     handleKeypress,
-    newPrompt,
-    resetInput
+    newPrompt
   };
 };

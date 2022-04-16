@@ -8,7 +8,7 @@ export default function SidebarButton(props) {
   const { text } = props;
 
   return (
-    <a href={props.href} className="button">
+    <a href={props.href} className="sideButton">
       {text === "Practice" && <FontAwesomeIcon icon={faKeyboard} className="icon" />}
       {text === "Profile" && <FontAwesomeIcon icon={faArrowTrendUp} className="icon" />}
       {text === "Help" && <FontAwesomeIcon icon={faQuestion} className="icon" />}

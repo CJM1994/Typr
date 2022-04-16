@@ -3,6 +3,7 @@ import useKeyPress from "../../hooks/useKeyPress";
 
 import "./Display.scss";
 
+import Information from "./Information";
 import Lines from "./Lines";
 import VirtualKeyboard from "./VirtualKeyboard";
 
@@ -15,10 +16,9 @@ export default function Display() {
   // side effect for language change
   useEffect(() => {
     newPrompt(language);
-    resetInput();
-  }, [language]);
+  }, []);
 
-  // creates new event listener when component is unmounted
+  // creates new event listener when component is unmounted (new prompt)
   useEffect(() => {
     document.addEventListener("keypress", handleKeypress);
     return () => {
@@ -26,19 +26,23 @@ export default function Display() {
     };
   }, [handleKeypress]);
 
+
   return (
     <div className="display">
-      <select onChange={(event) => newPrompt(event.target.value)}>
-        <option value="JS ">Javascript</option>
-        <option value="Python">Python</option>
-      </select>
+      <Information 
+        language={prompt.language}
+        setLanguage={newPrompt}
+      />
       <div className="codeContainer">
-        <Lines
-          lines={codeLines}
-          lengths={lengths}
-          indexes={wrongIndexes}
-          counter={counter}
-        />
+        <div className="line" />
+        <div className="code">
+          <Lines
+            lines={codeLines}
+            lengths={lengths}
+            indexes={wrongIndexes}
+            counter={counter}
+          />
+        </div>
       </div>
       <VirtualKeyboard />
     </div>
