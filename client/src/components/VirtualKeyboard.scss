@@ -1,0 +1,10 @@
+section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .keyboardContainer {
+    display: flex;
+    width: 820px;
+    align-items: center;
+  }
+}
