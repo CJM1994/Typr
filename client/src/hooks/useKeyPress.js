@@ -59,19 +59,22 @@ export default function useKeyPress() {
         return {
           keys: [...keys.slice(0, currentLine), keys[currentLine] + event.key],
           counter: counter + 1,
-          indent: prev.indent + (event.key === "{" ? 1 : 0),
+          indent: prev.indent,
           wrongIndexes,
           queue: null
         };
       // if user presses enter when needed
       } else if (event.keyCode === 13 && lines[currentLine][currentIndexOnLine] === "\n") {
         // updates indent in input state if the first character in the next line is a closing bracket
-        const indent = prev.indent - (lines[keys.length][(prev.indent - 1 > 0 ? prev.indent - 1 : 0) * 2] === "}" ? 1 : 0);
+        let indent = prev.indent;
+        if (lines[currentLine + 1][(prev.indent * 2 - 2 > 0) ? prev.indent * 2 - 2 : 0] === "}") indent--;
+        if (lines[currentLine][currentIndexOnLine - 1] === "{") indent++;
   
         return {
           ...prev,
           keys: [...keys, "" + "  ".repeat(indent)],
           counter: counter + 1 + 2 * indent,
+          indent,
           wrongIndexes,
           queue: null
         };

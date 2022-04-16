@@ -160,8 +160,6 @@ function VirtualKeyboard() {
        */
       buttonElement.style.background = "#42403E";
       buttonElement.style.color = "white";
-
-      console.log(buttonElement);
     }
 
     function unhighlightButton(event) {
@@ -177,8 +175,6 @@ function VirtualKeyboard() {
        * Highlighting that key manually...
        */
       buttonElement.removeAttribute("style");
-
-      console.log(buttonElement);
     }
 
   }, [])
