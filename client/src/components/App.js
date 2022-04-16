@@ -10,9 +10,8 @@ function App() {
     <main className="layout">
       <div className="container">
         <Display />
-        <VirtualKeyboard id="virtual-keyboard" />
+        <Sidebar />
       </div>
-      <Sidebar />
     </main>
   );
 }

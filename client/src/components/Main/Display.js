@@ -1,7 +1,8 @@
 import React from "react";
 
 import Block from "./Block";
-import Keyboard from "./Keyboard";
+import VirtualKeyboard from "../VirtualKeyboard";
+import Keyboard from "react-simple-keyboard";
 
 import "./Display.scss";
 
@@ -16,7 +17,7 @@ for (const animal of animals) {\n\
   return(
     <div className="display">
       <Block text={code} />
-      <Keyboard />
+      <VirtualKeyboard />
     </div>
   )
 };

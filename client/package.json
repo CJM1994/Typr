@@ -9,7 +9,9 @@
     "react-dom": "^16.9.0",
     "react-hooks-testing-library": "^0.6.0",
     "react-scripts": "3.0.0",
-    "sass": "^1.50.0"
+    "react-simple-keyboard": "^3.4.107",
+    "sass": "^1.50.0",
+    "simple-keyboard": "^3.4.84"
   },
   "scripts": {
     "start": "react-scripts start",
