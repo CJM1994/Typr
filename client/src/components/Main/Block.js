@@ -23,6 +23,7 @@ export default function Block(props) {
   const [input, setInput] = useState({
     keys: [""],
     counter: 0,
+    indent: 0,
     wrongIndexes: [],
     queue: null
   });
@@ -37,23 +38,27 @@ export default function Block(props) {
   useEffect(() => {
     document.addEventListener("keypress", (event) => {
       setInput((prev) =>  {
-        const indexes = [...prev.wrongIndexes];
-        if (prev.queue) indexes.push(prev.queue);
+        const wrongIndexes = [...prev.wrongIndexes];
+        if (prev.queue) wrongIndexes.push(prev.queue);
 
         if (event.key === lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]]) {
           return {
             ...prev,
             keys: [...prev.keys.slice(0, prev.keys.length - 1), prev.keys[prev.keys.length - 1] + event.key],
             counter: prev.counter + 1,
-            wrongIndexes: indexes,
+            indent: prev.indent + (event.key === "{" ? 1 : 0),
+            wrongIndexes,
             queue: null
           };
         } else if (event.keyCode === 13 && lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]] === "\n") {
+          const indent = prev.indent - (lines[prev.keys.length][0 + (prev.indent - 1 > 0 ? prev.indent - 1 : 0) * 2] === "}" ? 1 : 0);
+
           return {
             ...prev,
-            keys: [...prev.keys, ""],
-            counter: prev.counter + 1,
-            wrongIndexes: indexes,
+            keys: [...prev.keys, "" + "  ".repeat(indent)],
+            counter: prev.counter + 1 + 2 * indent,
+            indent,
+            wrongIndexes,
             queue: null
           };
         } else if (!prev.wrongIndexes.includes(prev.counter) ) {

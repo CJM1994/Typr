@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Block from "./Block";
 import Keyboard from "./Keyboard";
@@ -6,10 +6,11 @@ import Keyboard from "./Keyboard";
 import "./Display.scss";
 
 export default function Display() {
-  const code = 'const animals = ["Cat", "Dog", "Rat"];\n\
+  const code = 'const animals = [];\n\
 \n\
-for (const animals of animals) {\n\
+for (const animal of animals) {\n\
   console.log(animal);\n\
+  doSomething(animal);\n\
 }';
 
   return(
