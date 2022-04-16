@@ -7,6 +7,9 @@ import "./Sidebar.scss"
 export default function Sidebar() {
   return (
     <section className="sidebar">
+      <a className="login" href="/login">
+        <span>Sign In</span>
+      </a>
       <SidebarButton href="/" text="Practice" />
       <SidebarButton href="/profile" text="Profile" />
       <SidebarButton href="/test" text="Typing Test" />
