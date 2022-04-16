@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import "./Block.scss";
 
@@ -19,28 +20,45 @@ const getIndexes = (arr) => {
 };
 
 export default function Block(props) {
-  const { text } = props;
-  const [input, setInput] = useState({
-    keys: [""],
-    counter: 0,
-    indent: 0,
-    wrongIndexes: [],
-    queue: null
+  const [prompt, setPrompt] = useState({
+    code: "",
+    language: props.language
   });
 
-  const lines = text.split("\n").map((el) => {
-    const newEl = el.split("");
-    newEl.push("\n");
-    return newEl;
+  const [input, setInput] = useState({
+    keys: [""], // ["", ""]
+    counter: 0, // keys.length
+    indent: 0, // 1 indent = 1 tab
+    wrongIndexes: [], // incorrect keypresses
+    queue: null // to be added ot wrongIndexes for visual purposes
   });
-  const lineLengths = getIndexes(lines);
 
   useEffect(() => {
+    axios.get(`prompts/${prompt.language}`)
+      .then((res) => {
+        setPrompt((prev) => ({ ...prev, code: res.data[res.data.length - 1].codeBlock.split("\n") }));
+      });
+  }, [prompt.language]);
+
+  const lines = prompt.code;
+  const lineLengths = getIndexes(lines);
+  
+  useEffect(() => {
+    // listens to keypress events (uses the variables it was working with at intialization)
     document.addEventListener("keypress", (event) => {
+      // everytime key is pressed:
       setInput((prev) =>  {
+        // new array containing previous wrongIndex
         const wrongIndexes = [...prev.wrongIndexes];
         if (prev.queue !== null) wrongIndexes.push(prev.queue);
 
+        // debugging:
+        // console.log(`comparing ${event.key} === ${lines[prev.keys.length - 1]}`);
+        // [prev.counter - lineLengths[prev.keys.length - 1][0] + 2]
+        // console.log("inside", prompt.code);
+        // console.log(`            === lines[${prev.keys.length - 1}][${prev.counter - lineLengths[prev.keys.length - 1][0]}]`);
+
+        // correct key is pressed
         if (event.key === lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]]) {
           return {
             ...prev,
@@ -50,6 +68,9 @@ export default function Block(props) {
             wrongIndexes,
             queue: null
           };
+        // if user presses enter
+        // lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]]
+        //   => first ch on next line accounting for indents
         } else if (event.keyCode === 13 && lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]] === "\n") {
           const indent = prev.indent - (lines[prev.keys.length][0 + (prev.indent - 1 > 0 ? prev.indent - 1 : 0) * 2] === "}" ? 1 : 0);
 
@@ -61,7 +82,8 @@ export default function Block(props) {
             wrongIndexes,
             queue: null
           };
-        } else if (!prev.wrongIndexes.includes(prev.counter) ) {
+        // if wrongly pressed index is already in wrong array
+        } else if (!prev.wrongIndexes.includes(prev.counter)) {
           return { ...prev, queue: prev.counter };
         } else {
           return { ...prev }
