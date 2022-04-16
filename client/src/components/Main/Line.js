@@ -4,7 +4,7 @@ import classNames from "classnames";
 import "./Line.scss";
 
 export default function Line(props) {
-  const { text, start, index, wrong} = props;
+  const { text, start, index, wrong } = props;
   const line = [];
   let lineClasses;
 

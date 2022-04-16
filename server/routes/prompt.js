@@ -4,7 +4,7 @@ const router = express.Router();
 const { addPrompt, getPrompt } = require('../controllers/prompt');
 
 router.post("/add", addPrompt );
-router.get("/index", getPrompt );
+router.get("/:language", getPrompt );
 
 
 module.exports = router;
