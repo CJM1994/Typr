@@ -39,7 +39,7 @@ export default function Block(props) {
     document.addEventListener("keypress", (event) => {
       setInput((prev) =>  {
         const wrongIndexes = [...prev.wrongIndexes];
-        if (prev.queue) wrongIndexes.push(prev.queue);
+        if (prev.queue !== null) wrongIndexes.push(prev.queue);
 
         if (event.key === lines[prev.keys.length - 1][prev.counter - lineLengths[prev.keys.length - 1][0]]) {
           return {

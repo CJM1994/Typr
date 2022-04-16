@@ -1,8 +1,7 @@
 import React from "react";
 
 import Block from "./Block";
-import VirtualKeyboard from "../VirtualKeyboard";
-import Keyboard from "react-simple-keyboard";
+import VirtualKeyboard from "./VirtualKeyboard";
 
 import "./Display.scss";
 
