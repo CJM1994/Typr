@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import useKeyPress from "../../hooks/useKeyPress";
 
 import "./Display.scss";
-import Information from "./Information";
 
+import Information from "./Information";
 import Lines from "./Lines";
 import VirtualKeyboard from "./VirtualKeyboard";
 

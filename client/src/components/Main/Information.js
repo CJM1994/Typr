@@ -24,7 +24,6 @@ export default function Information(props) {
   return (
     <article className="information">
       <span className="info">{"Speed: <speed> Accuracy: <accuracy> Score: <score>"}</span>
-      {/* <span className="info">{"Language: <props.language>"}</span> */}
       <div className="info">
         <span>Language:</span>
         {buttons}
