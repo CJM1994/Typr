@@ -1,4 +1,4 @@
-.button {
+.sideButton {
   display: flex;
   align-items: center;
   width: 85%;
@@ -9,11 +9,11 @@
   padding-left: 20px;
 }
 
-.button:hover {
+.sideButton:hover {
   background-color: #f2ebe8;
 }
 
-.button span {
+.sideButton span {
   margin: 10px;
 }
 
