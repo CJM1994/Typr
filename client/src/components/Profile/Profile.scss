@@ -10,7 +10,7 @@
   .welcome {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: flex-start
   }
   
@@ -26,3 +26,8 @@
   }
 }
 
+// For testing the resizing of charts
+#Test {
+  width: 1000px;
+  height:500;
+}

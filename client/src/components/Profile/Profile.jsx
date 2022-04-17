@@ -1,6 +1,7 @@
 import React from "react";
 import './Profile.scss';
 import StatisticsBlock from "./StatisticsBlock"
+import LineChart from './Charts/Line'
 
 export default function Profile(props) {
 
@@ -45,6 +46,9 @@ export default function Profile(props) {
         <p>Your all time average speed beats {avgSpeedPercentile} of all other people.</p>
 
         {/* Implementing graphs below -Connor */}
+
+        <div id='Test'><LineChart /></div>
+        
 
       </div>
 
