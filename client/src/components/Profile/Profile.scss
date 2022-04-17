@@ -1,0 +1,28 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 1.5em;
+  margin-left: 1%;
+  padding: 1% 4%;
+  border: 1px solid #D7D0CF;
+
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start
+  }
+  
+  h1 {
+    color: #673B1D;
+    font-weight: 300;
+    font-size: 2em;
+    margin-bottom: 0;
+  }
+  h2 {
+    color: #673B1D;
+    font-weight: 300;
+  }
+}
+
