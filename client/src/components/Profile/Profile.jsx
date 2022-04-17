@@ -44,6 +44,7 @@ export default function Profile(props) {
         <p>Your all time top speed beats {topSpeedPercentile} of all other people.</p>
         <p>Your all time average speed beats {avgSpeedPercentile} of all other people.</p>
 
+        {/* Implementing graphs below -Connor */}
 
       </div>
 
