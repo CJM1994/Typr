@@ -26,7 +26,7 @@ export default function useKeyPress() {
   }
 
   // function for retrieving a prompt from db
-  function newPrompt(language) {
+  function fetchPrompt(language) {
     axios.get(`prompts/${language}`)
       .then((res) => {
         setPrompt((prev) => ({
@@ -34,8 +34,6 @@ export default function useKeyPress() {
           language
         }));
       });
-
-    resetInput();
   };
 
   // simpler variables
@@ -93,6 +91,7 @@ export default function useKeyPress() {
     lengths,
     input,
     handleKeypress,
-    newPrompt
+    fetchPrompt,
+    resetInput
   };
 };
