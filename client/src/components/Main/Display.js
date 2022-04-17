@@ -13,7 +13,7 @@ export default function Display() {
   const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress } = useKeyPress();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
-  const { seconds, running, toggleTimer, resetTimer } = useTimer();
+  const { milliseconds, running, toggleTimer, resetTimer } = useTimer();
 
   function newPrompt(language) {
     fetchPrompt(language);
@@ -50,7 +50,7 @@ export default function Display() {
       <Information 
         language={prompt.language}
         setLanguage={newPrompt}
-        time={seconds}
+        time={milliseconds}
       />
       <div className="codeContainer">
         <div className="line" />
