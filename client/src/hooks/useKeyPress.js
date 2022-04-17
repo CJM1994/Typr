@@ -14,7 +14,8 @@ export default function useKeyPress() {
     counter: 0,
     indent: 0,
     wrongIndexes: [],
-    queue: null
+    queue: null,
+    focused: false
   };
 
   // state for keeping track of user keypresses
@@ -23,7 +24,11 @@ export default function useKeyPress() {
   // returns input to its initial state
   function resetInput() {
     setInput(initialInput);
-  }
+  };
+
+  function setFocus(focus) {
+    setInput((prev) => ({ ...prev, focused: focus }));
+  };
 
   // function for retrieving a prompt from db
   function fetchPrompt(language) {
@@ -44,46 +49,49 @@ export default function useKeyPress() {
   // callback for event listener
   function handleKeypress(event) {
     // updates input when a key is pressed
-    setInput((prev) =>  {
-      // descriptive variables
-      const { counter, wrongIndexes, keys } = prev;
-      const currentLine = keys.length - 1;
-      const currentIndexOnLine = [counter - lengths[currentLine][0]];
-      
-      // if user presses correct key
-      if (event.key === lines[currentLine][currentIndexOnLine]) {
-        if (prev.queue !== null) wrongIndexes.push(prev.queue);
+    if (input.focused) {
+      setInput((prev) =>  {
+        // descriptive variables
+        const { counter, wrongIndexes, keys } = prev;
+        const currentLine = keys.length - 1;
+        const currentIndexOnLine = [counter - lengths[currentLine][0]];
+        
+        // if user presses correct key
+        if (event.key === lines[currentLine][currentIndexOnLine]) {
+          if (prev.queue !== null) wrongIndexes.push(prev.queue);
 
-        return {
-          keys: [...keys.slice(0, currentLine), keys[currentLine] + event.key],
-          counter: counter + 1,
-          indent: prev.indent,
-          wrongIndexes,
-          queue: null
-        };
-      // if user presses enter when needed
-      } else if (event.keyCode === 13 && lines[currentLine][currentIndexOnLine] === "\n") {
-        // updates indent in input state if the first character in the next line is a closing bracket
-        let indent = prev.indent;
-        if (lines[currentLine + 1][(prev.indent * 2 - 2 > 0) ? prev.indent * 2 - 2 : 0] === "}") indent--;
-        if (lines[currentLine][currentIndexOnLine - 1] === "{") indent++;
-  
-        return {
-          ...prev,
-          keys: [...keys, "" + "  ".repeat(indent)],
-          counter: counter + 1 + 2 * indent,
-          indent,
-          wrongIndexes,
-          queue: null
-        };
-      // if user presses an incorrect key for the first time
-      } else if (!wrongIndexes.includes(counter)) {
-        return { ...prev, queue: counter };
-      // if user presses an incorrect key
-      } else {
-        return { ...prev }
-      }
-    });
+          return {
+            ...prev,
+            keys: [...keys.slice(0, currentLine), keys[currentLine] + event.key],
+            counter: counter + 1,
+            indent: prev.indent,
+            wrongIndexes,
+            queue: null
+          };
+        // if user presses enter when needed
+        } else if (event.keyCode === 13 && lines[currentLine][currentIndexOnLine] === "\n") {
+          // updates indent in input state if the first character in the next line is a closing bracket
+          let indent = prev.indent;
+          if (lines[currentLine + 1][(prev.indent * 2 - 2 > 0) ? prev.indent * 2 - 2 : 0] === "}") indent--;
+          if (lines[currentLine][currentIndexOnLine - 1] === "{") indent++;
+    
+          return {
+            ...prev,
+            keys: [...keys, "" + "  ".repeat(indent)],
+            counter: counter + 1 + 2 * indent,
+            indent,
+            wrongIndexes,
+            queue: null
+          };
+        // if user presses an incorrect key for the first time
+        } else if (!wrongIndexes.includes(counter)) {
+          return { ...prev, queue: counter };
+        // if user presses an incorrect key
+        } else {
+          return { ...prev }
+        }
+      });
+    }
   }
 
   return {
@@ -92,6 +100,7 @@ export default function useKeyPress() {
     input,
     handleKeypress,
     fetchPrompt,
-    resetInput
+    resetInput,
+    setFocus
   };
 };

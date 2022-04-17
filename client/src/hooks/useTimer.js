@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function useTimer() {
-  const [milliseconds, setSeconds] = useState(0);
+  const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
 
   function toggle() {
@@ -9,7 +9,7 @@ export default function useTimer() {
   };
 
   function reset() {
-    setSeconds(0);
+    setTime(0);
     setRunning(false);
   };
 
@@ -18,19 +18,19 @@ export default function useTimer() {
 
     if (running) {
       interval = setInterval(() => {
-        setSeconds((prev) => prev + 1);
-      }, 1);
-    } else if (!running && milliseconds !== 0) {
+        setTime((prev) => prev + 1);
+      }, 1000);
+    } else if (!running && time !== 0) {
       clearInterval(interval);
     }
 
     return () => clearInterval(interval);
-  }, [running, milliseconds]);
+  }, [time, running])
 
   return {
-    milliseconds,
+    time,
     running,
-    toggleTimer: toggle,
-    resetTimer: reset
-  }
+    toggle,
+    reset
+  };
 }

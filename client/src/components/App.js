@@ -4,6 +4,7 @@ import "./App.scss";
 
 import Sidebar from "./Sidebar/Sidebar";
 import Display from "./Main/Display";
+// import Profile from "./Profile/Profile";
 
 function App() {
 
