@@ -8,8 +8,10 @@ export default function Information(props) {
   // => pass user info into props and use it to display their stats
   // => pass prompt info into props
   // => render buttons dynamically from an array of languages
-  const { language, setLanguage } = props;
+  const { language, setLanguage, time } = props;
   const languages = ["JS", "Python", "Ruby"];
+  const date = new Date(null);
+  date.setSeconds(time);
 
   const buttons = languages.map((el) => {
     return (
@@ -29,6 +31,7 @@ export default function Information(props) {
         {buttons}
       </div>
       <span className="info">{"Category: <props.category>"}</span>
+      <span className="info">Time: {date.toISOString().substr(14, 5)}</span>
     </article>
   );
 };
