@@ -4,10 +4,18 @@ let Schema = mongoose.Schema;
 
 let promptSchema = new Schema({
   promptId: mongoose.Schema.Types.ObjectId,
-  codeBlock: String,
-  language: String,
-  difficulty: String,
-  category: String
+  codeBlock: {
+    type: String,
+    required: true
+  },
+  language:  {
+    type: String,
+    required: true
+  },
+  category:  {
+    type: String,
+    required: true
+  },
 });
 
 module.exports = mongoose.model('Prompt', promptSchema);

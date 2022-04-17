@@ -1,15 +1,12 @@
 const promptSchema = require('../models/prompt')
-const addPrompt = async (req, res) => {
-const { codeBlock, language, difficulty, category } = req.body;
-  const newPrompt = new promptSchema({
-    codeBlock,
-    language,
-    difficulty,
-    category
+const addPrompt = (req, res) => {
+  promptSchema.insertMany(req.body)
+  .then((prompts)=> {
+    res.status(200).json(prompts);
   })
-  await newPrompt.save();
-  res.status(200).send('Added Successfully');
-  console.log(newPrompt);
+  .catch((error) => {
+    res.status(400).send(`Not Saved there was an error. ${error}`);
+  })
 };
 
 
