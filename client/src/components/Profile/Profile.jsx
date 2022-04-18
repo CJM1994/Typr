@@ -1,66 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { usestats, useEffect } from "react";
 import './Profile.scss';
 import StatisticsBlock from "./StatisticsBlock"
 import LineChart from './Charts/Line'
-import axios from "axios";
-import { formatFromSeconds, calculateScore } from '../../helpers/helpers';
+import useGetUserStatistics from "../../hooks/useGetUserStatistics";
 
 export default function Profile(props) {
 
-  const [state, setState] = useState({
-    avgSpeed: 0,
-    avgSpeedToday: 0,
-    totalTimeSpent: 0,
-    totalTimeSpentToday: 0,
-    totalLessons: 0,
-    totalLessonsToday: 0,
-    topScore: 0,
-    topScoreToday: 0,
-  });
-
-  // Hardcoded test email address
-  const email = 'test9@test.test'
-  // End of test values
-
-  useEffect(() => {
-    axios.get(`/user/${email}`)
-      .then(res => {
-        const userStatistics = res.data[0].statistics;
-        const todaysDate = new Date(Date.now());
-
-        let allTimeChars = 0;
-        let allTimeSpent = 0;
-        let todaysChars = 0;
-        let todaysTimeSpent = 0;
-        let todaysLessons = 0;
-        let todaysTopScore = 0;
-        let todaysScore = 0;
-
-        for (const dataPoint of userStatistics) {
-          allTimeChars += dataPoint.totalChars;
-          allTimeSpent += dataPoint.timeSpent;
-          const dataDate = new Date(dataPoint.createdAt)
-          if (todaysDate.getDate() === dataDate.getDate()) {
-            todaysScore = calculateScore((dataPoint.totalChars / 5), dataPoint.accuracy);
-            todaysChars += dataPoint.totalChars;
-            todaysTimeSpent += dataPoint.timeSpent;
-            todaysLessons++;
-            todaysTopScore = todaysScore > todaysTopScore ? todaysScore : todaysTopScore;
-          }
-        }
-
-        setState({
-          avgSpeed: (allTimeChars / 5) / (allTimeSpent / 60),
-          totalLessons: res.data[0].statistics.length,
-          totalLessonsToday: todaysLessons,
-          totalTimeSpent: formatFromSeconds(allTimeSpent),
-          topScore: res.data[0].greatestScore,
-          totalTimeSpentToday: formatFromSeconds(todaysTimeSpent),
-          avgSpeedToday: (todaysChars / 5) / (allTimeSpent / 60),
-          topScoreToday: Math.round(todaysTopScore),
-        });
-      })
-  }, [])
+  const stats = useGetUserStatistics('test9@test.test');
 
   return (
     <section className="profile">
@@ -75,18 +21,18 @@ export default function Profile(props) {
       <div id="statistics">
         <h2>All Time Statistics: </h2>
         <StatisticsBlock
-          timeSpent={state.totalTimeSpent}
-          numOfLessons={state.totalLessons}
-          topScore={state.topScore}
-          avgSpeed={Math.round(state.avgSpeed)}
+          timeSpent={stats.totalTimeSpent}
+          numOfLessons={stats.totalLessons}
+          topScore={stats.topScore}
+          avgSpeed={Math.round(stats.avgSpeed)}
         />
 
         <h2>Statistics for Today: </h2>
         <StatisticsBlock
-          timeSpent={state.totalTimeSpentToday}
-          numOfLessons={state.totalLessonsToday}
-          topScore={state.topScoreToday}
-          avgSpeed={Math.round(state.avgSpeedToday)}
+          timeSpent={stats.totalTimeSpentToday}
+          numOfLessons={stats.totalLessonsToday}
+          topScore={stats.topScoreToday}
+          avgSpeed={Math.round(stats.avgSpeedToday)}
         />
 
         <h2>Compare Yourself: </h2>
