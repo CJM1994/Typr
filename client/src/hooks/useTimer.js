@@ -18,8 +18,8 @@ export default function useTimer() {
 
     if (running) {
       interval = setInterval(() => {
-        setTime((prev) => prev + 1);
-      }, 1000);
+        setTime((prev) => prev + 10);
+      }, 10);
     } else if (!running && time !== 0) {
       clearInterval(interval);
     }
