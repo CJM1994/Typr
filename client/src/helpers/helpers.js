@@ -1,4 +1,4 @@
-export function getIndexes(arr) {
+function getIndexes(arr) {
   let lengths = [];
   
   for (let i = 0; i < arr.length; i++) {
@@ -11,3 +11,16 @@ export function getIndexes(arr) {
 
   return lengths
 };
+
+function formatFromSeconds(seconds) {
+  const hours = Math.round((seconds / 60 / 60));
+  const minutes = Math.round((((seconds / 60 / 60) - hours) * 60));
+
+  if (hours) {
+    return `${hours}H ${minutes}M`;
+  } else {
+    return `${minutes}M`
+  }
+}
+
+module.exports = {formatFromSeconds, getIndexes}

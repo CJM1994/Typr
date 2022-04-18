@@ -3,7 +3,7 @@ import './StatisticsBlock.scss';
 
 export default function StatisticsBlock(props) {
 
-  const {timeSpent, numOfLessons, topSpeed, avgSpeed} = props;
+  const {timeSpent, numOfLessons, topScore, avgSpeed} = props;
 
   return (
     <>
@@ -19,8 +19,8 @@ export default function StatisticsBlock(props) {
         </span>
 
         <span className="frame">
-          <span className="inner top" title="Top typing speed">Top Speed (wpm)</span>
-          <span className="inner bottom">{topSpeed}</span>
+          <span className="inner top" title="Top score">Top Score</span>
+          <span className="inner bottom">{topScore}</span>
         </span>
 
         <span className="frame">
