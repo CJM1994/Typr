@@ -4,9 +4,12 @@
   width: 85%;
   height: 65px;
   color: #444256;
-  border-bottom: 1px solid #D7D0CF;
+  background-color: transparent;
   text-decoration: none;
   padding-left: 20px;
+  border: none;
+  border-bottom: 1px solid #D7D0CF;
+  font-size: 25px;
 }
 
 .sideButton:hover {
