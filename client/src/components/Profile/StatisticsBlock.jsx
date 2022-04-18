@@ -7,7 +7,7 @@ export default function StatisticsBlock(props) {
 
   return (
     <>
-      <p>
+      <p className="statistics-block">
         <span className="frame">
           <span className="inner top" title="Time spent on exercises">Total Time: </span>
           <span className="inner bottom">{timeSpent}</span>

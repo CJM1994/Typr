@@ -4,7 +4,7 @@ const morgan = require('morgan'); // Server logs
 const dotenv = require('dotenv'); // Load ENV
 const mongoose = require('mongoose');
 const bp = require('body-parser')
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3001;
 
 require('dotenv').config();
 
@@ -26,7 +26,7 @@ app.use(bp.urlencoded({ extended: true }))
 dotenv.config();
 
 // Initialize Routes
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/user');
 const promptRoutes = require('./routes/prompt');
 const bodyParser = require('body-parser');
 

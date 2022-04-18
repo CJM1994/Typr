@@ -1,4 +1,4 @@
-.profile {
+.leaderboard {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -7,27 +7,24 @@
   padding: 1% 4%;
   border: 1px solid #D7D0CF;
 
-  .welcome {
+  .body {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start
+    align-items: start;
+    justify-content: flex-start;
+    max-width: 60%;
+    text-align: justify;
   }
-  
+
   h1 {
     color: #673B1D;
     font-weight: 300;
     font-size: 2em;
     margin-bottom: 0;
   }
+
   h2 {
     color: #673B1D;
     font-weight: 300;
   }
-}
-
-// For testing the resizing of charts
-#Test {
-  width: 1000px;
-  height:500;
 }

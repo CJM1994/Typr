@@ -6,7 +6,7 @@ export default function useKeyPress() {
   // state for keeping track of code block text and language
   const [prompt, setPrompt] = useState({
     codeLines: "",
-    language: "JS"
+    language: "Javascript"
   });
 
   const initialInput = {

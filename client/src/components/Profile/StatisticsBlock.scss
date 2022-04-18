@@ -1,24 +1,38 @@
-p {
+.statistics-block {
  display: flex;
  gap: 1rem; 
+
+  .frame {
+    border: 1px solid #D7D0CF;
+    flex: 1 1 0;
+    padding: 1rem;
+  }
+
+  .inner {
+    display: block;
+    text-align: center;
+  }
+
+  .top {
+    font-size: 1rem;
+    color: #636071;
+  }
+
+  .bottom {
+    font-size: 2rem;
+  }
+
+
 }
 
-.frame {
+.chart-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 70%;
+  justify-content: center;
+}
+
+hr {
   border: 1px solid #D7D0CF;
-  flex: 1 1 0;
-  padding: 1rem;
-}
-
-.inner {
-   display: block;
-   text-align: center;
-}
-
-.top {
-  font-size: 1rem;
-  color: #636071;
-}
-
-.bottom {
-  font-size: 2rem;
+  margin: 2%;
 }

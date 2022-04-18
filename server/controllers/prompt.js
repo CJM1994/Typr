@@ -1,21 +1,28 @@
-const promptSchema = require('../models/prompt')
+/*
+  Code snippet POST/GET routes.
+  codeBlock: String
+  Language: String
+  Category: String
+*/
+const promptSchema = require('../models/prompt');
+
 const addPrompt = async (req, res) => {
-const { codeBlock, language, difficulty, category } = req.body;
-  const newPrompt = new promptSchema({
-    codeBlock,
-    language,
-    difficulty,
-    category
-  })
-  await newPrompt.save();
-  res.status(200).send('Added Successfully');
-  console.log(newPrompt);
+  await promptSchema.insertMany(req.body)
+    .then((prompts) => {
+      res.status(200).json(prompts);
+    })
+    .catch((error) => {
+      res.status(400).send(`Not Saved there was an error. ${error}`);
+    });
 };
 
-
 const getPrompt = async (req, res) => {
-  const getPrompt = await promptSchema.find({ "language": req.params.language })
-  res.status(200).send(getPrompt);
-}
+  await promptSchema.find({ "language": req.params.language })
+  .then((prompt) => {
+    res.status(200).json(prompt)})
+  .catch((error) => {
+    res.status(400).send(`Bad request. ${error}`)
+  });
+};
 
 module.exports = { addPrompt, getPrompt };
