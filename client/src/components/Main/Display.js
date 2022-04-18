@@ -57,6 +57,8 @@ export default function Display() {
     toggleTimer();
   }
 
+  console.log(codeLines);
+
   return (
     <div className="display">
       <Information 

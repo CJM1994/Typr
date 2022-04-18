@@ -70,7 +70,7 @@ export default function useKeyPress() {
           };
         // if user presses enter when needed
         } else if (event.keyCode === 13 && lines[currentLine][currentIndexOnLine] === "\n") {
-          const indent = lines[currentLine + 1].join("").search(/\S/) / 2;
+          const indent = lines[currentLine + 1][lines[currentLine + 1].length - 2] === " " ? prev.indent : lines[currentLine + 1].join("").search(/\S/) / 2;
     
           return {
             ...prev,
