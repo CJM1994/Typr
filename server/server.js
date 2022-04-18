@@ -26,7 +26,7 @@ app.use(bp.urlencoded({ extended: true }))
 dotenv.config();
 
 // Initialize Routes
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/user');
 const promptRoutes = require('./routes/prompt');
 const bodyParser = require('body-parser');
 
