@@ -9,7 +9,7 @@ export default function Information(props) {
   // => pass prompt info into props
   // => render buttons dynamically from an array of languages
   const { language, setLanguage, time } = props;
-  const languages = ["JS", "Python", "Ruby"];
+  const languages = ["Javascript", "Python", "Ruby"];
   const date = new Date(null);
   date.setMilliseconds(time);
 
