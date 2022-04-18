@@ -3,6 +3,14 @@ let mongoose = require('mongoose');
 //Define a schema
 let Schema = mongoose.Schema;
 
+let statisticSchema = new Schema({
+  accuracy: Number,
+  wordsPerMin: Number,
+  timeSpent: Number,
+  totalWords: Number,
+  createdAt: { type: Date, default: Date.now }
+});
+
 let userSchema = new Schema({
   userId: mongoose.Schema.Types.ObjectId,
   firstName: {
@@ -16,19 +24,11 @@ let userSchema = new Schema({
   email: {
     type: String,
     require: true,
-    unique: true,
+    unique: true
   },
   allTimeScore: Number,
   greatestScore: Number,
-  statistic: [
-     {
-      accuracy: Number,
-      WordsPerMin: Number,
-      timeSpent: Number,
-      totalWords: Number,
-      created_at: Date
-     }
-  ]
+  statistics: [statisticSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);
