@@ -14,7 +14,8 @@ let promptSchema = new Schema({
   },
   category:  {
     type: String,
-    required: true
+    required: true,
+    enum: ['Javascript', 'Ruby', 'Python']
   },
 });
 
