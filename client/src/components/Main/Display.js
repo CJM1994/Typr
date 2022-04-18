@@ -70,7 +70,7 @@ export default function Display() {
         onFocus={() => toggleFocus()} 
         onBlur={() => toggleFocus()}
       >
-        <div className="line" />
+        <div className="codeSideline" />
         <div className={codeClasses}>
           <Lines
             lines={codeLines}
@@ -79,6 +79,9 @@ export default function Display() {
             counter={counter}
           />
         </div>
+          {!input.focused && <div className="overlay">
+            <span className="indicator">Click here to see prompt!</span>
+          </div>}
       </div>
       <VirtualKeyboard />
     </div>
