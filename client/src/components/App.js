@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.scss";
 
@@ -8,12 +8,15 @@ import Profile from './Profile/Profile';
 import Leaderboard from "./Leaderboard/Leaderboard";
 
 function App() {
+  const [view, setView] = useState("Practice");
 
   return (
     <main className="layout">
       <div className="container">
-        <Display />
-        <Sidebar />
+        {view === "Practice" && <Display />}
+        {view === "Profile" && <Profile />}
+        {view === "High Scores" && <Leaderboard />}
+        <Sidebar setView={setView} />
       </div>
     </main>
   );
