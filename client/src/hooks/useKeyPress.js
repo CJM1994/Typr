@@ -70,10 +70,7 @@ export default function useKeyPress() {
           };
         // if user presses enter when needed
         } else if (event.keyCode === 13 && lines[currentLine][currentIndexOnLine] === "\n") {
-          // updates indent in input state if the first character in the next line is a closing bracket
-          let indent = prev.indent;
-          if (lines[currentLine + 1][(prev.indent * 2 - 2 > 0) ? prev.indent * 2 - 2 : 0] === "}") indent--;
-          if (lines[currentLine][currentIndexOnLine - 1] === "{") indent++;
+          const indent = lines[currentLine + 1].join("").search(/\S/) / 2;
     
           return {
             ...prev,
