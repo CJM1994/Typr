@@ -57,7 +57,7 @@ export default function LineChart(props) {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'bottom',
       },
       title: {
         display: true,

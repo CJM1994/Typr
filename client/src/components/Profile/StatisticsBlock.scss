@@ -21,6 +21,8 @@
   .bottom {
     font-size: 2rem;
   }
+
+
 }
 
 .chart-wrapper {
@@ -28,4 +30,9 @@
   position: relative;
   width: 70%;
   justify-content: center;
+}
+
+hr {
+  border: 1px solid #D7D0CF;
+  margin: 2%;
 }
