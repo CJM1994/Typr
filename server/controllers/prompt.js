@@ -6,7 +6,7 @@
 */
 const promptSchema = require('../models/prompt');
 
-const addPrompt = async (req, res) => {
+exports.addPrompt = async (req, res) => {
   await promptSchema.insertMany(req.body)
     .then((prompts) => {
       res.status(200).json(prompts);
@@ -16,7 +16,7 @@ const addPrompt = async (req, res) => {
     });
 };
 
-const getPrompt = async (req, res) => {
+exports.getPrompt = async (req, res) => {
   await promptSchema.find({ "language": req.params.language })
   .then((prompt) => {
     res.status(200).json(prompt)})
@@ -24,5 +24,3 @@ const getPrompt = async (req, res) => {
     res.status(400).send(`Bad request. ${error}`)
   });
 };
-
-module.exports = { addPrompt, getPrompt };

@@ -6,7 +6,7 @@
 */
 const userSchema = require('../models/user');
 
-const topUsers = async (req, res) => {
+exports.topUsers = async (req, res) => {
   await userSchema.find({}).sort({ allTimeScore: -1 }).limit(10)
     .then((topUsers) => {
       res.status(200).json(topUsers);
@@ -16,7 +16,7 @@ const topUsers = async (req, res) => {
     });
 };
 
-const getUsers = async (req, res) => {
+exports.getUsers = async (req, res) => {
   await userSchema.find({})
     .then((users) => {
       res.status(200).json(users);
@@ -26,7 +26,7 @@ const getUsers = async (req, res) => {
     });
 };
 
-const getUser = async (req, res) => {
+exports.getUser = async (req, res) => {
   await userSchema.find({ "email": req.params.email })
     .then((user) => {
       res.status(200).json(user);
@@ -36,7 +36,7 @@ const getUser = async (req, res) => {
     });
 };
 
-const addUsers = async (req, res) => {
+exports.addUsers = async (req, res) => {
   await userSchema.insertMany(req.body)
     .then((users) => {
       res.status(200).json(users);
@@ -46,8 +46,14 @@ const addUsers = async (req, res) => {
     });
 };
 
-module.exports = { topUsers, addUsers, getUsers, getUser };
-
-
+exports.updateStatistic = async (req, res) => {
+  await userSchema.updateOne({ "email": req.params.email }, {$push: {statistics: req.body.statistics}})
+  .then(() => {
+    res.status(200);
+  })
+  .catch((error) => {
+    res.status(400).send(`Not Saved there was an error. ${error}`);
+  });
+};
 
 

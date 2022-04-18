@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import classNames from "classnames";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
+import axios from "axios";
 
 import "./Display.scss";
 
@@ -11,7 +12,7 @@ import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
   // deconstructing objects
-  const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress , setFocus } = useKeyPress();
+  const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput } = useKeyPress();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
   const { time, running, toggleTimer, resetTimer } = useTimer();
@@ -34,15 +35,42 @@ export default function Display() {
   // timer toggling side effect for when user first presses a key
   useEffect(() => {
     if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
-      toggleTimer();
+      toggleTimer(true);
     } else if (lengths[lengths.length - 1]) {
-      if (counter === lengths[lengths.length - 1][1] - 1)  {
-        toggleTimer();
-
-        // push to db: # of wrong chars, time, prompt.words
+      if (counter === lengths[lengths.length - 1][1] - 1 && !input.end) {
+        toggleTimer(false);
+        endInput();
       }
     }
   }, [input]);
+
+
+  useEffect(() => {
+    if(input.end === true){
+      const email = `test8@test.test`;
+      // push to db: # of wrong chars, time, prompt.words accuracy, wordsPerMin , timeSpent = time, totalChars = 
+      let totalChars = 0;
+      let totalWords = 0;
+      for (const line of codeLines) {
+        totalChars += line.length;
+        totalWords += line.join('').split(' ').length;
+      }
+      const minutes = time / 60000;
+      const wordsPerMin = (totalWords / minutes);
+      const accuracy = (totalChars - input.wrongIndexes.length) / totalChars;
+      axios.patch(`user/${email}`, { 
+        statistics: { accuracy: accuracy, 
+          wordsPerMin: wordsPerMin, 
+          timeSpent: time, totalChars: 
+          totalChars } 
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
+  }, [ input.end ]);
+
+  console.log(input.end);
 
   // creates new event listener when component is unmounted (new prompt)
   useEffect(() => {
@@ -55,23 +83,21 @@ export default function Display() {
   function toggleFocus() {
     setFocus(!input.focused);
     if (input.keys[0].length > 0 || input.queue !== null) {
-      toggleTimer();  
+      toggleTimer(!input.focused);  
     }
   }
 
-  console.log(codeLines);
-
   return (
     <div className="display">
-      <Information 
+      <Information
         language={prompt.language}
         setLanguage={newPrompt}
         time={time}
       />
-      <div 
-        className="codeContainer" 
-        tabIndex={0} 
-        onFocus={() => toggleFocus()} 
+      <div
+        className="codeContainer"
+        tabIndex={0}
+        onFocus={() => toggleFocus()}
         onBlur={() => toggleFocus()}
       >
         <div className="codeSideline" />
