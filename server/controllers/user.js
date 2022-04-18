@@ -4,15 +4,16 @@
   lastName: String,
   email: String
 */
-const userSchema = require('../models/user')
+const userSchema = require('../models/user');
 
 const topUsers = async (req, res) => {
-  await userSchema.find({}).sort({allTimeScore : -1}).limit(10)
-  .then((prompt) => {
-    res.status(200).json(prompt)})
-  .catch((error) => {
-    res.status(400).send(`Bad request. ${error}`)
-  });
+  await userSchema.find({}).sort({ allTimeScore: -1 }).limit(10)
+    .then((prompt) => {
+      res.status(200).json(prompt);
+    })
+    .catch((error) => {
+      res.status(400).send(`Bad request. ${error}`);
+    });
 };
 
 const addUser = async (req, res) => {
