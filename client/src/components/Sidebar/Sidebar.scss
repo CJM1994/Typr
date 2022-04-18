@@ -20,10 +20,13 @@
   align-items: center;
   width: 85%;
   height: 175px;
+  border: none;
   border-bottom: 1px solid #D7D0CF;
+  background-color: transparent;
   color: #444256;
   font-weight: bold;
   text-decoration: none;
+  font-size: 25px;
 }
 
 .login:hover {

@@ -11,10 +11,10 @@ export default function Sidebar(props) {
 
   return (
     <section className="sidebar">
-      <a className="login" href="/login">
+      <button className="login" onClick={() => setView("Login")}>
         <FontAwesomeIcon icon={faSmile} size="3x" />
         <span>Sign In</span>
-      </a>
+      </button>
       <SidebarButton href="/" text="Practice" onClick={setView} />
       <SidebarButton href="/profile" text="Profile" onClick={setView} />
       <SidebarButton href="/help" text="Help" onClick={setView} />
