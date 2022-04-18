@@ -24,7 +24,7 @@ export default function LeaderboardTable(props) {
           return (
             <tr key={key}>
               <td>{key + 1}</td>
-              <td>{val.firstName}</td>
+              <td>{val.firstName + " " + val.lastName}</td>
               <td>{val.allTimeScore}</td>
             </tr>
           );
