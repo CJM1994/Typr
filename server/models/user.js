@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 
 let statisticSchema = new Schema({
   accuracy: Number,
-  WordsPerMin: Number,
+  wordsPerMin: Number,
   timeSpent: Number,
   totalWords: Number,
   createdAt: { type: Date, default: Date.now }
@@ -28,7 +28,7 @@ let userSchema = new Schema({
   },
   allTimeScore: Number,
   greatestScore: Number,
-  statistic: [statisticSchema]
+  statistics: [statisticSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);
