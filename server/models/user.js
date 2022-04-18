@@ -28,7 +28,19 @@ let userSchema = new Schema({
   },
   allTimeScore: Number,
   greatestScore: Number,
+<<<<<<< Updated upstream
   statistics: [statisticSchema]
+=======
+  statistic: [
+     {
+      accuracy: Number,
+      wordsPerMin: Number,
+      timeSpent: Number,
+      totalChars: Number,
+      created_at: Date
+     }
+  ]
+>>>>>>> Stashed changes
 });
 
 module.exports = mongoose.model('User', userSchema);
