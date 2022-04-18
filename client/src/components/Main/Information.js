@@ -11,7 +11,7 @@ export default function Information(props) {
   const { language, setLanguage, time } = props;
   const languages = ["Javascript", "Python", "Ruby"];
   const date = new Date(null);
-  date.setMilliseconds(time);
+  date.setSeconds(time);
 
   const buttons = languages.map((el) => {
     return (
@@ -31,7 +31,7 @@ export default function Information(props) {
         {buttons}
       </div>
       <span className="info">{"Category: <props.category>"}</span>
-      <span className="info">Time: {date.toISOString().substr(14, 8)}</span>
+      <span className="info">Time: {date.toISOString().substr(14, 5)}</span>
     </article>
   );
 };
