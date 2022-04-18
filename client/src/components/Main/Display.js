@@ -37,8 +37,6 @@ export default function Display() {
     }
   }, [input]);
 
-  console.log(time);
-
   // creates new event listener when component is unmounted (new prompt)
   useEffect(() => {
     document.addEventListener("keypress", handleKeypress);
@@ -57,18 +55,19 @@ export default function Display() {
       <div 
         className="codeContainer" 
         tabIndex={0} 
-        onFocus={() => setFocus(true)} 
-        onBlur={() => setFocus(false)}
+        onFocus={(event) => setFocus(true, event.target)} 
+        onBlur={(event) => setFocus(false, event.target)}
       >
         <div className="line" />
-        <div className="code">
+        {input.focused && <div className="code">
           <Lines
             lines={codeLines}
             lengths={lengths}
             indexes={wrongIndexes}
             counter={counter}
           />
-        </div>
+        </div>}
+        {!input.focused && <p className="ch">Click here to see prompt.</p>}
       </div>
       <VirtualKeyboard />
     </div>

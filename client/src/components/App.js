@@ -12,7 +12,7 @@ function App() {
   return (
     <main className="layout">
       <div className="container">
-        <Profile />
+        <Display />
         <Sidebar />
       </div>
     </main>
