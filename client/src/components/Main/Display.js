@@ -33,7 +33,7 @@ export default function Display() {
 
   // timer toggling side effect for when user first presses a key
   useEffect(() => {
-    if (!running && input.keys[0].length > 0) {
+    if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
       toggle();
     } else if (lengths[lengths.length - 1]) {
       if (counter === lengths[lengths.length - 1][1] - 1)  {
