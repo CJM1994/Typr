@@ -29,7 +29,7 @@ export default function useKeyPress() {
   function setFocus(focus) {
     setInput((prev) => ({ ...prev, focused: focus }));
   };
-
+  
   // function for retrieving a prompt from db
   function fetchPrompt(language) {
     axios.get(`prompts/${language}`)

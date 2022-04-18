@@ -14,7 +14,7 @@ export default function Display() {
   const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress , setFocus } = useKeyPress();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
-  const { time, running, toggle, reset } = useTimer();
+  const { time, running, toggleTimer, resetTimer } = useTimer();
 
   const codeClasses = classNames("code", {
     "code--blur": !input.focused
@@ -23,7 +23,7 @@ export default function Display() {
   function newPrompt(language) {
     fetchPrompt(language);
     resetInput();
-    reset();
+    resetTimer();
   }
 
   // side effect for language change
@@ -34,10 +34,10 @@ export default function Display() {
   // timer toggling side effect for when user first presses a key
   useEffect(() => {
     if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
-      toggle();
+      toggleTimer();
     } else if (lengths[lengths.length - 1]) {
       if (counter === lengths[lengths.length - 1][1] - 1)  {
-        toggle();
+        toggleTimer();
 
         // push to db: # of wrong chars, time, prompt.words
       }
@@ -52,6 +52,11 @@ export default function Display() {
     };
   }, [handleKeypress]);
 
+  function toggleFocus() {
+    setFocus(!input.focused);
+    toggleTimer();
+  }
+
   return (
     <div className="display">
       <Information 
@@ -62,8 +67,8 @@ export default function Display() {
       <div 
         className="codeContainer" 
         tabIndex={0} 
-        onFocus={() => setFocus(true)} 
-        onBlur={() => setFocus(false)}
+        onFocus={() => toggleFocus()} 
+        onBlur={() => toggleFocus()}
       >
         <div className="line" />
         <div className={codeClasses}>
