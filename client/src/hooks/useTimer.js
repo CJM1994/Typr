@@ -30,7 +30,7 @@ export default function useTimer() {
   return {
     time,
     running,
-    toggle,
-    reset
+    toggleTimer: toggle,
+    resetTimer: reset
   };
 }
