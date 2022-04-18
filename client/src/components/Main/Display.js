@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import classNames from "classnames";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
 
@@ -14,6 +15,10 @@ export default function Display() {
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
   const { time, running, toggle, reset } = useTimer();
+
+  const codeClasses = classNames("code", {
+    "code--blur": !input.focused
+  });
 
   function newPrompt(language) {
     fetchPrompt(language);
@@ -55,19 +60,19 @@ export default function Display() {
       <div 
         className="codeContainer" 
         tabIndex={0} 
-        onFocus={(event) => setFocus(true, event.target)} 
-        onBlur={(event) => setFocus(false, event.target)}
+        onFocus={() => setFocus(true)} 
+        onBlur={() => setFocus(false)}
       >
         <div className="line" />
-        {input.focused && <div className="code">
+        <div className={codeClasses}>
           <Lines
             lines={codeLines}
             lengths={lengths}
             indexes={wrongIndexes}
             counter={counter}
           />
-        </div>}
-        {!input.focused && <p className="ch">Click here to see prompt.</p>}
+        </div>
+        {/* {!input.focused && <p className="ch">Click here to see prompt.</p>} */}
       </div>
       <VirtualKeyboard />
     </div>
