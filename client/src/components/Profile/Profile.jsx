@@ -12,6 +12,42 @@ export default function Profile(props) {
   const avgSpeed = '50.9'; // Need to query for percentile (ie. beats 88% of all other people)
   const topSpeedPercentile = '92.81%';
   const avgSpeedPercentile = '88.82%'
+
+  const statistics = [{
+    accuracy: 98,
+    wordsPerMinute: 80, // Words per min
+    timeInSeconds: 15, // Seconds
+    charactersTyped: 20,
+    createdAt: Date.now(),
+  },
+  {
+    accuracy: 88,
+    wordsPerMinute: 68, // Words per min
+    timeInSeconds: 16, // Seconds
+    charactersTyped: 18,
+    createdAt: Date.now(),
+  },
+  {
+    accuracy: 70,
+    wordsPerMinute: 73, // Words per min
+    timeInSeconds: 14, // Seconds
+    charactersTyped: 17,
+    createdAt: Date.now(),
+  },
+  {
+    accuracy: 92,
+    wordsPerMinute: 68, // Words per min
+    timeInSeconds: 15, // Seconds
+    charactersTyped: 17,
+    createdAt: Date.now(),
+  },
+  {
+    accuracy: 92,
+    wordsPerMinute: 68, // Words per min
+    timeInSeconds: 15, // Seconds
+    charactersTyped: 17,
+    createdAt: Date.now(),
+  }]
   // End of hardcoded values
 
   return (
@@ -47,8 +83,8 @@ export default function Profile(props) {
 
         {/* Implementing graphs below -Connor */}
 
-        <div id='Test'><LineChart /></div>
-        
+        <div className='chart-wrapper'><LineChart statistics={statistics} dataSelection={'wordsPerMinute'} /></div>
+        <div className='chart-wrapper'><LineChart statistics={statistics} dataSelection={'accuracy'} /></div>
 
       </div>
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Line } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
@@ -22,39 +23,70 @@ ChartJS.register(
   Filler
 );
 
-const options = {
-  responsive: true,
-  // maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Typing Speed',
-    },
-  },
+const chartTitle = {
+  wordsPerMinute: 'Typing Speed (Words Per Minute)',
+  accuracy: 'Percentage Accuracy'
+}
+
+const dataLabel = {
+  wordsPerMinute: 'Your Speed Over Time',
+  accuracy: 'Your Accuracy Over Time'
+}
+
+const generateLabel = (xAxisStart, iterateBy, data) => {
+  return data.map(() => { return (xAxisStart += iterateBy).toString() });
 };
 
-const data = {
-  labels: 'topSpeed',
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [1, 2, 3, 4, 10],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgb(255, 99, 132)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [1, 10, 3, 7, 8],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgb(53, 162, 235)',
-    },
-  ],
+const getStatisticsData = (statistics, dataSelection) => {
+  const statisticsData = [];
+
+  for (const dataPoint of statistics) {
+    statisticsData.push(dataPoint[dataSelection]);
+  };
+
+  return statisticsData;
 };
 
-export default function LineChart() {
+export default function LineChart(props) {
+
+  const { statistics, dataSelection } = props;
+  const displayData = getStatisticsData(statistics, dataSelection);
+  const label = generateLabel(0, 1, displayData);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: chartTitle[dataSelection],
+      },
+    },
+    scales: {
+      x: {
+        min: 0,
+        max: displayData.length
+      },
+      y: {
+        min: Math.min(...displayData) - 10,
+        max: Math.max(...displayData) + 10
+      }
+    }
+  };
+
+  const data = {
+    labels: label,
+    datasets: [
+      {
+        label: dataLabel[dataSelection],
+        data: displayData,
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgb(154, 208, 245)',
+      }
+    ],
+  };
 
   return (
     <Line
