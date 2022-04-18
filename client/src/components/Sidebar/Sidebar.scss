@@ -4,10 +4,13 @@
   justify-content: left;
   align-items: center;
   width: 275px;
-  height: 100%;
   border: 1px solid #D7D0CF;
   font-size: x-large;
   color: #444256;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
 }
 
 .login {

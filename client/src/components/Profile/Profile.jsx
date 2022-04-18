@@ -83,7 +83,9 @@ export default function Profile(props) {
 
         {/* Implementing graphs below -Connor */}
 
+        <hr />
         <div className='chart-wrapper'><LineChart statistics={statistics} dataSelection={'wordsPerMinute'} /></div>
+        <hr />
         <div className='chart-wrapper'><LineChart statistics={statistics} dataSelection={'accuracy'} /></div>
 
       </div>
