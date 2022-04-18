@@ -33,7 +33,7 @@ export default function Display() {
 
   // timer toggling side effect for when user first presses a key
   useEffect(() => {
-    if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
+    if (!running && input.focused && (input.keys[0].length > 0 || input.queue !== null)) {
       toggleTimer();
     } else if (lengths[lengths.length - 1]) {
       if (counter === lengths[lengths.length - 1][1] - 1)  {
@@ -56,6 +56,8 @@ export default function Display() {
     setFocus(!input.focused);
     toggleTimer();
   }
+
+  console.log(codeLines);
 
   return (
     <div className="display">
