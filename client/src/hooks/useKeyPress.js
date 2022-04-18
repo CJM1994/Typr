@@ -49,7 +49,7 @@ export default function useKeyPress() {
   // callback for event listener
   function handleKeypress(event) {
     // updates input when a key is pressed
-    if (input.focused) {
+    if (input.focused && input.counter !== lengths[lengths.length - 1][1] - 1) {
       setInput((prev) =>  {
         // descriptive variables
         const { counter, wrongIndexes, keys } = prev;

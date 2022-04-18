@@ -38,6 +38,8 @@ export default function Display() {
     } else if (lengths[lengths.length - 1]) {
       if (counter === lengths[lengths.length - 1][1] - 1)  {
         toggle();
+
+        // push to db: # of wrong chars, time, prompt.words
       }
     }
   }, [input]);
@@ -72,7 +74,6 @@ export default function Display() {
             counter={counter}
           />
         </div>
-        {/* {!input.focused && <p className="ch">Click here to see prompt.</p>} */}
       </div>
       <VirtualKeyboard />
     </div>
