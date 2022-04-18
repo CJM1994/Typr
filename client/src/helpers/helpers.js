@@ -23,4 +23,9 @@ function formatFromSeconds(seconds) {
   }
 }
 
-module.exports = {formatFromSeconds, getIndexes}
+// Calculate score (accuracy 90, wpm 100, score will be 9000)
+function calculateScore(wordsPerMinute, accuracy) {
+  return (wordsPerMinute * accuracy)
+}
+
+module.exports = {formatFromSeconds, getIndexes, calculateScore}
