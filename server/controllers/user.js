@@ -47,13 +47,16 @@ exports.addUsers = async (req, res) => {
 };
 
 exports.updateStatistic = async (req, res) => {
-  await userSchema.updateOne({ "email": req.params.email }, {$push: {statistics: req.body.statistics}})
-  .then((updatedUser) => {
-    res.status(200).json(updatedUser);
+  await userSchema.updateOne({ "email": req.params.email }, {
+    $push: { statistics: req.body.statistics },
+    $inc: { allTimeScore: req.body.attemptScore }
   })
-  .catch((error) => {
-    res.status(400).send(`Not Saved there was an error. ${error}`);
-  });
+    .then((updatedUser) => {
+      res.status(200).json(updatedUser);
+    })
+    .catch((error) => {
+      res.status(400).send(`Not Saved there was an error. ${error}`);
+    });
 };
 
 
