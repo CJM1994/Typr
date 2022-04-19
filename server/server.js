@@ -4,6 +4,8 @@ const morgan = require('morgan'); // Server logs
 const dotenv = require('dotenv'); // Load ENV
 const mongoose = require('mongoose');
 const bp = require('body-parser')
+const {createServer} = require('http');
+const {Server: SocketServer} = require('socket.io');
 const PORT = process.env.PORT || 3001;
 
 require('dotenv').config();
@@ -26,16 +28,12 @@ app.use(bp.urlencoded({ extended: true }))
 dotenv.config();
 
 // SocketIO
-const httpServer = require('http').createServer();
-const io = require('socket.io')(httpServer, {
-  
-});
+const httpServer = createServer(app);
+const io = new SocketServer(httpServer, { /* options */ });
+
 io.on('connection', socket => {
   console.log(`connection created at ${socket}`)
 })
-httpServer.listen(8080, (stuff) => {
-  console.log('http server listening on port 8080')
-});
 
 // Initialize Routes
 const userRoutes = require('./routes/user');
@@ -45,11 +43,10 @@ const bodyParser = require('body-parser');
 app.use("/", userRoutes);
 app.use("/prompts", promptRoutes);
 
-
 app.get('/home', (req, res) => {
   res.send('Hello|World');
 })
 
-app.listen(PORT, () => {
-  console.debug(`App listening on port ${PORT}`);
+httpServer.listen(PORT, (stuff) => {
+  console.log(`http server listening on port ${PORT}`)
 });
