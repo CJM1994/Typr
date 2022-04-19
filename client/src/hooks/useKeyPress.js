@@ -6,7 +6,8 @@ export default function useKeyPress() {
   // state for keeping track of code block text and language
   const [prompt, setPrompt] = useState({
     codeLines: "",
-    language: "Javascript"
+    language: "Javascript",
+    category: ""
   });
 
   const initialInput = {
@@ -39,10 +40,15 @@ export default function useKeyPress() {
   function fetchPrompt(language) {
     axios.get(`prompts/${language}`)
       .then((res) => {
-        setPrompt((prev) => ({
-          codeLines: res.data[Math.floor(Math.random() * res.data.length)].codeBlock.split("\n").map((el) => [...el, "\n"]),
-          language
-        }));
+        setPrompt((prev) => {
+          const index = Math.floor(Math.random() * res.data.length);
+
+          return {
+          codeLines: res.data[index].codeBlock.split("\n").map((el) => [...el, "\n"]),
+          language,
+          category: res.data[index].category
+          };
+        });
       });
   };
 
