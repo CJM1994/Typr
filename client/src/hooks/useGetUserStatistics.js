@@ -13,6 +13,7 @@ export default function useGetUserStatistics(email) {
     topScore: 0,
     topScoreToday: 0,
     scorePercentile: 0,
+    data: [],
   });
 
   useEffect(() => {
@@ -56,13 +57,12 @@ export default function useGetUserStatistics(email) {
           totalTimeSpentToday: formatFromSeconds(todaysTimeSpent),
           avgSpeedToday: todaysChars / 5 / (allTimeSpent / 60),
           topScoreToday: Math.round(todaysTopScore),
+          data: res.data[0].statistics
         };
       });
     })
     .then((prev) => {
-
-      console.log('topscore', stats.topScore)
-
+      // NEED TO FIX THIS REQUEST, CALL MENTOR AT 12
       axios.get(`/users`).then((res) => {
         const users = res.data;
         const numOfUsers = res.data.length;
@@ -74,7 +74,7 @@ export default function useGetUserStatistics(email) {
           } 
         }
         setStats((prev) => {
-          console.log(scoreRank, numOfUsers);
+          // console.log(scoreRank, numOfUsers);
           return {
             ...prev,
             scorePercentile: 100 - scoreRank / numOfUsers,
