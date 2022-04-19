@@ -9,6 +9,7 @@ import "./Display.scss";
 import Information from "./Information";
 import Lines from "./Lines";
 import VirtualKeyboard from "./VirtualKeyboard";
+import { calculateScore } from '../../helpers/helpers';
 
 export default function Display() {
   // deconstructing objects
@@ -70,7 +71,6 @@ export default function Display() {
       const minutes = time / 60000;
       const wordsPerMin = (totalWords / minutes);
       const accuracy = (totalChars - input.wrongIndexes.length) / totalChars;
-
       setStats({
         wordsPerMin,
         accuracy,
@@ -101,7 +101,7 @@ export default function Display() {
   function toggleFocus() {
     setFocus(!input.focused);
     if ((input.keys[0].length > 0 || input.queue !== null) && !input.end) {
-      toggleTimer(!input.focused);  
+      toggleTimer(!input.focused);
     }
   }
 
@@ -129,9 +129,9 @@ export default function Display() {
             counter={counter}
           />
         </div>
-          {!input.focused && <div className="overlay">
-            <span className="indicator">Click here to see prompt!</span>
-          </div>}
+        {!input.focused && <div className="overlay">
+          <span className="indicator">Click here to see prompt!</span>
+        </div>}
       </div>
       <VirtualKeyboard />
     </div>
