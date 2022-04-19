@@ -25,6 +25,18 @@ app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 dotenv.config();
 
+// SocketIO
+const httpServer = require('http').createServer();
+const io = require('socket.io')(httpServer, {
+  
+});
+io.on('connection', socket => {
+  console.log(`connection created at ${socket}`)
+})
+httpServer.listen(8080, (stuff) => {
+  console.log('http server listening on port 8080')
+});
+
 // Initialize Routes
 const userRoutes = require('./routes/user');
 const promptRoutes = require('./routes/prompt');
