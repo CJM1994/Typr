@@ -32,7 +32,10 @@ const httpServer = createServer(app);
 const io = new SocketServer(httpServer, { /* options */ });
 
 io.on('connection', socket => {
-  console.log(`connection created at ${socket}`)
+  console.log(`connection created for user ${socket.id}`)
+})
+io.on('disconnect', socket => {
+  console.log(`user ${socket.id} disconnected`)
 })
 
 // Initialize Routes
