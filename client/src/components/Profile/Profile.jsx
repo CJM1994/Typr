@@ -6,7 +6,9 @@ import useGetUserStatistics from "../../hooks/useGetUserStatistics";
 
 export default function Profile(props) {
 
+  // Use this hook to retrieve user data for the StatisticsBlock component
   const stats = useGetUserStatistics('test9@test.test');
+  console.log('data', stats.data);
 
   return (
     <section className="profile">
@@ -36,15 +38,26 @@ export default function Profile(props) {
         />
 
         <h2>Compare Yourself: </h2>
-        <p>Your all time top score beats --- of all other people.</p>
-        <p>Your all time average speed beats --- of all other people.</p>
+        <p>Your all time top score beats {stats.scorePercentile}% of all other people.</p>
 
-        {/* Implementing graphs below -Connor */}
+        {/* Implementing graphs below */}
 
-        {/* <hr />
-        <div className='chart-wrapper'><LineChart statistics={statistics} dataSelection={'wordsPerMinute'} /></div>
         <hr />
-        <div className='chart-wrapper'><LineChart statistics={statistics} dataSelection={'accuracy'} /></div> */}
+        <div className='chart-wrapper'>
+          <LineChart
+            statistics={stats.data}
+            dataSelection={'accuracy'}
+          />
+        </div>
+        <hr />
+        <div className='chart-wrapper'>
+          <LineChart
+            statistics={stats.data}
+            dataSelection={'wordsPerMin'}
+          />
+        </div>
+        <hr />
+
 
       </div>
 

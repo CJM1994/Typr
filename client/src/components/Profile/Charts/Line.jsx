@@ -24,13 +24,13 @@ ChartJS.register(
 );
 
 const chartTitle = {
-  wordsPerMinute: 'Typing Speed (Words Per Minute)',
-  accuracy: 'Percentage Accuracy'
+  wordsPerMin: 'Typing Speed (Words Per Minute)',
+  accuracy: 'Percentage Accuracy',
 }
 
 const dataLabel = {
-  wordsPerMinute: 'Your Speed Over Time',
-  accuracy: 'Your Accuracy Over Time'
+  wordsPerMin: 'Your Speed Over Time',
+  accuracy: 'Your Accuracy Over Time',
 }
 
 const generateLabel = (xAxisStart, iterateBy, data) => {
