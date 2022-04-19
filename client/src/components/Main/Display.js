@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
+import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
-import axios from "axios";
 
 import "./Display.scss";
 
@@ -13,9 +13,15 @@ import VirtualKeyboard from "./VirtualKeyboard";
 export default function Display() {
   // deconstructing objects
   const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput } = useKeyPress();
+  const { time, running, toggleTimer, resetTimer } = useTimer();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
-  const { time, running, toggleTimer, resetTimer } = useTimer();
+
+  const [stats, setStats] = useState({
+    wordsPerMin: 0,
+    accuracy: 0,
+    score: 0
+  });
 
   const codeClasses = classNames("code", {
     "code--blur": !input.focused
@@ -60,6 +66,12 @@ export default function Display() {
       const wordsPerMin = (totalWords / minutes);
       const accuracy = (totalChars - input.wrongIndexes.length) / totalChars;
 
+      setStats({
+        wordsPerMin,
+        accuracy,
+        score: wordsPerMin * accuracy
+      });
+
       const email = `test3@test.test`;
       axios.patch(`user/${email}`, { 
         statistics: { accuracy: accuracy, 
@@ -68,6 +80,7 @@ export default function Display() {
           totalChars } 
         })
         .then((res) => {
+          
         });
     }
   }, [input.end]);
@@ -94,6 +107,7 @@ export default function Display() {
         language={prompt.language}
         setLanguage={newPrompt}
         time={time}
+        stats={stats}
       />
       <div
         className="codeContainer"

@@ -3,9 +3,13 @@
   flex-direction: column;
   justify-content: flex-start;
   font-size: 1.5em;
-  margin-left: 1%;
-  padding: 1% 4%;
+  height: 96.5vh;
+  padding: 15px 4%;
+  padding-top: 5px;
+  margin: 1%;
+  margin-right: 0;
   border: 1px solid #D7D0CF;
+  border-right: none;
 
   .body {
     display: flex;
