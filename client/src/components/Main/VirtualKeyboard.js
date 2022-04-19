@@ -181,11 +181,11 @@ function VirtualKeyboard() {
 
   return (
     <section>
-      <div class="keyboardContainer">
-        <div class="simple-keyboard simple-keyboard-main"></div>
-        <div class="controlArrows">
-          <div class="simple-keyboard-control"></div>
-          <div class="simple-keyboard-arrows"></div>
+      <div className="keyboardContainer">
+        <div className="simple-keyboard simple-keyboard-main"></div>
+        <div className="controlArrows">
+          <div className="simple-keyboard-control"></div>
+          <div className="simple-keyboard-arrows"></div>
         </div>
       </div>
     </section>

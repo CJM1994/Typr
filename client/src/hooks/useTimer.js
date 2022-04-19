@@ -4,8 +4,8 @@ export default function useTimer() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
 
-  function toggle() {
-    setRunning(!running);
+  function toggle(mode) {
+    setRunning(mode);
   };
 
   function reset() {
