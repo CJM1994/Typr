@@ -6,7 +6,6 @@ export default function Leaderboard(props) {
 
   return (
     <section className="leaderboard">
-
       <article className="body">
         <h1>High Scores</h1>
         <p className="text">
