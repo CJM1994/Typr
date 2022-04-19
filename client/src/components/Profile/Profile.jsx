@@ -6,6 +6,7 @@ import useGetUserStatistics from "../../hooks/useGetUserStatistics";
 
 export default function Profile(props) {
 
+  // Use this hook to retrieve user data for the StatisticsBlock component
   const stats = useGetUserStatistics('test9@test.test');
 
   return (
@@ -36,8 +37,7 @@ export default function Profile(props) {
         />
 
         <h2>Compare Yourself: </h2>
-        <p>Your all time top score beats --- of all other people.</p>
-        <p>Your all time average speed beats --- of all other people.</p>
+        <p>Your all time top score beats {stats.scorePercentile}% of all other people.</p>
 
         {/* Implementing graphs below -Connor */}
 
