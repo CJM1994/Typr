@@ -18,7 +18,7 @@ function App() {
         {view === "Practice" && <Display />}
         {view === "Profile" && <Profile />}
         {view === "High Scores" && <Leaderboard />}
-        {view === "Help" && <Display />}
+        {view === "Help" && <Leaderboard />}
         {view === "Multiplayer" && <Display />}
         <Sidebar setView={setView} />
       </div>
