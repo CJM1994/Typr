@@ -43,8 +43,21 @@ export default function Profile(props) {
         {/* Implementing graphs below */}
 
         <hr />
-        <div className='chart-wrapper'><LineChart statistics={stats.data} dataSelection={'accuracy'} /></div>
+        <div className='chart-wrapper'>
+          <LineChart
+            statistics={stats.data}
+            dataSelection={'accuracy'}
+          />
+        </div>
         <hr />
+        <div className='chart-wrapper'>
+          <LineChart
+            statistics={stats.data}
+            dataSelection={'wordsPerMin'}
+          />
+        </div>
+        <hr />
+
 
       </div>
 

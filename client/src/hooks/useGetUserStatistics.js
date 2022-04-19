@@ -60,27 +60,27 @@ export default function useGetUserStatistics(email) {
           data: res.data[0].statistics
         };
       });
-    })
-    .then((prev) => {
-      // NEED TO FIX THIS REQUEST, CALL MENTOR AT 12
-      axios.get(`/users`).then((res) => {
-        const users = res.data;
-        const numOfUsers = res.data.length;
-        let scoreRank = 0;
+    // })
+    // .then((prev) => {
+    //   // NEED TO FIX THIS REQUEST, CALL MENTOR AT 12
+    //   axios.get(`/users`).then((res) => {
+    //     const users = res.data;
+    //     const numOfUsers = res.data.length;
+    //     let scoreRank = 0;
   
-        for (const user of users) {
-          if (user.greatestScore > stats.topScore) {
-            scoreRank++;
-          } 
-        }
-        setStats((prev) => {
-          // console.log(scoreRank, numOfUsers);
-          return {
-            ...prev,
-            scorePercentile: 100 - scoreRank / numOfUsers,
-          };
-        });
-      });
+    //     for (const user of users) {
+    //       if (user.greatestScore > stats.topScore) {
+    //         scoreRank++;
+    //       } 
+    //     }
+    //     setStats((prev) => {
+    //       // console.log(scoreRank, numOfUsers);
+    //       return {
+    //         ...prev,
+    //         scorePercentile: 100 - scoreRank / numOfUsers,
+    //       };
+    //     });
+    //   });
 
     })
 
