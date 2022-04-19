@@ -90,6 +90,7 @@ export default function Display() {
   return (
     <div className="display">
       <Information
+        category={prompt.category}
         language={prompt.language}
         setLanguage={newPrompt}
         time={time}
