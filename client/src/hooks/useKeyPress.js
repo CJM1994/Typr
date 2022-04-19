@@ -31,9 +31,9 @@ export default function useKeyPress() {
     setInput((prev) => ({ ...prev, focused: focus }));
   };
   
-  function endInput () {
+  function endInput() {
     setInput((prev) => ({ ...prev, end: true }));
-  }
+  };
 
   // function for retrieving a prompt from db
   function fetchPrompt(language) {
@@ -54,7 +54,7 @@ export default function useKeyPress() {
   // callback for event listener
   function handleKeypress(event) {
     // updates input when a key is pressed
-    if (input.focused && input.counter !== lengths[lengths.length - 1][1] - 1) {
+    if (input.focused && input.counter !== lengths[lengths.length - 1][1] - 1 && !input.end) {
       setInput((prev) =>  {
         // descriptive variables
         const { counter, wrongIndexes, keys } = prev;

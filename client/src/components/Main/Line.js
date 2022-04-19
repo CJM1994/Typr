@@ -14,10 +14,10 @@ export default function Line(props) {
     });
 
     if (i === index - start) {
-      line.push(<div className="ticker" />);
+      line.push(<div className="ticker" key={i} />);
     }
 
-    line.push(<p className={lineClasses}>{text[i]}</p>)
+    line.push(<p className={lineClasses} key={i + lineClasses}>{text[i]}</p>)
   }
 
   return (

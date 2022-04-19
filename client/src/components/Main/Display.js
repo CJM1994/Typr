@@ -34,30 +34,33 @@ export default function Display() {
 
   // timer toggling side effect for when user first presses a key
   useEffect(() => {
-    if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
-      toggleTimer(true);
-    } else if (lengths[lengths.length - 1]) {
-      if (counter === lengths[lengths.length - 1][1] - 1 && !input.end) {
-        toggleTimer(false);
-        endInput();
+    if (!input.end) {
+      if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
+        toggleTimer(true);
+      } else if (lengths[lengths.length - 1]) {
+        if (counter === lengths[lengths.length - 1][1] - 1) {
+          toggleTimer(false);
+          endInput();
+        }
       }
     }
   }, [input]);
 
-
   useEffect(() => {
-    if(input.end === true){
-      const email = `test8@test.test`;
-      // push to db: # of wrong chars, time, prompt.words accuracy, wordsPerMin , timeSpent = time, totalChars = 
+    if (input.end) {
       let totalChars = 0;
       let totalWords = 0;
+
       for (const line of codeLines) {
         totalChars += line.length;
         totalWords += line.join('').split(' ').length;
       }
+
       const minutes = time / 60000;
       const wordsPerMin = (totalWords / minutes);
       const accuracy = (totalChars - input.wrongIndexes.length) / totalChars;
+
+      const email = `test3@test.test`;
       axios.patch(`user/${email}`, { 
         statistics: { accuracy: accuracy, 
           wordsPerMin: wordsPerMin, 
@@ -65,12 +68,9 @@ export default function Display() {
           totalChars } 
         })
         .then((res) => {
-          console.log(res);
         });
     }
-  }, [ input.end ]);
-
-  console.log(input.end);
+  }, [input.end]);
 
   // creates new event listener when component is unmounted (new prompt)
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Display() {
 
   function toggleFocus() {
     setFocus(!input.focused);
-    if (input.keys[0].length > 0 || input.queue !== null) {
+    if ((input.keys[0].length > 0 || input.queue !== null) && !input.end) {
       toggleTimer(!input.focused);  
     }
   }

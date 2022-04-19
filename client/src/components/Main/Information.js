@@ -16,6 +16,7 @@ export default function Information(props) {
   const buttons = languages.map((el) => {
     return (
       <Button
+        key={languages.indexOf(el)}
         language={el}
         highlight={language === el}
         onClick={() => setLanguage(el)}
