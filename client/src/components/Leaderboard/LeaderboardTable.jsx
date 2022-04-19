@@ -13,13 +13,15 @@ export default function LeaderboardTable(props) {
   }, []);
 
   return (
-    <table>
-      <tbody>
+    <table className="table">
+      <thead>
         <tr>
           <th>#</th>
           <th>User</th>
           <th>Score</th>
         </tr>
+      </thead>
+      <tbody>
         {users.map((val, key) => {
           return (
             <tr key={key}>
