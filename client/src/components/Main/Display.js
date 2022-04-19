@@ -31,6 +31,11 @@ export default function Display() {
     fetchPrompt(language);
     resetInput();
     resetTimer();
+    setStats({
+      wordsPerMin: 0,
+      accuracy: 0,
+      score: 0
+    });
   }
 
   // side effect for language change

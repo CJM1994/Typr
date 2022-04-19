@@ -3,11 +3,8 @@
   flex-direction: column;
   justify-content: flex-start;
   font-size: 1.5em;
-  height: 96.5vh;
-  padding: 15px 4%;
-  padding-top: 5px;
-  margin: 1%;
-  margin-right: 0;
+  width: 100%;
+  height: 100%;
   border: 1px solid #D7D0CF;
   border-right: none;
 
@@ -16,8 +13,15 @@
     flex-direction: column;
     align-items: start;
     justify-content: flex-start;
-    max-width: 60%;
+    width: 67%;
     text-align: justify;
+    margin-left: 2em;
+  }
+
+  .text {
+    font-weight: 300;
+    font-size: 20px;
+    margin: 15px 0;
   }
 
   h1 {
