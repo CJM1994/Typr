@@ -26,8 +26,8 @@ export default function LeaderboardTable(props) {
           return (
             <tr key={key}>
               <td>{key + 1}</td>
-              <td>{val.firstName + " " + val.lastName}</td>
-              <td>{val.allTimeScore}</td>
+              <td>{val.email.split('@')[0]}</td>
+              <td>{Math.floor(val.allTimeScore)}</td>
             </tr>
           );
         })}

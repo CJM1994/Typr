@@ -3,6 +3,8 @@ import axios from "axios";
 import { formatFromSeconds, calculateScore } from "../helpers/helpers";
 
 export default function useGetUserStatistics(email) {
+  
+  
   const [stats, setStats] = useState({
     avgSpeed: 0,
     avgSpeedToday: 0,
@@ -85,8 +87,8 @@ export default function useGetUserStatistics(email) {
           });
         });
     };
-    getData();
-  }, []);
+    email && getData();
+  }, [email]);
 
   return stats;
 }

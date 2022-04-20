@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
 import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
-
 import "./Display.scss";
-
 import Information from "./Information";
 import Lines from "./Lines";
+import { UserContext } from "../App";
+import { calculateScore } from "../../helpers/helpers";
 import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
-  // deconstructing objects
+  const { userProps } = useContext(UserContext);
   const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput } = useKeyPress();
   const { time, running, toggleTimer, resetTimer } = useTimer();
   const { codeLines, language } = prompt;
@@ -77,16 +77,19 @@ export default function Display() {
         score: wordsPerMin * accuracy
       });
 
-      const email = `test3@test.test`;
-      axios.patch(`user/${email}`, { 
-        statistics: { accuracy: accuracy, 
-          wordsPerMin: wordsPerMin, 
-          timeSpent: time, totalChars: 
-          totalChars } 
+      if (userProps.isAuthenticated) {
+        axios.patch(`user/${userProps.user.email}`, {
+          attemptScore: calculateScore(wordsPerMin, accuracy),
+          statistics: {
+            accuracy: accuracy,
+            wordsPerMin: wordsPerMin,
+            timeSpent: time, totalChars:
+              totalChars
+          }
         })
-        .then((res) => {
-          
-        });
+          .then((res) => {
+          });
+      }
     }
   }, [input.end]);
 
