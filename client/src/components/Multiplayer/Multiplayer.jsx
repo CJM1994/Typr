@@ -23,6 +23,7 @@ export default function Multiplayer() {
 
   function newPrompt(language) {
     fetchPrompt(language); // sends get request for random prompt of a given language
+                           // fetch this from websocket instead! just hardcode for now
     resetInput(); // returns input to original state (wrongindexes, counter, keys, etc)
     resetTimer(); // reset timer
     setStats({
@@ -51,3 +52,9 @@ export default function Multiplayer() {
   )
 
 };
+
+// What to do for mp functionality
+// Make game room for new connections
+// When 2 players connected send prompt to players (Hardcode for now)
+// When a player finishes their prompt send complete back to Server
+// When all players send complete to server, server sends back game result
