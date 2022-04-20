@@ -87,6 +87,7 @@ export default function Prompt(props) {
             lengths={lengths}
             indexes={wrongIndexes}
             counter={counter}
+            line={input.line}
           />
         </div>
         <p>Counter: {counter}</p>
