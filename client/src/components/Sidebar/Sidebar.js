@@ -1,20 +1,16 @@
 import React from "react";
-
 import SidebarButton from "./SidebarButton";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSmile } from '@fortawesome/free-solid-svg-icons'
+import Login from "../User/Login"
+import Logout from "../User/Logout"
 
 import "./Sidebar.scss"
 
 export default function Sidebar(props) {
   const { setView } = props;
-
   return (
     <section className="sidebar">
-      <button className="login" onClick={() => setView("Login")}>
-        <FontAwesomeIcon icon={faSmile} size="3x" />
-        <span>Sign In</span>
-      </button>
+      <Login/>
+      <Logout/>
       <SidebarButton href="/" text="Practice" onClick={setView} />
       <SidebarButton href="/profile" text="Profile" onClick={setView} />
       <SidebarButton href="/help" text="Help" onClick={setView} />

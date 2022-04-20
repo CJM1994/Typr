@@ -13,11 +13,7 @@ let statisticSchema = new Schema({
 
 let userSchema = new Schema({
   userId: mongoose.Schema.Types.ObjectId,
-  firstName: {
-    type: String,
-    require: true
-  },
-  lastName: {
+  name: {
     type: String,
     require: true
   },
@@ -26,7 +22,11 @@ let userSchema = new Schema({
     require: true,
     unique: true
   },
-  allTimeScore: Number,
+  allTimeScore: {
+    type: Number,
+    default: 0,
+    require: true
+  },
   greatestScore: Number,
   statistics: [statisticSchema]
 });
