@@ -38,9 +38,10 @@ const io = new SocketServer(httpServer, {
 io.on("connection", (socket) => {
   console.log(`connection created for user ${socket.id}`);
   socket.emit("newServerMessage", { body: "test server message" });
-});
-io.on("disconnect", (socket) => {
-  console.log(`user ${socket.id} disconnected`);
+
+  socket.on("newClientMessage", (arg) => {
+    console.log(`user ${socket.id} replied with ${arg}`);
+  });
 });
 
 // Initialize Routes

@@ -12,5 +12,10 @@ export default function useSocket(gameID) {
     socketRef.current.on(NEW_SERVER_MESSAGE_EVENT, (message) => {
       console.log(message);
     });
+
+    socketRef.current.emit('newClientMessage', 'hello');
+
   });
+
+  return socketRef.current;
 };

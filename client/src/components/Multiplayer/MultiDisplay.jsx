@@ -34,8 +34,7 @@ export default function MultiDisplay() {
     setFocus(true);
   }, []);
 
-  // timer toggling side effect for when user first presses a key
-  // NEEDS TO BE DISABLED, DONT WANT TIMER STOPPING DURING MULTIPLAYER
+  // Set / Stop Timer
   useEffect(() => {
     if (!input.end) {
       if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
