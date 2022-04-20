@@ -7,6 +7,7 @@ import Display from "./Main/Display";
 import Profile from './Profile/Profile';
 import Leaderboard from "./Leaderboard/Leaderboard";
 import User from "./User/User";
+import Multiplayer from "./Multiplayer/Multiplayer";
 import Help from "./Help/Help";
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
         {view === "Profile" && <Profile />}
         {view === "High Scores" && <Leaderboard />}
         {view === "Help" && <Help />}
-        {view === "Multiplayer" && <Display />}
+        {view === "Multiplayer" && <Multiplayer />}
+
         <Sidebar setView={setView} />
       </div>
     </main>
