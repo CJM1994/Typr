@@ -1,16 +1,45 @@
 import React from 'react';
 import './Multiplayer.scss'
-import useSocket from '../../hooks/useSocket';
-import MultiDisplay from './MultiDisplay';
-import { useEffect, useState } from "react";
+import Prompt from './Prompt';
+import VSDisplay from './VSDisplay';
+import { useEffect, useState, useRef } from "react";
+
+// Websocket functions
+const { io } = require("socket.io-client");
+const {sendMessage, updateProgress} = require('./api')
 
 export default function Multiplayer() {
 
-  useSocket();
+  const NEW_SERVER_MESSAGE_EVENT = "newServerMessage";
+  const socketRef = useRef();
+
+  useEffect(() => {
+    socketRef.current = io();
+
+    socketRef.current.on(NEW_SERVER_MESSAGE_EVENT, (message) => {
+      console.log(message);
+    });
+
+  });
+
+  // TEST VARIABLES
+  const player1 = {
+    connected: true,
+    progress: 50,
+  }
+
+  const player2 = {
+    connected: true,
+    progress: 50,
+  }
 
   return (
     <div>
-      <MultiDisplay />
+      <VSDisplay player1={player1} player2={player2} />
+      <Prompt
+        onComplete={() => sendMessage(socketRef.current, 'Prompt Complete')}
+        onProgress={(counter) => updateProgress(socketRef.current, counter)}
+        />
     </div>
   )
 

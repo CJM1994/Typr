@@ -42,6 +42,10 @@ io.on("connection", (socket) => {
   socket.on("newClientMessage", (arg) => {
     console.log(`user ${socket.id} replied with ${arg}`);
   });
+
+  socket.on('progressUpdate', (arg) => {
+    console.log(`user ${socket.id} progressed and ${arg}`)
+  });
 });
 
 // Initialize Routes

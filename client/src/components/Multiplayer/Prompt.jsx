@@ -4,7 +4,9 @@ import useTimer from "../../hooks/useTimer";
 import "../Main/Display.scss";
 import Lines from "../Main/Lines";
 
-export default function MultiDisplay() {
+export default function Prompt(props) {
+
+  const { onComplete, onProgress } = props;
 
   const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput } = useKeyPress();
   const { time, running, toggleTimer, resetTimer } = useTimer();
@@ -34,7 +36,7 @@ export default function MultiDisplay() {
     setFocus(true);
   }, []);
 
-  // Set / Stop Timer
+  // On click
   useEffect(() => {
     if (!input.end) {
       if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
@@ -48,9 +50,10 @@ export default function MultiDisplay() {
     }
   }, [input]);
 
-  // THIS USE EFFECT SHOULD SEND TO THE WEBSOCKET THAT USER FINISHED PROMPT
+  // On prompt complete
   useEffect(() => {
     if (input.end) {
+      onComplete(); // send complete message to websocket
       alert('PROMPT COMPLETE!!!') // This is where websocket should send
     }
   }, [input.end]);
@@ -62,6 +65,13 @@ export default function MultiDisplay() {
       document.removeEventListener("keypress", handleKeypress);
     };
   }, [handleKeypress]);
+
+  useEffect(() => {
+    if (counter !== 0) {
+      onProgress(counter);
+      // Can send a websocket message here to update % progress
+    }
+  }, [counter])
 
   return (
     <div className="display">
@@ -77,8 +87,11 @@ export default function MultiDisplay() {
             lengths={lengths}
             indexes={wrongIndexes}
             counter={counter}
+            line={input.line}
           />
         </div>
+        <p>Counter: {counter}</p>
+        <p>Errors: {wrongIndexes.length}</p>
       </div>
     </div>
   );
