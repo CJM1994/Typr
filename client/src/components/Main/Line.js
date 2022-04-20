@@ -6,7 +6,7 @@ import theme from "prism-react-renderer/themes/nightOwl";
 import "./Line.scss";
 
 export default function Line(props) {
-  const { text, start, end, wrong, index, onLine } = props;
+  const { text, start, end, wrong, index, onLine, line } = props;
   // const line = [];
   // let lineClasses;
 
@@ -33,26 +33,26 @@ export default function Line(props) {
   }
 
   return (
-    <pre className="lineContainer">
-      <Highlight  {...defaultProps} theme={theme} code={text} language="js">
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre>
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-              {(index - start === 0 && onLine) && <div className="ticker" />}
-                {line.map((token, key) => {
-                  return (token.content.split("").map((ch, j) => {
-                    return (<>
-                      {index === getIndex(line, key, j) && <div className="ticker" />}
-                      <span {...getTokenProps({ token: { ...token, content: ch}, key: (key + 1) * (j + 1) })} />
-                    </>);
-                  }));
-                })}
-              </div>
-            ))}
+    <Highlight  {...defaultProps} theme={theme} code={text} language="js">
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        tokens.map((line, i) => (
+          <pre {...getLineProps({ line, key: i })} className="lineContainer">
+            {(index === start && props.line === true) && <div className="ticker" />}
+            {line.map((token, key) => {
+              return (token.content.split("").map((ch, j) => {
+                const chClasses = classNames("ch", {
+                  "ch--wrong": wrong.includes(getIndex(line, key, j))
+                });
+
+                return (<>
+                  <span {...getTokenProps({ token: { ...token, content: ch}, key: (key + 1) * (j + 1) })} className={chClasses} />
+                  {(index - 1 === getIndex(line, key, j) && props.line === true) && <div className="ticker" />}
+                </>);
+              }));
+            })}
           </pre>
-        )}
-      </Highlight>
-    </pre>
+        ))
+      )}
+    </Highlight>
   );
 };

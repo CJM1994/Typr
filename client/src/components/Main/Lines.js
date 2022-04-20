@@ -3,7 +3,7 @@ import React from "react";
 import Line from "./Line";
 
 export default function Lines(props) {
-  const { lines, lengths, indexes, counter } = props;
+  const { lines, line, lengths, indexes, counter } = props;
   const codeBlock = [];
 
   for (let i = 0; i < lines.length; i++) {
@@ -14,6 +14,7 @@ export default function Lines(props) {
       end={lengths[i][1]}
       wrong={indexes}
       index={counter}
+      line={line === i}
     />);
   }
 

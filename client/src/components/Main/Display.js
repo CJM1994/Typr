@@ -127,6 +127,7 @@ export default function Display() {
             lengths={lengths}
             indexes={wrongIndexes}
             counter={counter}
+            line={input.line}
           />
         </div>
         {!input.focused && <div className="overlay">

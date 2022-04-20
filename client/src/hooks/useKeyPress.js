@@ -17,7 +17,8 @@ export default function useKeyPress() {
     wrongIndexes: [],
     queue: null,
     focused: false,
-    end: false
+    end: false,
+    line: 0
   };
 
   // state for keeping track of user keypresses
@@ -64,7 +65,7 @@ export default function useKeyPress() {
       setInput((prev) =>  {
         // descriptive variables
         const { counter, wrongIndexes, keys } = prev;
-        const currentLine = keys.length - 1;
+        const currentLine = prev.line;
         const currentIndexOnLine = counter - lengths[currentLine][0];
         
         // if user presses correct key
@@ -81,7 +82,7 @@ export default function useKeyPress() {
           };
         // if user presses enter when needed
         } else if (event.keyCode === 13 && lengths[currentLine][0] + currentIndexOnLine === lengths[currentLine][1]) {
-          const indent = lines[currentLine + 1].search(/\S/) / 2;
+          const indent = (lines[currentLine + 1].search(/\S/) / 2 < 0) ? prev.indent : lines[currentLine + 1].search(/\S/) / 2;
     
           return {
             ...prev,
@@ -89,7 +90,8 @@ export default function useKeyPress() {
             counter: counter + 2 * indent,
             indent,
             wrongIndexes,
-            queue: null
+            queue: null,
+            line: prev.line + 1
           };
         // if user presses an incorrect key for the first time
         } else if (!wrongIndexes.includes(counter)) {
