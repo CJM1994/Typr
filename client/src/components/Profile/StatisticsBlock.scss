@@ -1,6 +1,8 @@
 .statistics-block {
- display: flex;
- gap: 1rem; 
+  display: flex;
+  width: 100%;
+  gap: 1em; 
+  margin: 15px 0;
 
   .frame {
     border: 1px solid #D7D0CF;
@@ -14,25 +16,16 @@
   }
 
   .top {
-    font-size: 1rem;
+    font-size: 20px;
     color: #636071;
   }
 
   .bottom {
-    font-size: 2rem;
+    font-size: 20px;
   }
-
-
 }
 
-.chart-wrapper {
-  display: inline-block;
-  position: relative;
-  width: 70%;
-  justify-content: center;
-}
-
-hr {
-  border: 1px solid #D7D0CF;
-  margin: 2%;
-}
+// hr {
+//   border: 1px solid #D7D0CF;
+//   margin: 2%;
+// }

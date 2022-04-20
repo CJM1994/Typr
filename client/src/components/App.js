@@ -8,6 +8,7 @@ import Profile from './Profile/Profile';
 import Leaderboard from "./Leaderboard/Leaderboard";
 import User from "./User/User";
 import Multiplayer from "./Multiplayer/Multiplayer";
+import Help from "./Help/Help";
 
 function App() {
   const [view, setView] = useState("Practice");
@@ -19,8 +20,9 @@ function App() {
         {view === "Practice" && <Display />}
         {view === "Profile" && <Profile />}
         {view === "High Scores" && <Leaderboard />}
-        {view === "Help" && <Display />}
+        {view === "Help" && <Help />}
         {view === "Multiplayer" && <Multiplayer />}
+
         <Sidebar setView={setView} />
       </div>
     </main>

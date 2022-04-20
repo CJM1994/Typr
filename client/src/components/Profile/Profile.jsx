@@ -12,16 +12,30 @@ export default function Profile(props) {
 
   return (
     <section className="profile">
-
       <article class="welcome">
         <h1>My Profile</h1>
-        <p>This is a page with detailed statistics about your learning progress.
-          The more lessons you complete, the<br /> more detailed and accurate these statistics will be.
+        <p className="text">
+          This is a page with detailed statistics about your learning progress.
+          The more lessons you complete, the more detailed and accurate these statistics will be.
         </p>
-      </article>
 
-      <div id="statistics">
-        <h2>All Time Statistics: </h2>
+        <div className="charts">
+          <div className='chart-wrapper'>
+            <LineChart
+              statistics={stats.data}
+              dataSelection={'accuracy'}
+            />
+          </div>
+
+          <div className='chart-wrapper'>
+            <LineChart
+              statistics={stats.data}
+              dataSelection={'wordsPerMin'}
+            />
+          </div>
+        </div>
+
+        <h2>All Time Statistics:</h2>
         <StatisticsBlock
           timeSpent={stats.totalTimeSpent}
           numOfLessons={stats.totalLessons}
@@ -29,7 +43,7 @@ export default function Profile(props) {
           avgSpeed={Math.round(stats.avgSpeed)}
         />
 
-        <h2>Statistics for Today: </h2>
+        <h2>Daily Statistics:</h2>
         <StatisticsBlock
           timeSpent={stats.totalTimeSpentToday}
           numOfLessons={stats.totalLessonsToday}
@@ -38,30 +52,8 @@ export default function Profile(props) {
         />
 
         <h2>Compare Yourself: </h2>
-        <p>Your all time top score beats {stats.scorePercentile}% of all other people.</p>
-
-        {/* Implementing graphs below */}
-
-        <hr />
-        <div className='chart-wrapper'>
-          <LineChart
-            statistics={stats.data}
-            dataSelection={'accuracy'}
-          />
-        </div>
-        <hr />
-        <div className='chart-wrapper'>
-          <LineChart
-            statistics={stats.data}
-            dataSelection={'wordsPerMin'}
-          />
-        </div>
-        <hr />
-
-
-      </div>
-
+        <p className="text">Your all time top score beats {stats.scorePercentile}% of all other people.</p>
+      </article>
     </section>
-  )
-
+  );
 }
