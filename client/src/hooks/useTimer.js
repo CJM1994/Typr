@@ -5,6 +5,8 @@ export default function useTimer() {
   const [running, setRunning] = useState(false);
 
   function toggle(mode) {
+  
+    console.log(`Setting timer to ${mode}`)
     setRunning(mode);
   };
 

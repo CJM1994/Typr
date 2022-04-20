@@ -1,26 +1,12 @@
 import React from "react";
 import classNames from "classnames";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwl";
+import theme from "prism-react-renderer/themes/nightOwlLight";
 
 import "./Line.scss";
 
 export default function Line(props) {
-  const { text, start, end, wrong, index, onLine, line } = props;
-  // const line = [];
-  // let lineClasses;
-
-  // for (let i = 0; i < text.length; i++) {
-  //   lineClasses = classNames("ch", {
-  //     "ch--wrong": wrong.includes(i + start)
-  //   });
-
-  //   if (i === index - start) {
-  //     line.push(<div className="ticker" key={i} />);
-  //   }
-
-  //   line.push(<p className={lineClasses} key={i + lineClasses}>{text[i]}</p>);
-  // }
+  const { text, start, wrong, index } = props;
 
   function getIndex(line, lineIndex, charIndex) {
     let index = charIndex + start;
