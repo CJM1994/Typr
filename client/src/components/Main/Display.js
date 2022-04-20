@@ -9,7 +9,6 @@ import "./Display.scss";
 import Information from "./Information";
 import Lines from "./Lines";
 import VirtualKeyboard from "./VirtualKeyboard";
-import { calculateScore } from '../../helpers/helpers';
 
 export default function Display() {
   // deconstructing objects
@@ -50,7 +49,7 @@ export default function Display() {
       if (!running && (input.keys[0].length > 0 || input.queue !== null)) {
         toggleTimer(true);
       } else if (lengths[lengths.length - 1]) {
-        if (counter === lengths[lengths.length - 1][1] - 1) {
+        if (counter === lengths[lengths.length - 1][1]) {
           toggleTimer(false);
           endInput();
         }
@@ -64,13 +63,14 @@ export default function Display() {
       let totalWords = 0;
 
       for (const line of codeLines) {
-        totalChars += line.length;
-        totalWords += line.join('').split(' ').length;
+        totalChars += line.split("").length;
+        totalWords += line.split(" ").length;
       }
 
       const minutes = time / 60000;
       const wordsPerMin = (totalWords / minutes);
       const accuracy = (totalChars - input.wrongIndexes.length) / totalChars;
+      
       setStats({
         wordsPerMin,
         accuracy,
@@ -127,6 +127,7 @@ export default function Display() {
             lengths={lengths}
             indexes={wrongIndexes}
             counter={counter}
+            line={input.line}
           />
         </div>
         {!input.focused && <div className="overlay">
