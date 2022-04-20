@@ -11,6 +11,7 @@ export default function Lines(props) {
       key={i}
       text={lines[i]}
       start={lengths[i][0]}
+      end={lengths[i][1]}
       wrong={indexes}
       index={counter}
     />);

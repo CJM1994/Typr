@@ -3,6 +3,11 @@
   align-items: center;
   padding: 0;
   margin: 5px;
+
+  pre {
+    font-size: 20px;
+    margin: 0;
+  }
 }
 
 .ch {
@@ -20,4 +25,8 @@
   border: 1px solid black;
   width: 2px;
   height: 24px;
+}
+
+.token-line {
+  display: flex;
 }

@@ -8,8 +8,7 @@ export default function Profile(props) {
 
   // Use this hook to retrieve user data for the StatisticsBlock component
   const stats = useGetUserStatistics('test9@test.test');
-  console.log('data', stats.data);
-
+  
   return (
     <section className="profile">
       <article class="welcome">

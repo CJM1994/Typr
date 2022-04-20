@@ -44,9 +44,9 @@ export default function useKeyPress() {
           const index = Math.floor(Math.random() * res.data.length);
 
           return {
-          codeLines: res.data[index].codeBlock.split("\n").map((el) => [...el, "\n"]),
-          language,
-          category: res.data[index].category
+            codeLines: res.data[index].codeBlock.split("\n"),
+            language,
+            category: res.data[index].category
           };
         });
       });
@@ -60,12 +60,15 @@ export default function useKeyPress() {
   // callback for event listener
   function handleKeypress(event) {
     // updates input when a key is pressed
-    if (input.focused && input.counter !== lengths[lengths.length - 1][1] - 1 && !input.end) {
+    if (input.focused && input.counter !== lengths[lengths.length - 1][1] && !input.end) {
       setInput((prev) =>  {
         // descriptive variables
         const { counter, wrongIndexes, keys } = prev;
         const currentLine = keys.length - 1;
-        const currentIndexOnLine = [counter - lengths[currentLine][0]];
+        const currentIndexOnLine = counter - lengths[currentLine][0];
+        console.log(`Comparing ${event.key} and ${lines[currentLine][currentIndexOnLine]}`)
+        console.log(`indexes: ${lengths[currentLine][0]} ${lengths[currentLine][1]}`);
+        console.log("currentIndex", currentIndexOnLine +  lengths[currentLine][0]);
         
         // if user presses correct key
         if (event.key === lines[currentLine][currentIndexOnLine]) {
@@ -80,13 +83,16 @@ export default function useKeyPress() {
             queue: null
           };
         // if user presses enter when needed
-        } else if (event.keyCode === 13 && lines[currentLine][currentIndexOnLine] === "\n") {
-          const indent = lines[currentLine + 1][lines[currentLine + 1].length - 2] === " " ? prev.indent : lines[currentLine + 1].join("").search(/\S/) / 2;
+        } else if (event.keyCode === 13 && lengths[currentLine][0] + currentIndexOnLine === lengths[currentLine][1]) {
+          console.log(lines[currentLine + 1].search(/\S/) / 2);
+          const indent = lines[currentLine + 1].search(/\S/) / 2;
+
+          console.log("indents:", indent);
     
           return {
             ...prev,
             keys: [...keys, "" + "  ".repeat(indent)],
-            counter: counter + 1 + 2 * indent,
+            counter: counter + 2 * indent,
             indent,
             wrongIndexes,
             queue: null
