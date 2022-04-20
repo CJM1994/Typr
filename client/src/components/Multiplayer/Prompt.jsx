@@ -68,7 +68,7 @@ export default function Prompt(props) {
 
   useEffect(() => {
     if (counter !== 0) {
-      onProgress();
+      onProgress(counter);
       // Can send a websocket message here to update % progress
     }
   }, [counter])

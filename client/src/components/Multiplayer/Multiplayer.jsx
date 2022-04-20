@@ -38,7 +38,7 @@ export default function Multiplayer() {
       <VSDisplay player1={player1} player2={player2} />
       <Prompt
         onComplete={() => sendMessage(socketRef.current, 'Prompt Complete')}
-        onProgress={() => updateProgress(socketRef.current, 'Moved one key ahead')}
+        onProgress={(counter) => updateProgress(socketRef.current, counter)}
         />
     </div>
   )
