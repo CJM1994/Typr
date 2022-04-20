@@ -6,7 +6,7 @@ import Lines from "../Main/Lines";
 
 export default function Prompt(props) {
 
-  const {onComplete} = props;
+  const { onComplete, onProgress } = props;
 
   const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput } = useKeyPress();
   const { time, running, toggleTimer, resetTimer } = useTimer();
@@ -66,6 +66,13 @@ export default function Prompt(props) {
     };
   }, [handleKeypress]);
 
+  useEffect(() => {
+    if (counter !== 0) {
+      onProgress();
+      // Can send a websocket message here to update % progress
+    }
+  }, [counter])
+
   return (
     <div className="display">
       <p>Time: {time}</p>
@@ -82,7 +89,7 @@ export default function Prompt(props) {
             counter={counter}
           />
         </div>
-        <p>Counter: {counter}</p> 
+        <p>Counter: {counter}</p>
         <p>Errors: {wrongIndexes.length}</p>
       </div>
     </div>
