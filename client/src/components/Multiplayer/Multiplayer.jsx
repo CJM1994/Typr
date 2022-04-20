@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 
 export default function Multiplayer() {
 
-
-
   useSocket();
 
-  return (<MultiDisplay />)
+  return (
+    <div>
+      <MultiDisplay />
+    </div>
+  )
 
 };
 
