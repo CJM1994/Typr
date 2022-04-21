@@ -2,8 +2,8 @@ const sendMessage = (socket, message) => {
   socket.emit('newClientMessage', message);
 };
 
-const updateProgress = (socket, percentComplete) => {
-  socket.emit('progressUpdate', percentComplete);
+const joinMatch = (socket, percentComplete) => {
+  socket.emit('joinMatch', percentComplete);
 }
 
-module.exports = {sendMessage, updateProgress}
+module.exports = {sendMessage, joinMatch}

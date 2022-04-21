@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 
 // Websocket functions
 const { io } = require("socket.io-client");
-const {sendMessage, updateProgress} = require('./api')
+const {sendMessage, joinMatch} = require('./api')
 
 export default function Multiplayer() {
 
@@ -38,7 +38,7 @@ export default function Multiplayer() {
       <VSDisplay player1={player1} player2={player2} />
       <Prompt
         onComplete={() => sendMessage(socketRef.current, 'Prompt Complete')}
-        onProgress={(counter) => updateProgress(socketRef.current, counter)}
+        onJoin={(counter) => joinMatch(socketRef.current, counter)}
         />
     </div>
   )
