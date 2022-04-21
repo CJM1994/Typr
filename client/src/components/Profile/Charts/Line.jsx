@@ -41,7 +41,11 @@ const getStatisticsData = (statistics, dataSelection) => {
   const statisticsData = [];
 
   for (const dataPoint of statistics) {
-    statisticsData.push(dataPoint[dataSelection]);
+    if (dataSelection === 'accuracy') {
+      statisticsData.push(dataPoint[dataSelection] * 100);
+    } else {
+      statisticsData.push(dataPoint[dataSelection]);
+    }
   };
 
   return statisticsData;

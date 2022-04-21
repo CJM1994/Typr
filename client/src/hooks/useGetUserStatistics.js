@@ -26,41 +26,43 @@ export default function useGetUserStatistics(email) {
           const userStatistics = res.data[0].statistics;
           const todaysDate = new Date(Date.now());
 
-          let allTimeChars = 0;
+          let allTimeWordsPerMin = 0;
           let allTimeSpent = 0;
-          let todaysChars = 0;
+          let todaysWordsPerMin = 0;
           let todaysTimeSpent = 0;
           let todaysLessons = 0;
           let todaysTopScore = 0;
           let todaysScore = 0;
+          let i = 0;
 
           for (const dataPoint of userStatistics) {
-            allTimeChars += dataPoint.totalChars;
+            allTimeWordsPerMin += dataPoint.wordsPerMin;
             allTimeSpent += dataPoint.timeSpent;
             const dataDate = new Date(dataPoint.createdAt);
             if (todaysDate.getDate() === dataDate.getDate()) {
               todaysScore = calculateScore(
-                dataPoint.totalChars / 5,
+                dataPoint.wordsPerMin,
                 dataPoint.accuracy
               );
-              todaysChars += dataPoint.totalChars;
+              todaysWordsPerMin += dataPoint.wordsPerMin;
               todaysTimeSpent += dataPoint.timeSpent;
               todaysLessons++;
               todaysTopScore =
                 todaysScore > todaysTopScore ? todaysScore : todaysTopScore;
             }
+            i++;
           }
 
           setStats((prev) => {
             return {
               ...prev,
-              avgSpeed: allTimeChars / 5 / (allTimeSpent / 60000),
+              avgSpeed: allTimeWordsPerMin / i,
               totalLessons: res.data[0].statistics.length,
               totalLessonsToday: todaysLessons,
               totalTimeSpent: formatFromSeconds(allTimeSpent),
               topScore: res.data[0].greatestScore,
               totalTimeSpentToday: formatFromSeconds(todaysTimeSpent),
-              avgSpeedToday: todaysChars / 5 / (allTimeSpent / 60000),
+              avgSpeedToday: todaysWordsPerMin / i,
               topScoreToday: Math.round(todaysTopScore),
               data: res.data[0].statistics,
             };
