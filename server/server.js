@@ -3,7 +3,6 @@ const app = express();
 const morgan = require("morgan"); // Server logs
 const dotenv = require("dotenv"); // Load ENV
 const mongoose = require("mongoose");
-const bp = require("body-parser");
 
 require("dotenv").config();
 

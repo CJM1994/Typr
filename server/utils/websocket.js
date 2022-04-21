@@ -9,7 +9,7 @@ const createIO = (io) => {
       console.log(`user ${socket.id} replied with ${arg}`);
     });
 
-    socket.on("progressUpdate", async (arg) => {
+    socket.on("joinMatch", async (arg) => {
       console.log(`user ${socket.id} progressed and ${arg}`);
       playersArray.push(socket.id);
       console.log(playersArray);
@@ -17,6 +17,7 @@ const createIO = (io) => {
       if (playersArray.length >= 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
+          // socket.emit('newPrompt', prompt)
           console.log(prompt);
         });
       }
