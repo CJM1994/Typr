@@ -10,15 +10,14 @@ const createIO = (io) => {
     });
 
     socket.on("joinMatch", async (arg) => {
-      console.log(`user ${socket.id} progressed and ${arg}`);
       playersArray.push(socket.id);
-      console.log(playersArray);
+      console.log(`${socket.id} joined match: `, playersArray);
 
       if (playersArray.length >= 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
-          // socket.emit('newPrompt', prompt)
           console.log(prompt);
+          socket.emit('newPrompt', prompt);
         });
       }
     });

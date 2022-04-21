@@ -112,6 +112,7 @@ export default function useKeyPress() {
     fetchPrompt,
     resetInput,
     setFocus,
-    endInput
+    endInput,
+    setPrompt
   };
 };

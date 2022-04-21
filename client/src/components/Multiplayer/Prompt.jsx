@@ -6,9 +6,9 @@ import Lines from "../Main/Lines";
 
 export default function Prompt(props) {
 
-  const { onComplete, onJoin } = props;
+  const { onComplete, serverPrompt } = props;
 
-  const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput } = useKeyPress();
+  const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput, setPrompt } = useKeyPress();
   const { time, running, toggleTimer, resetTimer } = useTimer();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
@@ -19,8 +19,8 @@ export default function Prompt(props) {
     score: 0
   });
 
-  function newPrompt(language) {
-    fetchPrompt(language);
+  function newPrompt() {
+    setPrompt({codeLines: serverPrompt, language: 'Javascript', category: 'food'});
     resetInput();
     resetTimer();
     setStats({
@@ -32,10 +32,9 @@ export default function Prompt(props) {
 
   // THIS IS NEEDED FOR INITIAL PROMPT TO SHOW UP
   useEffect(() => {
-    onJoin();
     newPrompt(language);
     setFocus(true);
-  }, []);
+  }, [serverPrompt]);
 
   // On click
   useEffect(() => {

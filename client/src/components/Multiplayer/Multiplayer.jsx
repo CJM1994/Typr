@@ -1,16 +1,21 @@
 import React from 'react';
 import './Multiplayer.scss'
 import Prompt from './Prompt';
+import Button from '../Main/Button'
+import '../Main/Button.scss'
 import VSDisplay from './VSDisplay';
 import { useEffect, useState, useRef } from "react";
 
 // Websocket functions
 const { io } = require("socket.io-client");
-const {sendMessage, joinMatch} = require('./api')
+const { sendMessage, joinMatch } = require('./api')
 
 export default function Multiplayer() {
 
+  const [serverPrompt, setServerPrompt] = useState('click button to start');
+
   const NEW_SERVER_MESSAGE_EVENT = "newServerMessage";
+  const NEW_PROMPT_EVENT = "newPrompt";
   const socketRef = useRef();
 
   useEffect(() => {
@@ -20,7 +25,12 @@ export default function Multiplayer() {
       console.log(message);
     });
 
-  });
+  socketRef.current.on(NEW_PROMPT_EVENT, (prompt) => {
+      console.log(prompt);
+      setServerPrompt(prompt[0].codeBlock.split('\n'));
+    })
+
+  }, []);
 
   // TEST VARIABLES
   const player1 = {
@@ -36,10 +46,13 @@ export default function Multiplayer() {
   return (
     <div>
       <VSDisplay player1={player1} player2={player2} />
+      <button
+        onClick={() => joinMatch(socketRef.current)}
+      >Click</button>
       <Prompt
         onComplete={() => sendMessage(socketRef.current, 'Prompt Complete')}
-        onJoin={(counter) => joinMatch(socketRef.current, counter)}
-        />
+        serverPrompt={serverPrompt}
+      />
     </div>
   )
 
