@@ -1,7 +1,6 @@
 import React from 'react';
 import './Multiplayer.scss'
 import Prompt from './Prompt';
-import Button from '../Main/Button'
 import '../Main/Button.scss'
 import VSDisplay from './VSDisplay';
 import { useEffect, useState, useRef } from "react";

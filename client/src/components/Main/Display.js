@@ -3,7 +3,6 @@ import classNames from "classnames";
 import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
-import { UserContext } from "../App";
 import { calculateWords } from "../../helpers/helpers";
 
 import "./Display.scss";

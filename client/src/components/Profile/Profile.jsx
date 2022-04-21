@@ -40,7 +40,7 @@ export default function Profile(props) {
           <StatisticsBlock
             timeSpent={stats.totalTimeSpent}
             numOfLessons={stats.totalLessons}
-            topScore={stats.topScore}
+            topScore={Math.round(stats.topScore)}
             avgSpeed={Math.round(stats.avgSpeed)}
           />
 
@@ -53,7 +53,7 @@ export default function Profile(props) {
           />
 
           <h2>Compare Yourself: </h2>
-          <p className="text">Your all time top score beats {stats.scorePercentile}% of all other people.</p>
+          <p className="text">Your all time top score beats {Math.round(stats.scorePercentile)}% of all other people.</p>
         </article>
       </section>
     );
