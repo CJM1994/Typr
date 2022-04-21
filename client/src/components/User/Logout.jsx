@@ -7,6 +7,7 @@ import { faSmile } from '@fortawesome/free-solid-svg-icons';
 export default function Logout() {
   const { userProps } = useContext(UserContext);
   const { isAuthenticated, logout } = userProps;
+  console.log(userProps.user)
   return (
     isAuthenticated && (
       <button className="login" onClick={() => logout()}>

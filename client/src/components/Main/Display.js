@@ -4,6 +4,7 @@ import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
 import { calculateWords } from "../../helpers/helpers";
+import { UserContext } from "../App";
 
 import "./Display.scss";
 
