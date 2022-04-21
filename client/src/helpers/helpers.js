@@ -12,7 +12,8 @@ function getIndexes(arr) {
   return lengths
 };
 
-function formatFromSeconds(seconds) {
+function formatFromSeconds(ms) {
+  const seconds = ms / 1000;
   const hours = Math.round((seconds / 60 / 60));
   const minutes = Math.round((((seconds / 60 / 60) - hours) * 60));
 

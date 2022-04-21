@@ -4,7 +4,7 @@ import { formatFromSeconds, calculateScore } from "../helpers/helpers";
 
 export default function useGetUserStatistics(email) {
   
-  
+
   const [stats, setStats] = useState({
     avgSpeed: 0,
     avgSpeedToday: 0,
