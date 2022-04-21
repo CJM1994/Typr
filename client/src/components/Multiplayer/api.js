@@ -1,5 +1,9 @@
-const joinMatch = (socket, percentComplete) => {
-  socket.emit('joinMatch', percentComplete);
+const joinMatch = (socket) => {
+  socket.emit('joinMatch');
 }
 
-module.exports = {joinMatch}
+const sendGameProgress = (socket, counter, errors) => {
+  socket.emit('gameProgress', counter, errors);
+}
+
+module.exports = {joinMatch, sendGameProgress}

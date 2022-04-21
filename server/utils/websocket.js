@@ -1,5 +1,5 @@
 const createIO = (io) => {
-  const playersArray = [];
+  const players = {};
 
   io.on("connection", (socket) => {
 
@@ -7,11 +7,15 @@ const createIO = (io) => {
       console.log(`${socket.id} joined room1`);
       socket.join("room1");
 
-      if(!playersArray.includes(socket.id)) {
-        playersArray.push(socket.id);
+      players[socket.id] = {
+        position: 0,
+        progress: 0,
+        speed: 0,
+        errors: 0,
+        counter: 0,
       }
       
-      if (playersArray.length >= 2) {
+      if (Object.keys(players).length >= 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
           console.log(prompt);
@@ -23,10 +27,13 @@ const createIO = (io) => {
     });
 
     socket.on('gameProgress', (counter, errors) => {
+
+      players[socket.id].counter = counter;
+      players[socket.id].errors = errors;
       
-      for (const player of playersArray) {
-        console.log(player, 'correct: ', counter, 'errors', errors);
-      }
+      for (const key in players) {
+        console.log(key, 'correct: ', players[key].counter, 'errors', players[key].errors);
+      };
 
     });
 
