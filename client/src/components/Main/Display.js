@@ -10,7 +10,6 @@ import "./Display.scss";
 
 import Information from "./Information";
 import Lines from "./Lines";
-import { UserContext } from "../App";
 
 import VirtualKeyboard from "./VirtualKeyboard";
 
