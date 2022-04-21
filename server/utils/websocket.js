@@ -3,12 +3,14 @@ const createIO = (io) => {
 
   io.on("connection", (socket) => {
 
-    socket.on("joinMatch", async (arg) => {
+    socket.on("joinMatch", async () => {
       console.log(`${socket.id} joined room1`);
       socket.join("room1");
 
-      playersArray.push(socket.id);
-
+      if(!playersArray.includes(socket.id)) {
+        playersArray.push(socket.id);
+      }
+      
       if (playersArray.length >= 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
@@ -20,8 +22,18 @@ const createIO = (io) => {
       };
     });
 
+    socket.on('gameProgress', (counter, errors) => {
+      
+      for (const player of playersArray) {
+        console.log(player, 'correct: ', counter, 'errors', errors);
+      }
+
+    });
 
   });
 };
 
 module.exports = createIO;
+
+// for the game track
+// position, progress, speed, errors
