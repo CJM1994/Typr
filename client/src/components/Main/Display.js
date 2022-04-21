@@ -4,16 +4,14 @@ import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
 import { UserContext } from "../App";
-import { calculateScore, calculateWords } from "../../helpers/helpers";
+import { calculateWords } from "../../helpers/helpers";
 
 import "./Display.scss";
 
 import Information from "./Information";
 import Lines from "./Lines";
-<<<<<<< Updated upstream
-=======
 import { UserContext } from "../App";
->>>>>>> Stashed changes
+
 import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
