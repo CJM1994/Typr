@@ -10,6 +10,10 @@ import "./Display.scss";
 
 import Information from "./Information";
 import Lines from "./Lines";
+<<<<<<< Updated upstream
+=======
+import { UserContext } from "../App";
+>>>>>>> Stashed changes
 import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
@@ -79,8 +83,21 @@ export default function Display() {
       });
 
       if (userProps.isAuthenticated) {
-        axios.patch(`user/${userProps.user.email}`, {
-          attemptScore: calculateScore(wordsPerMin, accuracy),
+        axios.get(`user/${userProps.user.email}`)
+        .then((res)=>{
+        let score = wordsPerMin * accuracy;
+       
+         if(res.data[0].greatestScore < score){
+          axios.patch(`user/greatscore/${userProps.user.email}`, {
+            greatestScore: score
+          })
+            .then((res) => {
+            });
+         }
+       })
+
+        axios.patch(`user/statistic/${userProps.user.email}`, {
+          attemptScore: wordsPerMin * accuracy,
           statistics: {
             accuracy: accuracy,
             wordsPerMin: wordsPerMin,
