@@ -54,13 +54,13 @@ export default function useGetUserStatistics(email) {
           setStats((prev) => {
             return {
               ...prev,
-              avgSpeed: allTimeChars / 5 / (allTimeSpent / 60),
+              avgSpeed: allTimeChars / 5 / (allTimeSpent / 60000),
               totalLessons: res.data[0].statistics.length,
               totalLessonsToday: todaysLessons,
               totalTimeSpent: formatFromSeconds(allTimeSpent),
               topScore: res.data[0].greatestScore,
               totalTimeSpentToday: formatFromSeconds(todaysTimeSpent),
-              avgSpeedToday: todaysChars / 5 / (allTimeSpent / 60),
+              avgSpeedToday: todaysChars / 5 / (allTimeSpent / 60000),
               topScoreToday: Math.round(todaysTopScore),
               data: res.data[0].statistics,
             };
