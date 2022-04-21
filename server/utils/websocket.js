@@ -2,25 +2,25 @@ const createIO = (io) => {
   const playersArray = [];
 
   io.on("connection", (socket) => {
-    console.log(`connection created for user ${socket.id}`);
-    socket.emit("newServerMessage", { body: "test server message" });
-
-    socket.on("newClientMessage", (arg) => {
-      console.log(`user ${socket.id} replied with ${arg}`);
-    });
 
     socket.on("joinMatch", async (arg) => {
+      console.log(`${socket.id} joined room1`);
+      socket.join("room1");
+
       playersArray.push(socket.id);
-      console.log(`${socket.id} joined match: `, playersArray);
 
       if (playersArray.length >= 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
           console.log(prompt);
-          socket.emit('newPrompt', prompt);
+          let i = Math.floor(Math.random(prompt.length) * 10);
+          console.log("i", i);
+          io.to('room1').emit("newPrompt", prompt[i]);
         });
-      }
+      };
     });
+
+
   });
 };
 
