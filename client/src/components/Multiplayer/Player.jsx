@@ -1,14 +1,34 @@
+import React, { useState, useEffect } from "react";
+import './Player.scss';
 
+export default function Player(props) {
 
-export default function VSDisplay(props) { // how many player
+  const [carPosition, setCarPosition] = useState(0);
+  const { position, progress, speed, errors } = props;
 
-  const {player1, player2} = props;
+  useEffect(() => {
+    setCarPosition(progress * 100);
+  }, [progress]);
+
 
   return (
-    <div>
-      <p>Player 1: {player1.connected}, Progress: {player1.progress}</p>
-      <p>Player 2: {player2.connected}, Progress: {player2.progress}</p>
+    <div className="player-card">
+      <div className="car" style={{ left: `${carPosition}%`}}>
+        <svg height="100" width="100">
+          <circle cx="50" cy="50" r="30" fill="yellow" />
+        </svg>
+      </div>
+      <span>Randomly Generate User</span>
+
+      <section>
+        <div className="user-stats">
+          <span> Position: {position} </span>
+          <span> Progress: {progress}</span>
+          <span> Speed:{speed}</span>
+          <span> Error:{errors}</span>
+        </div>
+      </section>
     </div>
-  )
+  );
 
 }

@@ -1,0 +1,20 @@
+.player-card {
+  border: 15px solid #008000;
+  width: 75%;
+
+  .car {
+    position: relative;
+  }
+
+  section {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    .user-stats {
+      display: flex;
+      width: 45%;
+      justify-content: space-around;
+    }
+  }
+}
