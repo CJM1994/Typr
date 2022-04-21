@@ -3,11 +3,15 @@ import classNames from "classnames";
 import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
+import { UserContext } from "../App";
+import { calculateWords } from "../../helpers/helpers";
+
 import "./Display.scss";
+
 import Information from "./Information";
 import Lines from "./Lines";
 import { UserContext } from "../App";
-import { calculateScore } from "../../helpers/helpers";
+
 import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
@@ -60,11 +64,10 @@ export default function Display() {
   useEffect(() => {
     if (input.end) {
       let totalChars = 0;
-      let totalWords = 0;
+      const totalWords = calculateWords(codeLines);
 
       for (const line of codeLines) {
         totalChars += line.split("").length;
-        totalWords += line.split(" ").length;
       }
 
       const minutes = time / 60000;
@@ -78,8 +81,21 @@ export default function Display() {
       });
 
       if (userProps.isAuthenticated) {
-        axios.patch(`user/${userProps.user.email}`, {
-          attemptScore: calculateScore(wordsPerMin, accuracy),
+        axios.get(`user/${userProps.user.email}`)
+        .then((res)=>{
+        let score = wordsPerMin * accuracy;
+       
+         if(res.data[0].greatestScore < score){
+          axios.patch(`user/greatscore/${userProps.user.email}`, {
+            greatestScore: score
+          })
+            .then((res) => {
+            });
+         }
+       })
+
+        axios.patch(`user/statistic/${userProps.user.email}`, {
+          attemptScore: wordsPerMin * accuracy,
           statistics: {
             accuracy: accuracy,
             wordsPerMin: wordsPerMin,

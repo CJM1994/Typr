@@ -59,4 +59,16 @@ exports.updateStatistic = async (req, res) => {
     });
 };
 
+exports.updateFastScore = async (req, res) => {
+  await userSchema.updateOne({ "email": req.params.email }, {
+   greatestScore: req.body.greatestScore 
+  })
+    .then((updatedUser) => {
+      res.status(200).json(updatedUser);
+    })
+    .catch((error) => {
+      res.status(400).send(`Not Saved there was an error. ${error}`);
+    });
+};
+
 
