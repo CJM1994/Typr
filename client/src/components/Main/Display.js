@@ -3,11 +3,13 @@ import classNames from "classnames";
 import axios from "axios";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
+import { UserContext } from "../App";
+import { calculateScore, calculateWords } from "../../helpers/helpers";
+
 import "./Display.scss";
+
 import Information from "./Information";
 import Lines from "./Lines";
-import { UserContext } from "../App";
-import { calculateScore } from "../../helpers/helpers";
 import VirtualKeyboard from "./VirtualKeyboard";
 
 export default function Display() {
@@ -60,11 +62,10 @@ export default function Display() {
   useEffect(() => {
     if (input.end) {
       let totalChars = 0;
-      let totalWords = 0;
+      const totalWords = calculateWords(codeLines);
 
       for (const line of codeLines) {
         totalChars += line.split("").length;
-        totalWords += line.split(" ").length;
       }
 
       const minutes = time / 60000;

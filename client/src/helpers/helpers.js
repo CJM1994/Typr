@@ -29,4 +29,25 @@ function calculateScore(wordsPerMinute, accuracy) {
   return (wordsPerMinute * accuracy)
 }
 
-module.exports = {formatFromSeconds, getIndexes, calculateScore}
+function calculateWords(lines) {
+  let text = lines;
+
+  if (text.length > 1) {
+    text = text.join(" ");
+  } else {
+    text = text[0];
+  }
+
+  text = text.split(/[ ,]+/).filter((el) => el.length > 1);
+  text = text.map((el) => el.split(/\.|,|\(\)|\[|\(/).filter((el) => el.length > 1));
+  
+  let counter = 0;
+
+  for (const el of text) {
+    counter += el.length;
+  }
+
+  return counter;
+};
+
+module.exports = { formatFromSeconds, getIndexes, calculateScore, calculateWords }
