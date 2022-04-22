@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from "react";
 
 // Websocket functions
 const { io } = require("socket.io-client");
-const { joinMatch, sendGameProgress } = require('./api')
+const { joinMatch, sendGameProgress, sendMessage } = require('./api')
 
 export default function Multiplayer() {
 

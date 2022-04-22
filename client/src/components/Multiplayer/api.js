@@ -6,4 +6,8 @@ const sendGameProgress = (socket, counter, errors) => {
   socket.emit('gameProgress', counter, errors);
 }
 
-module.exports = {joinMatch, sendGameProgress}
+const sendMessage = (socket, message) => {
+  socket.emit('sendMessage', message);
+}
+
+module.exports = {joinMatch, sendGameProgress, sendMessage}
