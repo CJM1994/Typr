@@ -24,15 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 dotenv.config();
 
 // Initialize Routes
-const userRoutes = require("./routes/user");
 const promptRoutes = require("./routes/prompt");
 const router = require("./routes/user");
 
-app.use("/", userRoutes);
+app.use("/", router);
 app.use("/prompts", promptRoutes);
-
-app.get("/home", (req, res) => {
-  res.send("Hello|World");
-});
 
 module.exports = app;
