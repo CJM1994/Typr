@@ -13,7 +13,13 @@ export default function Multiplayer() {
 
   const [serverPrompt, setServerPrompt] = useState('');
 
+  const [serverGameState, setServerGameState] = useState({
+    player1: {},
+    player2: {},
+  });
+
   const NEW_PROMPT_EVENT = "newPrompt";
+  const NEW_GAME_STATE_EVENT = 'newGameState';
   const socketRef = useRef();
 
   useEffect(() => {
@@ -21,6 +27,15 @@ export default function Multiplayer() {
 
     socketRef.current.on(NEW_PROMPT_EVENT, (prompt) => {
       setServerPrompt(prompt.codeBlock.split('\n'));
+    });
+
+    socketRef.current.on(NEW_GAME_STATE_EVENT, (gameState) => {
+      
+      setServerGameState({
+        player1: Object.values(gameState)[0],
+        player2: Object.values(gameState)[1],
+      });
+
     });
 
   }, []);
@@ -31,14 +46,9 @@ export default function Multiplayer() {
     progress: 50,
   }
 
-  const player2 = {
-    connected: true,
-    progress: 50,
-  }
-
   return (
     <div>
-      <VSDisplay player1={player1} player2={player2} />
+      <VSDisplay gameState={serverGameState}/>
       <button
         onClick={() => joinMatch(socketRef.current)}
       >Click</button>
