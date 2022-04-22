@@ -17,6 +17,8 @@ const createIO = (io) => {
         gameStates[roomName] = {};
       };
 
+      gameStates[roomName][socket.id] = {};
+
       players[socket.id] = {
         position: 0,
         progress: 0,
@@ -27,7 +29,7 @@ const createIO = (io) => {
       };
       
       // ready to start match button, refactor into function
-      if (Object.keys(players).length >= 2) {
+      if (Object.keys(gameStates[roomName]).length >= 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
 
@@ -35,7 +37,6 @@ const createIO = (io) => {
 
           io.to(roomName).emit("newPrompt", prompt[i]);
           promptLength = prompt[i].codeBlock.length + 1;
-
         });
       };
     });
