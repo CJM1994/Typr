@@ -50,4 +50,4 @@ function calculateWords(lines) {
   return counter;
 };
 
-module.exports = { formatFromSeconds, getIndexes, calculateScore, calculateWords }
+export { formatFromSeconds, getIndexes, calculateScore, calculateWords }
