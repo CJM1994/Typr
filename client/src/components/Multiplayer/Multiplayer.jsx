@@ -49,9 +49,9 @@ export default function Multiplayer() {
   return (
     <div>
       <VSDisplay gameState={serverGameState}/>
-      <button
-        onClick={() => joinMatch(socketRef.current)}
-      >Click</button>
+      <button onClick={() => joinMatch(socketRef.current)}>
+        Join Default Server
+      </button>
       <Prompt
         onComplete={() => sendMessage(socketRef.current, 'Prompt Complete')}
         serverPrompt={serverPrompt}
