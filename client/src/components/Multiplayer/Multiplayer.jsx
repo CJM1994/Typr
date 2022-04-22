@@ -8,7 +8,7 @@ import { useEffect, useState, useRef } from "react";
 
 // Websocket functions
 const { io } = require("socket.io-client");
-const { joinMatch, sendGameProgress, sendMessage } = require('./api')
+const { joinMatch, sendGameProgress, promptComplete } = require('./api')
 
 export default function Multiplayer() {
 
@@ -29,6 +29,7 @@ export default function Multiplayer() {
 
   const NEW_PROMPT_EVENT = "newPrompt";
   const NEW_GAME_STATE_EVENT = 'newGameState';
+  const MATCH_END_EVENT = "matchOver";
   const socketRef = useRef();
 
   useEffect(() => {
@@ -42,13 +43,16 @@ export default function Multiplayer() {
 
     // Trigger on user progress in match
     socketRef.current.on(NEW_GAME_STATE_EVENT, (gameState) => {
-
       setServerGameState({
         player1: Object.values(gameState)[0],
         player2: Object.values(gameState)[1],
       });
-
     });
+
+    socketRef.current.on(MATCH_END_EVENT, () => {
+      console.log('match is over');
+      setWait(true);
+    })
 
   }, []);
 
@@ -64,7 +68,7 @@ export default function Multiplayer() {
       {wait === false && <>
         <VSDisplay gameState={serverGameState} />
         <Prompt
-          onComplete={() => sendMessage(socketRef.current, 'Prompt Complete')}
+          onComplete={() => promptComplete(socketRef.current)}
           serverPrompt={serverPrompt}
           onProgress={(counter, errors) => sendGameProgress(socketRef.current, counter, errors)}
         />

@@ -58,10 +58,9 @@ const createIO = (io) => {
 
     });
 
-    socket.on('sendMessage', (message) => {
-      console.log('sendMessage', message);
-      io.to(players[socket.id].roomName).emit('newPrompt', {codeBlock: 'console.log()'});
-      promptLength = 13;
+    socket.on('promptComplete', () => {
+      console.log('promptComplete');
+      io.to(players[socket.id].roomName).emit('matchOver');
     });
 
   });
