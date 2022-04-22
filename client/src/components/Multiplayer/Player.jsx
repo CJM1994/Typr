@@ -14,21 +14,22 @@ export default function Player(props) {
   return (
     <div className="player-card">
       <div className="car" style={{ left: `${carPosition}%`}}>
-        <svg height="100" width="100">
-          <circle cx="50" cy="50" r="30" fill="yellow" />
-        </svg>
-      </div>
-      <span>Randomly Generate User</span>
+      <img src="https://cdn.discordapp.com/attachments/955930052036558879/966850723553869904/dc4okbX9i.png" width="100"/>
 
+      </div>
       <section>
+
+      <span>Randomly Generate User</span>
         <div className="user-stats">
           <span> Position: {position} </span>
           <span> Progress: {progress}</span>
-          <span> Speed:{speed}</span>
-          <span> Error:{errors}</span>
+          <span> Speed: {speed}</span>
+          <span> Error: {errors}</span>
         </div>
       </section>
     </div>
+
+
   );
 
 }
