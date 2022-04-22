@@ -52,6 +52,7 @@ export default function Multiplayer() {
     socketRef.current.on(MATCH_END_EVENT, () => {
       console.log('match is over');
       setWait(true);
+      setServerPrompt('');
     })
 
   }, []);

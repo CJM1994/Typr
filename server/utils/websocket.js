@@ -5,19 +5,16 @@ const createIO = (io) => {
 
   io.on("connection", (socket) => {
 
-    // pass rooms as parameters
-    // join room button separate from ready button (disable until enough players)
-
+    // Creates a room if it doesn't exist and add client to the room with blank data
     socket.on("joinMatch", async (roomName = 'default') => {
-      // join room logic
-      console.log(`${socket.id} joined room: ${roomName}`);
-      socket.join(roomName); // broadcast how many players in the gameroom to each player
+      socket.join(roomName);
 
       if (!gameStates[roomName]) {
         gameStates[roomName] = {};
       };
 
       gameStates[roomName][socket.id] = {};
+      numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
 
       players[socket.id] = {
         position: 0,
@@ -28,8 +25,8 @@ const createIO = (io) => {
         roomName,
       };
       
-      // ready to start match button, refactor into function
-      if (Object.keys(gameStates[roomName]).length >= 2) {
+      // Serve a prompt to a server when a room is full and ready
+      if (numberOfPlayersInRoom === 2) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
 
@@ -41,6 +38,7 @@ const createIO = (io) => {
       };
     });
 
+    // Serve users up to date data on each clients progress in the prompt
     socket.on('gameProgress', (counter, errors) => {
 
       const usersRoom = players[socket.id].roomName;
@@ -53,14 +51,17 @@ const createIO = (io) => {
         gameStates[usersRoom][key] = players[key];
       };
 
-      console.log(gameStates);
       io.to(usersRoom).emit('newGameState', gameStates[usersRoom]); // send game state back here
 
     });
 
+    // Reset everything in a room when a prompt is finished, kick clients
     socket.on('promptComplete', () => {
-      console.log('promptComplete');
-      io.to(players[socket.id].roomName).emit('matchOver');
+      const usersRoom = players[socket.id].roomName;
+      gameStates[usersRoom] = {};
+
+      io.to(usersRoom).emit('matchOver');
+      io.in(usersRoom).socketsLeave(usersRoom);
     });
 
   });
