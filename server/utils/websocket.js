@@ -55,6 +55,14 @@ const createIO = (io) => {
       players[socket.id].counter = counter;
       players[socket.id].errors = errors;
       players[socket.id].progress = counter / promptLength;
+
+      let position = 1;
+      for (const key in players) {
+        if (players[key].counter > players[socket.id].counter) {
+          position++;
+        }
+        players[socket.id].position = position;
+      }
       
       for (const key in players) {
         gameStates[usersRoom][key] = players[key];

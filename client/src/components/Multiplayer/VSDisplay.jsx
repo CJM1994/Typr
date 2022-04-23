@@ -24,25 +24,25 @@ export default function VSDisplay(props) {
         <Player
           position={gameState?.player1?.position}
           progress={gameState?.player1?.progress}
-          speed={gameState?.player1?.speed}
+          speed={gameState?.player1?.counter}
           errors={gameState?.player1?.errors}
         />
         <Player
           position={gameState?.player2?.position}
           progress={gameState?.player2?.progress}
-          speed={gameState?.player2?.speed}
+          speed={gameState?.player2?.counter}
           errors={gameState?.player2?.errors}
         />
         <Player
           position={gameState?.player3?.position}
           progress={gameState?.player3?.progress}
-          speed={gameState?.player3?.speed}
+          speed={gameState?.player3?.counter}
           errors={gameState?.player3?.errors}
         />
         <Player
           position={gameState?.player4?.position}
           progress={gameState?.player4?.progress}
-          speed={gameState?.player4?.speed}
+          speed={gameState?.player4?.counter}
           errors={gameState?.player4?.errors}
         />
       </div>
