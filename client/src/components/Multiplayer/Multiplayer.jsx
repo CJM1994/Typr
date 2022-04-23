@@ -16,8 +16,8 @@ export default function Multiplayer() {
   // Boolean if game is in progress or not, is user waiting?
   const [wait, setWait] = useState(true);
 
-  // Holds the name of the room user is currently in
-  const [roomName, setRoomName] = useState();
+  // Holds messages from the server to display on screen
+  const [serverMessage, setServerMessage] = useState('');
 
   // Holds current typing prompt sent from server
   const [serverPrompt, setServerPrompt] = useState("");
@@ -31,10 +31,27 @@ export default function Multiplayer() {
   const NEW_PROMPT_EVENT = "newPrompt";
   const NEW_GAME_STATE_EVENT = 'newGameState';
   const MATCH_END_EVENT = "matchOver";
+  const SERVER_MESSAGE_EVENT = 'serverMessage';
   const socketRef = useRef();
+  let messageTimeout = null;
+  
+  // Use this function to display message with a timeout
+  const addMessageTimeout = (message, timeout) => {
+    if (messageTimeout) {
+      clearTimeout(messageTimeout);
+    };
+    setServerMessage(message)
+    messageTimeout = setTimeout(() => {
+      setServerMessage('');
+    }, timeout)
+  };
 
   useEffect(() => {
     socketRef.current = io();
+
+    socketRef.current.on(SERVER_MESSAGE_EVENT, (message) => {
+      addMessageTimeout(message, 3000);
+    });
 
     // Trigger when lobby is full, new prompt sent
     socketRef.current.on(NEW_PROMPT_EVENT, (prompt) => {
@@ -51,7 +68,6 @@ export default function Multiplayer() {
     });
 
     socketRef.current.on(MATCH_END_EVENT, () => {
-      console.log('match is over');
       setWait(true);
       setServerPrompt(``);
     })
@@ -59,14 +75,20 @@ export default function Multiplayer() {
   }, []);
 
   return (
-    <div className="multiplayer">
-      {wait === true && <>
-        <ServerSelect />
-        <button className="button button--highlighted" onClick={() => joinMatch(socketRef.current)}>
-          Join Default Server
-        </button>
-      </>}
 
+    <div className="multiplayer">
+      {/* Game Select */}
+      {wait === true &&
+        <>
+          <ServerSelect />
+          <button className="button button--highlighted" onClick={() => joinMatch(socketRef.current)}>
+            Join Default Server
+          </button>
+          <p>{serverMessage}</p>
+        </>
+      }
+
+      {/* Game Screen */}
       {wait === false && <>
         <VSDisplay gameState={serverGameState} />
         <Prompt
@@ -80,7 +102,7 @@ export default function Multiplayer() {
 };
 
 // What to do for mp functionality
-// Make game room for new connections
+//
+// Stop people from joining a full lobby
 // When 2 players connected send prompt to players (Hardcode for now)
-// When a player finishes their prompt send complete back to Server
-// When all players send complete to server, server sends back game result
+// send back who won when someone finishes
