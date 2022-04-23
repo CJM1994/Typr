@@ -1,8 +1,9 @@
 const express = require("express");
-const app = express();
 const morgan = require("morgan"); // Server logs
 const dotenv = require("dotenv"); // Load ENV
 const mongoose = require("mongoose");
+const cors = require('cors');
+const app = express();
 
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Middleware
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.static("public")); // Serve static files
 app.use(express.json());

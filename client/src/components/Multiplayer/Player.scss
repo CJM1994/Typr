@@ -1,30 +1,63 @@
 .player-card {
-  position: relative;
-  width: 75%;
-  background-color: #F6F0F0;
-  padding: 10px;
-  border: 2px solid black;
+  display: flex;
+  width: 100%;
+  background-color: transparent;
+  color: #635F6F;
+  border-bottom: 2px solid #D7D0CF;
 
-  .car {
-    position: relative;
-  }
-
-  section {
+  .track {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    width: 90%;
+    padding: 0 10px;
 
-    .user-stats {
+    .player {
       display: flex;
-      width: 40%;
-      height: 25px;
-      justify-content: space-around;
-      background-color: lightgrey;
-      position: absolute; 
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      right: 0; 
-      bottom: 0;
-      border-top-left-radius: 25px;
+      width:fit-content;
+      color: #444256;
+    
+      label {
+        display: flex;
+        margin: 0;
+      }
+    
+      .car {
+        display: flex;
+        height: 40px;
+        margin: 5px 0;
+      }
     }
   }
+
+  .player-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    word-wrap: normal;
+    
+  }
+
+  // section {
+  //   display: flex;
+  //   align-items: flex-end;
+  //   justify-content: space-between;
+
+  //   .user-stats {
+  //     display: flex;
+  //     width: 40%;
+  //     height: 25px;
+  //     justify-content: space-around;
+  //     background-color: #D7D0CF;
+  //     position: absolute; 
+  //     align-items: center;
+  //     right: 0; 
+  //     bottom: 0;
+  //     border-top-left-radius: 25px;
+  //   }
+  // }
 }
+

@@ -1,0 +1,21 @@
+.mp-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  outline: none;
+}
+
+.information--mp {
+  margin: 20px 0;
+  width: 100%;
+}
