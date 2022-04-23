@@ -15,7 +15,7 @@ const createIO = (io) => {
 
       // Stop players from joining full rooms here
       numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
-      if (numberOfPlayersInRoom >= 2) {
+      if (numberOfPlayersInRoom >= 4) {
         io.sockets.sockets.get(socket.id).emit('serverMessage', 'This server is currently full, please try another!');
       } else {
         socket.join(roomName);
@@ -35,7 +35,7 @@ const createIO = (io) => {
       };
       
       // Serve a prompt to a server when a room is full and ready
-      if (numberOfPlayersInRoom === 2) {
+      if (numberOfPlayersInRoom === 4) {
         const promptSchema = require("../models/prompt");
         await promptSchema.find({ language: "Javascript" }).then((prompt) => {
 

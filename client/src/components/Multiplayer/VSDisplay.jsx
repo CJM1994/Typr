@@ -13,6 +13,8 @@ export default function VSDisplay(props) {
 
     console.log('Player1', gameState.player1);
     console.log('Player2', gameState.player2);
+    console.log('Player3', gameState.player3);
+    console.log('Player4', gameState.player4);
 
   }, [gameState]);
 
@@ -30,6 +32,18 @@ export default function VSDisplay(props) {
           progress={gameState?.player2?.progress}
           speed={gameState?.player2?.speed}
           errors={gameState?.player2?.errors}
+        />
+        <Player
+          position={gameState?.player3?.position}
+          progress={gameState?.player3?.progress}
+          speed={gameState?.player3?.speed}
+          errors={gameState?.player3?.errors}
+        />
+        <Player
+          position={gameState?.player4?.position}
+          progress={gameState?.player4?.progress}
+          speed={gameState?.player4?.speed}
+          errors={gameState?.player4?.errors}
         />
       </div>
       <article className="information information--mp">

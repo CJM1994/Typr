@@ -26,6 +26,8 @@ export default function Multiplayer() {
   const [serverGameState, setServerGameState] = useState({
     player1: {},
     player2: {},
+    player3: {},
+    player4: {},
   });
 
   const NEW_PROMPT_EVENT = "newPrompt";
@@ -64,6 +66,8 @@ export default function Multiplayer() {
       setServerGameState({
         player1: Object.values(gameState)[0],
         player2: Object.values(gameState)[1],
+        player3: Object.values(gameState)[2],
+        player4: Object.values(gameState)[3],
       });
     });
 
