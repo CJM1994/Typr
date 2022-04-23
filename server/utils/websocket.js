@@ -13,6 +13,12 @@ const createIO = (io) => {
         gameStates[roomName] = {};
       };
 
+      // Stop players from joining full rooms here
+      numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
+      if (numberOfPlayersInRoom >= 2) {
+        io.sockets.sockets.get(socket.id).emit('serverMessage');
+      };
+
       gameStates[roomName][socket.id] = {};
       numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
 
