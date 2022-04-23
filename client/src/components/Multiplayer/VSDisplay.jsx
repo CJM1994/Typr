@@ -26,24 +26,28 @@ export default function VSDisplay(props) {
           progress={gameState?.player1?.progress}
           speed={gameState?.player1?.counter}
           errors={gameState?.player1?.errors}
+          carColor='blue'
         />
         <Player
           position={gameState?.player2?.position}
           progress={gameState?.player2?.progress}
           speed={gameState?.player2?.counter}
           errors={gameState?.player2?.errors}
+          carColor='red'
         />
         <Player
           position={gameState?.player3?.position}
           progress={gameState?.player3?.progress}
           speed={gameState?.player3?.counter}
           errors={gameState?.player3?.errors}
+          carColor='green'
         />
         <Player
           position={gameState?.player4?.position}
           progress={gameState?.player4?.progress}
           speed={gameState?.player4?.counter}
           errors={gameState?.player4?.errors}
+          carColor='orange'
         />
       </div>
       <article className="information information--mp">
