@@ -32,12 +32,24 @@ export default function Multiplayer() {
   const MATCH_END_EVENT = "matchOver";
   const SERVER_MESSAGE_EVENT = 'serverMessage';
   const socketRef = useRef();
+  let messageTimeout = null;
+  
+  // Use this function to display message with a timeout
+  const addMessageTimeout = (message, timeout) => {
+    if (messageTimeout) {
+      clearTimeout(messageTimeout);
+    };
+    setServerMessage(message)
+    messageTimeout = setTimeout(() => {
+      setServerMessage('');
+    }, timeout)
+  };
 
   useEffect(() => {
     socketRef.current = io();
 
-    socketRef.current.on(SERVER_MESSAGE_EVENT, () => {
-      setServerMessage('This server is currently full, please try another!')
+    socketRef.current.on(SERVER_MESSAGE_EVENT, (message) => {
+      addMessageTimeout(message, 3000);
     });
 
     // Trigger when lobby is full, new prompt sent

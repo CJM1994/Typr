@@ -7,7 +7,7 @@ const createIO = (io) => {
 
     // Creates a room if it doesn't exist and add client to the room with blank data
     socket.on("joinMatch", async (roomName = 'default') => {
-      socket.join(roomName);
+      
 
       if (!gameStates[roomName]) {
         gameStates[roomName] = {};
@@ -16,7 +16,10 @@ const createIO = (io) => {
       // Stop players from joining full rooms here
       numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
       if (numberOfPlayersInRoom >= 2) {
-        io.sockets.sockets.get(socket.id).emit('serverMessage');
+        io.sockets.sockets.get(socket.id).emit('serverMessage', 'This server is currently full, please try another!');
+      } else {
+        socket.join(roomName);
+        io.sockets.sockets.get(socket.id).emit('serverMessage', `Joined: ${roomName}, please wait until server is full`);
       };
 
       gameStates[roomName][socket.id] = {};
