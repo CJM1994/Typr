@@ -6,10 +6,8 @@ export default function SignedIn() {
   const { userProps } = useContext(UserContext);
   const { isAuthenticated } = userProps;
   return (
-    isAuthenticated && (
-      <>
-        <div className="sideButton">Logged As: {userProps.user.nickname}</div>
-      </>
-    )
+    <>
+      {isAuthenticated && <div className="sideButton loggedIn">{`Logged in as:\n${userProps.user.nickname}`}</div>}
+    </>
   );
 };
