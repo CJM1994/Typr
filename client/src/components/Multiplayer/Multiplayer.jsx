@@ -1,10 +1,11 @@
-import React from 'react';
-import './Multiplayer.scss'
+import React, { useEffect, useState, useRef } from "react";
 import Prompt from './Prompt';
+
+import './Multiplayer.scss'
 import '../Main/Button.scss'
+
 import VSDisplay from './VSDisplay';
 import ServerSelect from './ServerSelect';
-import { useEffect, useState, useRef } from "react";
 
 // Websocket functions
 const { io } = require("socket.io-client");
@@ -19,7 +20,7 @@ export default function Multiplayer() {
   const [roomName, setRoomName] = useState();
 
   // Holds current typing prompt sent from server
-  const [serverPrompt, setServerPrompt] = useState('');
+  const [serverPrompt, setServerPrompt] = useState("");
 
   // Holds information about each player in current match
   const [serverGameState, setServerGameState] = useState({
@@ -52,19 +53,19 @@ export default function Multiplayer() {
     socketRef.current.on(MATCH_END_EVENT, () => {
       console.log('match is over');
       setWait(true);
-      setServerPrompt('');
+      setServerPrompt(``);
     })
 
   }, []);
 
   return (
-    <div>
-      {wait === true && <ServerSelect />}
-      {wait === true &&
-        <button onClick={() => joinMatch(socketRef.current)}>
+    <div className="multiplayer">
+      {wait === true && <>
+        <ServerSelect />
+        <button className="button button--highlighted" onClick={() => joinMatch(socketRef.current)}>
           Join Default Server
         </button>
-      }
+      </>}
 
       {wait === false && <>
         <VSDisplay gameState={serverGameState} />
@@ -76,7 +77,6 @@ export default function Multiplayer() {
       </>}
     </div>
   )
-
 };
 
 // What to do for mp functionality

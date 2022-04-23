@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useKeyPress from "../../hooks/useKeyPress";
 import useTimer from "../../hooks/useTimer";
-import "../Main/Display.scss";
+
+import "./Prompt.scss";
+
 import Lines from "../Main/Lines";
 
 export default function Prompt(props) {
@@ -74,24 +76,19 @@ export default function Prompt(props) {
   }, [counter])
 
   return (
-    <div className="display">
-      <p>Time: {time}</p>
-      <div
-        className="codeContainer"
-        tabIndex={0}
-      >
-        <div className="codeSideline" />
-        <div>
-          <Lines
-            lines={codeLines}
-            lengths={lengths}
-            indexes={wrongIndexes}
-            counter={counter}
-            line={input.line}
-          />
-        </div>
-        <p>Counter: {counter}</p>
-        <p>Errors: {wrongIndexes.length}</p>
+    <div
+      className="mp-codeContainer"
+      tabIndex={0}
+    >
+      <div className="codeSideline" />
+      <div className="code">
+        <Lines
+          lines={codeLines}
+          lengths={lengths}
+          indexes={wrongIndexes}
+          counter={counter}
+          line={input.line}
+        />
       </div>
     </div>
   );
