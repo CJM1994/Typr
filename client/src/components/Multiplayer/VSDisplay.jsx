@@ -22,39 +22,39 @@ export default function VSDisplay(props) {
     <div className="mp-display">
       <div className='players'>
         <Player
-          position={gameState?.player1?.position}
-          progress={gameState?.player1?.progress}
-          speed={gameState?.player1?.counter}
-          errors={gameState?.player1?.errors}
+          position={gameState?.player1?.position || 0}
+          progress={gameState?.player1?.progress || 0}
+          speed={gameState?.player1?.counter || 0}
+          errors={gameState?.player1?.errors || 0}
           carColor='blue'
         />
         <Player
-          position={gameState?.player2?.position}
-          progress={gameState?.player2?.progress}
-          speed={gameState?.player2?.counter}
-          errors={gameState?.player2?.errors}
+          position={gameState?.player2?.position || 0}
+          progress={gameState?.player2?.progress || 0}
+          speed={gameState?.player2?.counter || 0}
+          errors={gameState?.player2?.errors || 0}
           carColor='red'
         />
         <Player
-          position={gameState?.player3?.position}
-          progress={gameState?.player3?.progress}
-          speed={gameState?.player3?.counter}
-          errors={gameState?.player3?.errors}
+          position={gameState?.player3?.position || 0}
+          progress={gameState?.player3?.progress || 0}
+          speed={gameState?.player3?.counter || 0}
+          errors={gameState?.player3?.errors || 0}
           carColor='green'
         />
         <Player
-          position={gameState?.player4?.position}
-          progress={gameState?.player4?.progress}
-          speed={gameState?.player4?.counter}
-          errors={gameState?.player4?.errors}
+          position={gameState?.player4?.position || 0}
+          progress={gameState?.player4?.progress || 0}
+          speed={gameState?.player4?.counter || 0}
+          errors={gameState?.player4?.errors || 0}
           carColor='orange'
         />
       </div>
       <article className="information information--mp">
-        <span className="info">{`Language: <language>`}</span>
-        <span className="info">{`Category: <category>`}</span>
+        <span className="info">{`Language: <Javascript>`}</span>
+        <span className="info">{`Category: <All>`}</span>
         <span className="info">{`Time: <time>`}</span>
       </article>
     </div>
   );
-}
+};

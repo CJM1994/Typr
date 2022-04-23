@@ -19,6 +19,7 @@ export default function Sidebar(props) {
       <SidebarButton text="High Scores" onClick={setView} />
       <SidebarButton text="Help" onClick={setView} />
       <SignedIn/>
+      <img src="https://cdn.discordapp.com/attachments/955930052036558879/966114918036307978/My_project4.png" />
     </section>
   );
 };

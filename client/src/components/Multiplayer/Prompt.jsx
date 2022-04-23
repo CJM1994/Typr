@@ -10,26 +10,15 @@ export default function Prompt(props) {
 
   const { onComplete, serverPrompt, onProgress } = props;
 
-  const { prompt, input, lengths, fetchPrompt, resetInput, handleKeypress, setFocus, endInput, setPrompt } = useKeyPress();
+  const { prompt, input, lengths, resetInput, handleKeypress, setFocus, endInput, setPrompt } = useKeyPress();
   const { time, running, toggleTimer, resetTimer } = useTimer();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
 
-  const [stats, setStats] = useState({
-    wordsPerMin: 0,
-    accuracy: 0,
-    score: 0
-  });
-
   function newPrompt() {
-    setPrompt({codeLines: serverPrompt, language: 'Javascript', category: 'food'});
+    setPrompt({codeLines: serverPrompt, language: 'Javascript', category: 'All'});
     resetInput();
     resetTimer();
-    setStats({
-      wordsPerMin: 0,
-      accuracy: 0,
-      score: 0
-    });
   }
 
   // THIS IS NEEDED FOR INITIAL PROMPT TO SHOW UP

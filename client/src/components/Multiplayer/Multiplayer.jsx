@@ -74,7 +74,13 @@ export default function Multiplayer() {
     socketRef.current.on(MATCH_END_EVENT, () => {
       setWait(true);
       setServerPrompt(``);
-    })
+      setServerGameState({
+        player1: {},
+        player2: {},
+        player3: {},
+        player4: {},
+      });
+    });
 
   }, []);
 
