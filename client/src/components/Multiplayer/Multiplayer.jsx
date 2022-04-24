@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect,useContext, useState, useRef } from "react";
 import Prompt from './Prompt';
 
-import './Multiplayer.scss'
-import '../Main/Button.scss'
-
+import './Multiplayer.scss';
+import '../Main/Button.scss';
+import { UserContext } from "../App";
 import VSDisplay from './VSDisplay';
 import ServerSelect from './ServerSelect';
 
 // Websocket functions
 const { io } = require("socket.io-client");
-const { joinMatch, sendGameProgress, promptComplete } = require('./api')
+const { joinMatch, sendGameProgress, promptComplete } = require('./api');
 
 export default function Multiplayer() {
+  const { userProps } = useContext(UserContext);
 
   // Boolean if game is in progress or not, is user waiting?
   const [wait, setWait] = useState(true);
@@ -31,25 +32,27 @@ export default function Multiplayer() {
   });
 
   const NEW_PROMPT_EVENT = "newPrompt";
+  const NEW_USER_JOINED = "newUser";
   const NEW_GAME_STATE_EVENT = 'newGameState';
   const MATCH_END_EVENT = "matchOver";
   const SERVER_MESSAGE_EVENT = 'serverMessage';
   const socketRef = useRef();
   let messageTimeout = null;
-  
+
   // Use this function to display message with a timeout
   const addMessageTimeout = (message, timeout) => {
     if (messageTimeout) {
       clearTimeout(messageTimeout);
     };
-    setServerMessage(message)
+    setServerMessage(message);
     messageTimeout = setTimeout(() => {
       setServerMessage('');
-    }, timeout)
+    }, timeout);
   };
 
   useEffect(() => {
-    socketRef.current = io();
+    
+    socketRef.current = io({auth:{ user_id: userProps?.user?.nickname || null}});
 
     socketRef.current.on(SERVER_MESSAGE_EVENT, (message) => {
       addMessageTimeout(message, 3000);
@@ -71,10 +74,35 @@ export default function Multiplayer() {
       });
     });
 
+    socketRef.current.on(NEW_USER_JOINED, (userInfo) => {
+
+      setServerGameState((prev) => {
+
+        if (userInfo.player_pos === 1) {
+          prev.player1 = { ...prev.player1, user_id: userInfo.user_id };
+        } 
+        else if (userInfo.player_pos === 2) {
+          prev.player2 = { ...prev.player2, user_id: userInfo.user_id };
+        }
+        else if(userInfo.player_pos === 3){
+          prev.player3 = {...prev.player3, user_id: userInfo.user_id}
+        }
+        else if (userInfo.player_pos === 4) {
+          prev.player4 = { ...prev.player4, user_id: userInfo.user_id };
+        }
+    
+
+        return ({
+          ...prev
+        }
+        );
+      });
+    });
+
     socketRef.current.on(MATCH_END_EVENT, () => {
       setWait(true);
       setServerPrompt(``);
-    })
+    });
 
   }, []);
 
@@ -102,7 +130,7 @@ export default function Multiplayer() {
         />
       </>}
     </div>
-  )
+  );
 };
 
 // What to do for mp functionality

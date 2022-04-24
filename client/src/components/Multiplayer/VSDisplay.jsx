@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import "./VSDisplay.scss"
+import "./VSDisplay.scss";
 import "../Main/Information.scss";
 
 import Player from "./Player";
@@ -22,6 +22,7 @@ export default function VSDisplay(props) {
     <div className="mp-display">
       <div className='players'>
         <Player
+          user_id={gameState?.player1?.user_id}
           position={gameState?.player1?.position}
           progress={gameState?.player1?.progress}
           speed={gameState?.player1?.counter}
@@ -29,6 +30,7 @@ export default function VSDisplay(props) {
           carColor='blue'
         />
         <Player
+          user_id={gameState?.player2?.user_id}
           position={gameState?.player2?.position}
           progress={gameState?.player2?.progress}
           speed={gameState?.player2?.counter}
@@ -36,6 +38,7 @@ export default function VSDisplay(props) {
           carColor='red'
         />
         <Player
+          user_id={gameState?.player3?.user_id}
           position={gameState?.player3?.position}
           progress={gameState?.player3?.progress}
           speed={gameState?.player3?.counter}
@@ -43,6 +46,7 @@ export default function VSDisplay(props) {
           carColor='green'
         />
         <Player
+          user_id={gameState?.player4?.user_id}
           position={gameState?.player4?.position}
           progress={gameState?.player4?.progress}
           speed={gameState?.player4?.counter}
