@@ -41,9 +41,7 @@ const createIO = (io) => {
         counter: 0,
         roomName,
       }; 
-
-      console.log(players[socket.id]);
-
+      
       // Serve a prompt to a server when a room is full and ready
       if (numberOfPlayersInRoom === 4) {
         const promptSchema = require("../models/prompt");

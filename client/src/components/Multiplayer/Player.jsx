@@ -12,11 +12,10 @@ export default function Player(props) {
     setCarPosition(progress * 2400);
   }, [progress]);
 
-
   return (
     <div className="player-card">
       <div className="track">
-        <div className="player" style={{ left: `${carPosition}%`, '-webkit-transform': `translate(${carPosition}%, 0%)`, color: `${carColor}` }}>
+        <div className="player" style={{ left: `${carPosition}%`, 'WebkitTransform': `translate(${carPosition}%, 0%)`, color: `${carColor}` }}>
           <label>{`<${nickname}>`}</label>
           <FontAwesomeIcon icon={faCarSide} className="car" />
         </div>

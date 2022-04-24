@@ -12,7 +12,7 @@ export default function Prompt(props) {
   const { wrongIndexes, counter } = input;
 
   function newPrompt() {
-    setPrompt({codeLines: serverPrompt, language: 'Javascript', category: 'All'});
+    setPrompt({ codeLines: serverPrompt, language: 'Javascript', category: 'All' });
     resetInput();
     resetTimer();
     toggleTimer(true);
