@@ -123,9 +123,3 @@ export default function Multiplayer() {
     </div>
   )
 };
-
-// What to do for mp functionality
-//
-// Stop people from joining a full lobby
-// When 2 players connected send prompt to players (Hardcode for now)
-// send back who won when someone finishes

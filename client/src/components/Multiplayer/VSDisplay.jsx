@@ -9,6 +9,9 @@ export default function VSDisplay(props) {
 
   const { gameState, time } = props;
 
+  const date = new Date(null);
+  date.setMilliseconds(time);
+
   useEffect(() => {
 
   }, [gameState]);
@@ -52,7 +55,7 @@ export default function VSDisplay(props) {
       <article className="information information--mp">
         <span className="info">{`Language: <Javascript>`}</span>
         <span className="info">{`Category: <All>`}</span>
-        <span className="info">{`Time: <${time}>`}</span>
+        <span className="info">{`Time: <${date.toISOString().substr(14, 8)}>`}</span>
       </article>
     </div>
   );
