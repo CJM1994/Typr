@@ -6,7 +6,7 @@ import './Player.scss';
 
 export default function Player(props) {
   const [carPosition, setCarPosition] = useState(0);
-  const { position, progress, speed, errors, carColor } = props;
+  const { position, progress, speed, errors, carColor, nickname } = props;
 
   useEffect(() => {
     setCarPosition(progress * 2400);
@@ -17,7 +17,7 @@ export default function Player(props) {
     <div className="player-card">
       <div className="track">
         <div className="player" style={{ left: `${carPosition}%`, '-webkit-transform': `translate(${carPosition}%, 0%)`, color: `${carColor}` }}>
-          <label>{`<user>`}</label>
+          <label>{`<${nickname}>`}</label>
           <FontAwesomeIcon icon={faCarSide} className="car" />
         </div>
       </div>
