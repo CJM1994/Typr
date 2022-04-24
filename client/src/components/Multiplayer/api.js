@@ -1,5 +1,5 @@
-const joinMatch = (socket) => {
-  socket.emit('joinMatch');
+const joinMatch = (socket, userProps) => {
+  socket.emit('joinMatch', 'default', userProps);
 }
 
 const sendGameProgress = (socket, counter, errors) => {

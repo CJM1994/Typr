@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { UserContext } from "../App";
 import Prompt from './Prompt';
 
 import './Multiplayer.scss'
@@ -16,6 +17,8 @@ export default function Multiplayer() {
 
   // Timer
   const { time, running, toggleTimer, resetTimer } = useTimer();
+  // User information
+  const { userProps } = useContext(UserContext);
 
   // Boolean if game is in progress or not, is user waiting?
   const [wait, setWait] = useState(true);
@@ -40,7 +43,7 @@ export default function Multiplayer() {
   const SERVER_MESSAGE_EVENT = 'serverMessage';
   const socketRef = useRef();
   let messageTimeout = null;
-  
+
   // Use this function to display message with a timeout
   const addMessageTimeout = (message, timeout) => {
     if (messageTimeout) {
@@ -95,7 +98,7 @@ export default function Multiplayer() {
       {wait === true &&
         <>
           <ServerSelect />
-          <button className="button button--highlighted" onClick={() => joinMatch(socketRef.current)}>
+          <button className="button button--highlighted" onClick={() => joinMatch(socketRef.current, userProps)}>
             Join Default Server
           </button>
           <p>{serverMessage}</p>
@@ -104,7 +107,10 @@ export default function Multiplayer() {
 
       {/* Game Screen */}
       {wait === false && <>
-        <VSDisplay gameState={serverGameState} time={time} />
+        <VSDisplay
+          gameState={serverGameState}
+          time={time}
+        />
         <Prompt
           onComplete={() => promptComplete(socketRef.current)}
           serverPrompt={serverPrompt}
