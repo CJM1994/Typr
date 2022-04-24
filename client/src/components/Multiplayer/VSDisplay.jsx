@@ -7,7 +7,7 @@ import Player from "./Player";
 
 export default function VSDisplay(props) {
 
-  const { gameState } = props;
+  const { gameState, time } = props;
 
   useEffect(() => {
 
@@ -53,7 +53,7 @@ export default function VSDisplay(props) {
       <article className="information information--mp">
         <span className="info">{`Language: <Javascript>`}</span>
         <span className="info">{`Category: <All>`}</span>
-        <span className="info">{`Time: <time>`}</span>
+        <span className="info">{`Time: <${time}>`}</span>
       </article>
     </div>
   );

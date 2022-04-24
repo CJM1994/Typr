@@ -6,12 +6,16 @@ import '../Main/Button.scss'
 
 import VSDisplay from './VSDisplay';
 import ServerSelect from './ServerSelect';
+import useTimer from '../../hooks/useTimer';
 
 // Websocket functions
 const { io } = require("socket.io-client");
 const { joinMatch, sendGameProgress, promptComplete } = require('./api')
 
 export default function Multiplayer() {
+
+  // Timer
+  const { time, running, toggleTimer, resetTimer } = useTimer();
 
   // Boolean if game is in progress or not, is user waiting?
   const [wait, setWait] = useState(true);
@@ -100,11 +104,14 @@ export default function Multiplayer() {
 
       {/* Game Screen */}
       {wait === false && <>
-        <VSDisplay gameState={serverGameState} />
+        <VSDisplay gameState={serverGameState} time={time} />
         <Prompt
           onComplete={() => promptComplete(socketRef.current)}
           serverPrompt={serverPrompt}
           onProgress={(counter, errors) => sendGameProgress(socketRef.current, counter, errors)}
+          running={running}
+          toggleTimer={toggleTimer}
+          resetTimer={resetTimer}
         />
       </>}
     </div>
