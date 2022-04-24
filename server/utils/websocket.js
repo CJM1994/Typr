@@ -4,7 +4,6 @@ const createIO = (io) => {
   let promptLength = 0;
 
   io.on("connection", (socket) => {
-
     // Creates a room if it doesn't exist and add client to the room with blank data
     socket.on("joinMatch", async (roomName = 'default') => {
       
@@ -20,12 +19,14 @@ const createIO = (io) => {
       } else {
         socket.join(roomName);
         io.sockets.sockets.get(socket.id).emit('serverMessage', `Joined: ${roomName}, please wait until server is full`);
+        io.to(roomName).emit('newUser', {user_id: socket.handshake.auth.user_id || socket.id, player_pos: numberOfPlayersInRoom + 1});
       };
 
       gameStates[roomName][socket.id] = {};
       numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
 
       players[socket.id] = {
+        user_id: socket.handshake.auth.user_id || socket.id,
         position: 0,
         progress: 0,
         speed: 0,
