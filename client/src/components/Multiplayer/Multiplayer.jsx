@@ -70,6 +70,7 @@ export default function Multiplayer() {
 
     // Trigger on user progress in match
     socketRef.current.on(NEW_GAME_STATE_EVENT, (gameState) => {
+      console.log(gameState);
       setServerGameState({
         player1: Object.values(gameState)[0],
         player2: Object.values(gameState)[1],

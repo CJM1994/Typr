@@ -29,9 +29,6 @@ const createIO = (io) => {
           );
       }
 
-      gameStates[roomName][socket.id] = {};
-      numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
-
       players[socket.id] = {
         nickname: userProps?.user?.nickname || 'guest',
         position: 0,
@@ -41,6 +38,11 @@ const createIO = (io) => {
         counter: 0,
         roomName,
       }; 
+
+      gameStates[roomName][socket.id] = {nickname: players[socket.id].nickname};
+      numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
+
+      io.to(players[socket.id].roomName).emit("newGameState", gameStates[players[socket.id].roomName]);
       
       // Serve a prompt to a server when a room is full and ready
       if (numberOfPlayersInRoom === 4) {
