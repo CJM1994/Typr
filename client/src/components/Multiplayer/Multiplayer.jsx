@@ -17,6 +17,7 @@ export default function Multiplayer() {
 
   // Timer
   const { time, running, toggleTimer, resetTimer } = useTimer();
+
   // User information
   const { userProps } = useContext(UserContext);
 
@@ -27,7 +28,7 @@ export default function Multiplayer() {
   const [serverMessage, setServerMessage] = useState('');
 
   // Holds current typing prompt sent from server
-  const [serverPrompt, setServerPrompt] = useState("");
+  const [serverPrompt, setServerPrompt] = useState('');
 
   // Holds information about each player in current match
   const [serverGameState, setServerGameState] = useState({
@@ -98,10 +99,7 @@ export default function Multiplayer() {
       {/* Game Select */}
       {wait === true &&
         <>
-          <ServerSelect />
-          <button className="button button--highlighted" onClick={() => joinMatch(socketRef.current, userProps)}>
-            Join Default Server
-          </button>
+          <ServerSelect onClick={(server) => joinMatch(socketRef.current, server, userProps)} />
           <p>{serverMessage}</p>
         </>
       }
