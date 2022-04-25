@@ -21,7 +21,7 @@ export default function VSDisplay(props) {
       <div className='players'>
         <Player
           nickname={gameState?.player1?.nickname}
-          position={gameState?.player1?.position || 0}
+          position={gameState?.player1?.position || 4}
           progress={gameState?.player1?.progress || 0}
           speed={gameState?.player1?.counter || 0}
           errors={gameState?.player1?.errors || 0}
@@ -29,7 +29,7 @@ export default function VSDisplay(props) {
         />
         <Player
           nickname={gameState?.player2?.nickname}
-          position={gameState?.player2?.position || 0}
+          position={gameState?.player2?.position || 4}
           progress={gameState?.player2?.progress || 0}
           speed={gameState?.player2?.counter || 0}
           errors={gameState?.player2?.errors || 0}
@@ -37,7 +37,7 @@ export default function VSDisplay(props) {
         />
         <Player
           nickname={gameState?.player3?.nickname}
-          position={gameState?.player3?.position || 0}
+          position={gameState?.player3?.position || 4}
           progress={gameState?.player3?.progress || 0}
           speed={gameState?.player3?.counter || 0}
           errors={gameState?.player3?.errors || 0}
@@ -45,7 +45,7 @@ export default function VSDisplay(props) {
         />
         <Player
           nickname={gameState?.player4?.nickname}
-          position={gameState?.player4?.position || 0}
+          position={gameState?.player4?.position || 4}
           progress={gameState?.player4?.progress || 0}
           speed={gameState?.player4?.counter || 0}
           errors={gameState?.player4?.errors || 0}

@@ -9,13 +9,13 @@ export default function Player(props) {
   const { position, progress, speed, errors, carColor, nickname } = props;
 
   useEffect(() => {
-    setCarPosition(progress * 2400);
+    setCarPosition((progress * 100 * 0.55) + 12.5);
   }, [progress]);
 
   return (
     <div className="player-card">
       <div className="track">
-        <div className="player" style={{ left: `${carPosition}%`, 'WebkitTransform': `translate(${carPosition}%, 0%)`, color: `${carColor}` }}>
+        <div className="player" style={{ left: `${carPosition}%`, position: 'absolute', color: `${carColor}` }}>
           <label>{`<${nickname}>`}</label>
           <FontAwesomeIcon icon={faCarSide} className="car" />
         </div>
