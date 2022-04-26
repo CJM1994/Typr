@@ -102,7 +102,7 @@ const createIO = (io) => {
 
       gameStates[usersRoom] = {};
 
-      io.to(usersRoom).emit("matchOver");
+      io.to(usersRoom).emit("matchOver", winner);
       io.in(usersRoom).socketsLeave(usersRoom);
     });
   });
