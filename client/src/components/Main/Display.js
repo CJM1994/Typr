@@ -80,7 +80,7 @@ export default function Display() {
       });
 
       if (userProps.isAuthenticated) {
-        axios.get(`user/${userProps.user.email}`)
+        axios.get(`https://code-typr.herokuapp.com/user/${userProps.user.email}`)
         .then((res)=>{
         let score = wordsPerMin * accuracy;
        
@@ -93,7 +93,7 @@ export default function Display() {
          }
        })
 
-        axios.patch(`user/statistic/${userProps.user.email}`, {
+        axios.patch(`https://code-typr.herokuapp.com/user/statistic/${userProps.user.email}`, {
           attemptScore: wordsPerMin * accuracy,
           statistics: {
             accuracy: accuracy,

@@ -39,7 +39,7 @@ export default function useKeyPress() {
 
   // function for retrieving a prompt from db
   function fetchPrompt(language) {
-    axios.get(`prompts/${language}`)
+    axios.get(`https://code-typr.herokuapp.com/prompts/${language}`)
       .then((res) => {
         setPrompt((prev) => {
           const index = Math.floor(Math.random() * res.data.length);
