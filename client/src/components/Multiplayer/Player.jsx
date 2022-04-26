@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCarSide } from '@fortawesome/free-solid-svg-icons'
+import { faMotorcycle } from '@fortawesome/free-solid-svg-icons'
 
 import './Player.scss';
 
@@ -21,7 +21,7 @@ export default function Player(props) {
       <div className="track">
         <div className="player" style={{ left: `${carPosition}%`, position: 'absolute', color: `${carColor}` }}>
           <label>{`${nickname || "..."}`}</label>
-          <FontAwesomeIcon icon={faCarSide} className="car" />
+          <FontAwesomeIcon icon={faMotorcycle} className="car" />
         </div>
       </div>
       <div className="player-stats">
