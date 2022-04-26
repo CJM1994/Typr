@@ -10,9 +10,8 @@ export default function Prompt(props) {
   const { prompt, input, lengths, resetInput, handleKeypress, setFocus, endInput, setPrompt } = useKeyPress();
   const { codeLines, language } = prompt;
   const { wrongIndexes, counter } = input;
-
   function newPrompt() {
-    setPrompt({ codeLines: serverPrompt, language: 'Javascript', category: 'All' });
+    setPrompt({codeLines: serverPrompt, language: 'Javascript', category: 'All'});
     resetInput();
     resetTimer();
     toggleTimer(true);
@@ -41,8 +40,7 @@ export default function Prompt(props) {
   // On prompt complete
   useEffect(() => {
     if (input.end) {
-      onComplete(); // send complete message to websocket
-      alert('PROMPT COMPLETE!!!') // This is where websocket should send
+      onComplete()
     }
   }, [input.end]);
 

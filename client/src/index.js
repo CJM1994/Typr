@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import { Auth0Provider } from '@auth0/auth0-react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -16,7 +16,6 @@ ReactDOM.render(
     useRefreshTokens
     cacheLocation="localstorage"
   >
-
     <App />
   </Auth0Provider>,
   document.getElementById('root')
