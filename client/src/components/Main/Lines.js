@@ -14,7 +14,7 @@ export default function Lines(props) {
       wrong={indexes}
       index={counter}
       line={line === i}
-      language={language}
+      language={language || "js"}
     />);
   }
 

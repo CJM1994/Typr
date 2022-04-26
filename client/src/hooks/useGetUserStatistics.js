@@ -60,7 +60,7 @@ export default function useGetUserStatistics(email) {
               totalLessons: res.data[0].statistics.length,
               totalLessonsToday: todaysLessons,
               totalTimeSpent: formatFromSeconds(allTimeSpent),
-              topScore: res.data[0].greatestScore,
+              topScore: Math.round(todaysTopScore) > res.data[0].greatestScore ? Math.round(todaysTopScore) : res.data[0].greatestScore,
               totalTimeSpentToday: formatFromSeconds(todaysTimeSpent),
               avgSpeedToday: todaysWordsPerMin / i,
               topScoreToday: Math.round(todaysTopScore),
