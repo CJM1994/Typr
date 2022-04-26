@@ -65,12 +65,20 @@ const createIO = (io) => {
       players[socket.id].progress = counter / promptLength;
 
       let position = 1;
+      let counters = [];
       for (const key in players) {
-        if (players[key].counter > players[socket.id].counter) {
-          position++;
-        };
-        players[socket.id].position = position;
+        counters.push(players[key].counter);
+        // if (players[key].counter > players[socket.id].counter) {
+        //   position++;
+        // };
+        // players[socket.id].position = position;
       };
+
+      counters = counters.sort().reverse();
+
+      for (const key in players) {
+        players[key].position = counters.indexOf(players[key].counter) + 1;
+      }
 
       for (const key in players) {
         gameStates[usersRoom][key] = players[key];
