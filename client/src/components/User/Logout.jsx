@@ -11,7 +11,7 @@ export default function Logout() {
   return (
     isAuthenticated && (
       <button className="login" onClick={() => logout()}>
-        <FontAwesomeIcon icon={faSmile} size="3x" />
+        <img src={userProps.user.picture} size="3x" />
         <span>Sign Out</span>
       </button>
     )
