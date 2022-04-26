@@ -21,7 +21,7 @@ export default function useGetUserStatistics(email) {
   useEffect(() => {
     const getData = async () => {
       await axios
-        .get(`/user/${email}`)
+        .get(`https://code-typr.herokuapp.com/user/${email}`)
         .then((res) => {
           const userStatistics = res.data[0].statistics;
           const todaysDate = new Date(Date.now());
@@ -70,7 +70,7 @@ export default function useGetUserStatistics(email) {
           return res;
         })
         .then((thisUser) => {
-          axios.get(`/users`).then((res) => {
+          axios.get(`https://code-typr.herokuapp.com/users`).then((res) => {
             const users = res.data;
             const numOfUsers = res.data.length;
             let scoreRank = 0;

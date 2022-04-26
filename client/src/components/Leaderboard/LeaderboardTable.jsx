@@ -6,7 +6,7 @@ export default function LeaderboardTable(props) {
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    axios.get(`topUsers`)
+    axios.get(`https://code-typr.herokuapp.com/topUsers`)
       .then((res) => {
         setUsers(res.data);
       });
