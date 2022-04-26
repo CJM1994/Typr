@@ -4,6 +4,7 @@
   background-color: transparent;
   color: #635F6F;
   border-bottom: 2px solid #D7D0CF;
+  padding-top: 5px;
 
   .track {
     display: flex;
@@ -15,7 +16,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width:fit-content;
+      width: fit-content;
     
       label {
         display: flex;
@@ -25,7 +26,6 @@
       .car {
         display: flex;
         height: 40px;
-        margin: 5px 0;
       }
     }
   }
@@ -37,26 +37,6 @@
     align-items: center;
     height: 100%;
     word-wrap: normal;
-    
   }
-
-  // section {
-  //   display: flex;
-  //   align-items: flex-end;
-  //   justify-content: space-between;
-
-  //   .user-stats {
-  //     display: flex;
-  //     width: 40%;
-  //     height: 25px;
-  //     justify-content: space-around;
-  //     background-color: #D7D0CF;
-  //     position: absolute; 
-  //     align-items: center;
-  //     right: 0; 
-  //     bottom: 0;
-  //     border-top-left-radius: 25px;
-  //   }
-  // }
 }
 
