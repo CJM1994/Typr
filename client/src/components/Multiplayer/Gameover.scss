@@ -1,62 +1,27 @@
-.player-card {
+.gameover-card {
   display: flex;
-  width: 100%;
-  background-color: transparent;
-  color: #635F6F;
-  border-bottom: 2px solid #D7D0CF;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #D7D0CF;
+  padding: 50px 75px;
 
-  .track {
-    display: flex;
-    width: 90%;
-    padding: 0 10px;
-
-    .player {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width:fit-content;
-    
-      label {
-        display: flex;
-        margin: 0;
-      }
-    
-      .car {
-        display: flex;
-        height: 40px;
-        margin: 5px 0;
-      }
-    }
+  h1 {
+    margin: 0;
   }
 
-  .player-stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    word-wrap: normal;
-    
+  h2 {
+    font-weight: normal;
   }
 
-  // section {
-  //   display: flex;
-  //   align-items: flex-end;
-  //   justify-content: space-between;
-
-  //   .user-stats {
-  //     display: flex;
-  //     width: 40%;
-  //     height: 25px;
-  //     justify-content: space-around;
-  //     background-color: #D7D0CF;
-  //     position: absolute; 
-  //     align-items: center;
-  //     right: 0; 
-  //     bottom: 0;
-  //     border-top-left-radius: 25px;
-  //   }
-  // }
+  button {
+    color: #444256;
+    background-color: #E0D9D9;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-left: 5px;
+    color: white;
+    background-color: #444256;
+    padding: 10px;
+  }
 }
-
