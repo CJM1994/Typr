@@ -17,10 +17,12 @@
   width: 75%;
   margin: 20px 0;
   outline: none;
+  padding: 10px;
+  background-color: #232323;
+  border-radius: 10px;
 }
 
 .code {
-
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -39,7 +41,7 @@
   width: 3px;
   height: 97.5%;
   min-height: 35px;
-  background-color: #E0D9D9;
+  background-color: #7A7A7A;
   border-radius: 20px;
   margin-right: 10px;
 }
@@ -53,17 +55,15 @@
 }
 
 .indicator {
-  color: #444256;
+  color: #7A7A7A;
   font-size: 20px;
   font-weight: bold;
 }
 
-// Optional Border/Background for multiplayer text area
-
-// Optional Border/Background for multiplayer text area
-
-.code {
-  background-color: rgb(255, 255, 255);
-  padding: 0.5%;
-  border-radius: 15px;
+.indicator--mp {
+  margin-left: 15px;
 }
+
+// Optional Border/Background for multiplayer text area
+
+// Optional Border/Background for multiplayer text area

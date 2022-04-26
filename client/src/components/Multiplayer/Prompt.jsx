@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useKeyPress from "../../hooks/useKeyPress";
 import Lines from "../Main/Lines";
+
+import "../Main/Display.scss";
 import "./Prompt.scss";
 
 export default function Prompt(props) {

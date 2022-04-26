@@ -1,8 +1,16 @@
 .mp-codeContainer {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   width: 75%;
   margin: 0;
   outline: none;
+  padding: 10px;
+  background-color: #232323;
+  border-radius: 10px;
+}
+
+.mp-codecontainer--display {
+  min-height: 270px;
 }

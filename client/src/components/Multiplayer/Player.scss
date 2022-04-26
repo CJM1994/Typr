@@ -8,14 +8,13 @@
   .track {
     display: flex;
     width: 90%;
-    padding: 0 10px;
 
     .player {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width:fit-content;
+      width: fit-content;
     
       label {
         display: flex;
@@ -25,7 +24,6 @@
       .car {
         display: flex;
         height: 40px;
-        margin: 5px 0;
       }
     }
   }
@@ -34,30 +32,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
-    width: 100px;
+    align-items: center;
+    width: 10%;
     height: 100%;
     word-wrap: normal;
-    
   }
-
-  // section {
-  //   display: flex;
-  //   align-items: flex-end;
-  //   justify-content: space-between;
-
-  //   .user-stats {
-  //     display: flex;
-  //     width: 40%;
-  //     height: 25px;
-  //     justify-content: space-around;
-  //     background-color: #D7D0CF;
-  //     position: absolute; 
-  //     align-items: center;
-  //     right: 0; 
-  //     bottom: 0;
-  //     border-top-left-radius: 25px;
-  //   }
-  // }
 }
-

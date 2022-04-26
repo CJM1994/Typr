@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { SpinnerCircularFixed } from 'spinners-react';
+import Servers from "./Servers";
+
+import "./ServerSelect.scss";
 
 export default function ServerSelect(props) {
-
   const [serverChoice, setServerChoice] = useState('server1');
   const [loading, setLoading] = useState(false);
   const { onClick } = props;
@@ -10,7 +12,7 @@ export default function ServerSelect(props) {
   return (
     <>
       {loading === false &&
-        <div>
+        <div className="servers">
           <select name="server" onChange={(event) => setServerChoice(event.target.value)}>
             <option value="server1">Server 1</option>
             <option value="server2">Server 2</option>
@@ -31,14 +33,13 @@ export default function ServerSelect(props) {
           </button>
         </div>}
 
-      {loading === true &&
-        <SpinnerCircularFixed
-          size={100}
-          thickness={100}
-          speed={100}
-          color="rgba(0, 0, 0, 1)"
-          secondaryColor="rgba(0, 0, 0, 0.44)"
-        />}
+      {loading === true && <SpinnerCircularFixed
+        size={100}
+        thickness={100}
+        speed={100}
+        color="rgba(0, 0, 0, 1)"
+        secondaryColor="rgba(0, 0, 0, 0.44)"
+      />}
     </>
   )
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import { SpinnerCircularFixed } from 'spinners-react';
 import { UserContext } from "../App";
-import Prompt from './Prompt';
 
 import './Multiplayer.scss'
 import '../Main/Button.scss'
@@ -8,21 +8,21 @@ import '../Main/Button.scss'
 import VSDisplay from './VSDisplay';
 import ServerSelect from './ServerSelect';
 import useTimer from '../../hooks/useTimer';
+import Servers from "./Servers";
+import Prompt from './Prompt';
 
 // Websocket functions
 const { io } = require("socket.io-client");
 const { joinMatch, sendGameProgress, promptComplete } = require('./api')
 
 export default function Multiplayer() {
-
   // Timer
   const { time, running, toggleTimer, resetTimer } = useTimer();
 
   // User information
   const { userProps } = useContext(UserContext);
 
-  // Boolean if game is in progress or not, is user waiting?
-  const [wait, setWait] = useState(true);
+  const [mode, setMode] = useState("choosing");
 
   // Holds messages from the server to display on screen
   const [serverMessage, setServerMessage] = useState('');
@@ -52,7 +52,15 @@ export default function Multiplayer() {
     };
     setServerMessage(message)
     messageTimeout = setTimeout(() => {
-      setServerMessage('');
+      if (message.includes("another")) {
+        setMode("choosing");
+      }
+      
+      if (message.includes("wait until server is full")) {
+        setServerMessage("Waiting for players...");
+      } else {
+        setServerMessage('');
+      }
     }, timeout)
   };
 
@@ -66,7 +74,7 @@ export default function Multiplayer() {
     // Trigger when lobby is full, new prompt sent
     socketRef.current.on(NEW_PROMPT_EVENT, (prompt) => {
       setServerPrompt(prompt.codeBlock.split('\n'));
-      setWait(false);
+      setMode("game");
     });
 
     // Trigger on user progress in match
@@ -81,7 +89,8 @@ export default function Multiplayer() {
     });
 
     socketRef.current.on(MATCH_END_EVENT, () => {
-      setWait(true);
+      setMode("choosing");
+      setServerMessage("");
       setServerPrompt(``);
       setServerGameState({
         player1: {},
@@ -93,23 +102,47 @@ export default function Multiplayer() {
 
   }, []);
 
-  return (
+  const servers = [];
 
+  for (let i = 1; i <= 10; i++) {
+    servers.push({ value: i });
+  }
+
+  function joinServer(server) {
+    joinMatch(socketRef.current, server, userProps);
+    setMode("waiting");
+  }
+
+  return (
     <div className="multiplayer">
-      {/* Game Select */}
-      {wait === true &&
-        <>
-          <ServerSelect onClick={(server) => joinMatch(socketRef.current, server, userProps)} />
-          <p>{serverMessage}</p>
-        </>
-      }
+      <VSDisplay
+        gameState={serverGameState}
+        time={mode === "choosing" ? 0 : time}
+      />
+      
+      {mode === "choosing" && <>
+        <Servers servers={servers} joinServer={(server) => joinServer(server)} />
+      </>}
+
+      {mode === "waiting" && <>
+        <div className="mp-codeContainer mp-codecontainer--display">
+          <div className="codeSideline" />
+          <div className="code" />
+          <div className="overlay">
+            <SpinnerCircularFixed
+              size={100}
+              thickness={100}
+              speed={100}
+              color="#7A7A7A"
+              secondaryColor="rgba(0, 0, 0, 0.44)"
+            />
+            <span className="indicator indicator--mp">{serverMessage}</span>
+          </div>
+        </div>
+      </>}
 
       {/* Game Screen */}
-      {wait === false && <>
-        <VSDisplay
-          gameState={serverGameState}
-          time={time}
-        />
+      {mode === "game" && <>
         <Prompt
           onComplete={() => promptComplete(socketRef.current)}
           serverPrompt={serverPrompt}
