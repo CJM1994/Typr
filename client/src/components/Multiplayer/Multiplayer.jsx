@@ -67,7 +67,7 @@ export default function Multiplayer() {
   };
 
   useEffect(() => {
-    socketRef.current = io();
+    socketRef.current = io(`https://code-typr.herokuapp.com/`);
 
     socketRef.current.on(SERVER_MESSAGE_EVENT, (message) => {
       addMessageTimeout(message, 5000);
