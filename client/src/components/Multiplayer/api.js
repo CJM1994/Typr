@@ -1,7 +1,7 @@
 const joinMatch = (socket, server, userProps) => {
   if (socket) {
     socket.emit("joinMatch", server, userProps);
-  }
+  };
 };
 
 const sendGameProgress = (socket, counter, errors) => {

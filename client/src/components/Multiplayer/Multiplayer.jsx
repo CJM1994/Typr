@@ -60,7 +60,7 @@ export default function Multiplayer() {
     socketRef.current = io();
 
     socketRef.current.on(SERVER_MESSAGE_EVENT, (message) => {
-      addMessageTimeout(message, 3000);
+      addMessageTimeout(message, 5000);
     });
 
     // Trigger when lobby is full, new prompt sent

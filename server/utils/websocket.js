@@ -8,7 +8,7 @@ const createIO = (io) => {
     socket.on("joinMatch", async (roomName, userProps) => {
       if (!gameStates[roomName]) {
         gameStates[roomName] = {};
-      }
+      };
 
       // Stop players from joining full rooms here
       numberOfPlayersInRoom = Object.keys(gameStates[roomName]).length;
@@ -27,7 +27,7 @@ const createIO = (io) => {
             "serverMessage",
             `Joined: ${roomName}, please wait until server is full`
           );
-      }
+      };
 
       players[socket.id] = {
         nickname: userProps?.user?.nickname || 'guest',
@@ -53,7 +53,7 @@ const createIO = (io) => {
           io.to(roomName).emit("newPrompt", prompt[i]);
           promptLength = prompt[i].codeBlock.length + 1;
         });
-      }
+      };
     });
 
     // Serve users up to date data on each clients progress in the prompt
@@ -68,13 +68,13 @@ const createIO = (io) => {
       for (const key in players) {
         if (players[key].counter > players[socket.id].counter) {
           position++;
-        }
+        };
         players[socket.id].position = position;
-      }
+      };
 
       for (const key in players) {
         gameStates[usersRoom][key] = players[key];
-      }
+      };
 
       io.to(usersRoom).emit("newGameState", gameStates[usersRoom]); // send game state back here
     });

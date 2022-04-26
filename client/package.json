@@ -20,7 +20,8 @@
     "react-scripts": "5.0.0",
     "sass": "^1.50.0",
     "simple-keyboard": "^3.4.84",
-    "socket.io-client": "^4.4.1"
+    "socket.io-client": "^4.4.1",
+    "spinners-react": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
