@@ -2,6 +2,7 @@ const createIO = (io) => {
   const players = {};
   const gameStates = {};
   let promptLength = 0;
+  let winner = "";
 
   io.on("connection", (socket) => {
     // Creates a room if it doesn't exist and add client to the room with blank data
@@ -90,6 +91,15 @@ const createIO = (io) => {
     // Reset everything in a room when a prompt is finished, kick clients
     socket.on("promptComplete", () => {
       const usersRoom = players[socket.id].roomName;
+      let counterMax = 0;
+
+      for(let player in gameStates[usersRoom]){
+        if(gameStates[usersRoom][player].counter > counterMax) {
+          counterMax = gameStates[usersRoom][player].counter;
+          winner = gameStates[usersRoom][player].nickname;
+        }
+      }
+
       gameStates[usersRoom] = {};
 
       io.to(usersRoom).emit("matchOver");
