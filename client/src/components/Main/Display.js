@@ -146,6 +146,7 @@ export default function Display() {
             indexes={wrongIndexes}
             counter={counter}
             line={input.line}
+            language={prompt.language === "Javascript" ? "js" : "python"}
           />
         </div>
         {!input.focused && <div className="overlay">

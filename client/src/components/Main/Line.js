@@ -1,12 +1,12 @@
 import React from "react";
 import classNames from "classnames";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwlLight";
+import theme from "prism-react-renderer/themes/nightOwl";
 
 import "./Line.scss";
 
 export default function Line(props) {
-  const { text, start, wrong, index } = props;
+  const { text, start, wrong, index, language } = props;
 
   function getIndex(line, lineIndex, charIndex) {
     let index = charIndex + start;
@@ -19,7 +19,7 @@ export default function Line(props) {
   }
 
   return (
-    <Highlight  {...defaultProps} theme={theme} code={text} language="js">
+    <Highlight  {...defaultProps} theme={theme} code={text} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         tokens.map((line, i) => (
           <pre {...getLineProps({ line, key: i })} className="lineContainer">
