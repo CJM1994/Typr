@@ -1,0 +1,29 @@
+.gameover-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 270px;
+  width: 270px;
+  border: 1px solid #D7D0CF;
+
+  h1 {
+    margin: 0;
+  }
+
+  h2 {
+    font-weight: normal;
+  }
+
+  button {
+    color: #444256;
+    background-color: #E0D9D9;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-left: 5px;
+    color: white;
+    background-color: #444256;
+    padding: 10px;
+  }
+}

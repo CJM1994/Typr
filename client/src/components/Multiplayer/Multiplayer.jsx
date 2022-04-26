@@ -10,6 +10,7 @@ import ServerSelect from './ServerSelect';
 import useTimer from '../../hooks/useTimer';
 import Servers from "./Servers";
 import Prompt from './Prompt';
+import Gameover from "./Gameover";
 
 // Websocket functions
 const { io } = require("socket.io-client");
@@ -23,6 +24,7 @@ export default function Multiplayer() {
   const { userProps } = useContext(UserContext);
 
   const [mode, setMode] = useState("choosing");
+  const [winner, setWinner] = useState("");
 
   // Holds messages from the server to display on screen
   const [serverMessage, setServerMessage] = useState('');
@@ -88,8 +90,9 @@ export default function Multiplayer() {
       });
     });
 
-    socketRef.current.on(MATCH_END_EVENT, () => {
-      setMode("choosing");
+    socketRef.current.on(MATCH_END_EVENT, (winner) => {
+      setWinner(winner);
+      setMode("gameover");
       setServerMessage("");
       setServerPrompt(``);
       setServerGameState({
@@ -152,6 +155,8 @@ export default function Multiplayer() {
           resetTimer={resetTimer}
         />
       </>}
+
+      {mode === "gameover" && <Gameover winner={winner} setMode={setMode} />}
     </div>
   )
 };
