@@ -46,6 +46,7 @@ export default function Multiplayer() {
   const SERVER_MESSAGE_EVENT = 'serverMessage';
   const socketRef = useRef();
   let messageTimeout = null;
+  let test = 1;
 
   // Use this function to display message with a timeout
   const addMessageTimeout = (message, timeout) => {
