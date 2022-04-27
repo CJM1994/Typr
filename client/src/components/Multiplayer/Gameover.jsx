@@ -8,7 +8,7 @@ export default function Gameover(props) {
       <h1>Game Over!</h1>
       <h2>Winner: {props.winner}</h2>
       <span>
-        <button type='button' onClick={()=> props.setMode("choosing")}>Return to lobbies</button>
+        <button type='button' onClick={()=> props.setMode("choosing")}>Return To Lobby</button>
       </span>
     </div>
   );
