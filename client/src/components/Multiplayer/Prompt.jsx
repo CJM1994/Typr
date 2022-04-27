@@ -44,7 +44,6 @@ export default function Prompt(props) {
   useEffect(() => {
     if (input.end) {
       onComplete(); // send complete message to websocket
-      alert('PROMPT COMPLETE!!!') // This is where websocket should send
     }
   }, [input.end]);
 

@@ -32,6 +32,12 @@ export default function Multiplayer() {
   // Holds current typing prompt sent from server
   const [serverPrompt, setServerPrompt] = useState('');
 
+  // Holds current prompt language sent from server
+  const [promptLanguage, setPromptLanguage] = useState('...');
+
+  // Holds current prompt language sent from server
+  const [promptCategory, setPromptCategory] = useState('...');
+
   // Holds information about each player in current match
   const [serverGameState, setServerGameState] = useState({
     player1: {},
@@ -57,7 +63,7 @@ export default function Multiplayer() {
       if (message.includes("another")) {
         setMode("choosing");
       }
-      
+
       if (message.includes("wait until server is full")) {
         setServerMessage("Waiting for players...");
       } else {
@@ -67,7 +73,7 @@ export default function Multiplayer() {
   };
 
   useEffect(() => {
-    socketRef.current = io(`https://code-typr.herokuapp.com/`);
+    socketRef.current = io();
 
     socketRef.current.on(SERVER_MESSAGE_EVENT, (message) => {
       addMessageTimeout(message, 5000);
@@ -77,6 +83,8 @@ export default function Multiplayer() {
     socketRef.current.on(NEW_PROMPT_EVENT, (prompt) => {
       setServerPrompt(prompt.codeBlock.split('\n'));
       setMode("game");
+      setPromptLanguage(prompt.language);
+      setPromptCategory(prompt.category);
     });
 
     // Trigger on user progress in match
@@ -101,6 +109,7 @@ export default function Multiplayer() {
         player3: {},
         player4: {},
       });
+      resetTimer();
     });
 
   }, []);
@@ -121,8 +130,10 @@ export default function Multiplayer() {
       <VSDisplay
         gameState={serverGameState}
         time={mode === "choosing" ? 0 : time}
+        language={promptLanguage}
+        category={promptCategory}
       />
-      
+
       {mode === "choosing" && <>
         <Servers servers={servers} joinServer={(server) => joinServer(server)} />
       </>}
