@@ -7,24 +7,29 @@ Deployment
 --------
 Try our site here: https://code-typr.netlify.app/
 
+
+Features
+--------
+
+- User Authentication
+- Practice Mode with Javascript, Ruby, and Python Typing Prompts
+- Onscreen Keyboard as Visual Aid
+- Unique Display that Highlights Errrors and Doesn't Require Backspacing
+- Clean UI
+- Syntax Highlighting
+- User Stats and Progression
+- Multiplayer Racing Mode (Websockets)
+- High Scores Page
+
+Installation
+------------
+
 If you would like to deploy locally:
 
     clone the project to a local folder
     run npm install inside both the client folder and the server folder
     run npm start in separate terminals from the server folder and then the client folder
-
-Features
---------
-
-- Be awesome
-- Make things faster
-
-Installation
-------------
-
-Install $project by running:
-
-    install project
+    navigate to localhost:3000 to test the app
 
 Contribute
 ----------
@@ -32,13 +37,3 @@ Contribute
 - Issue Tracker: github.com/$project/$project/issues
 - Source Code: github.com/$project/$project
 
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@google-groups.com
-
-License
--------
-
-The project is licensed under the BSD license.
