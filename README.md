@@ -7,6 +7,9 @@ Deployment
 --------
 Try our site here: https://code-typr.netlify.app/
 
+App in Action
+--------
+!["Adding and checking off items"](https://github.com/ShahrukhFaqiri/Smart_ToDo_App/blob/master/docs/adding%E2%81%84checking.gif)
 
 Features
 --------
