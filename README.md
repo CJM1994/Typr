@@ -13,7 +13,7 @@ App in Action
 Logging in with Auth0
 
 !["Python Practice"](https://github.com/CJM1994/Typr/blob/main/docs/practice_python.png)
-WPM, Accuracy %, and Score appear once prompt is complete and are saved to mongoDB
+WPM, Accuracy %, and Score appear once prompt is complete and are they are saved to mongoDB
 
 !["Profile Page"](https://github.com/CJM1994/Typr/blob/main/docs/profile.png)
 Track Improvements Over Time
