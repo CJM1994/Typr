@@ -9,9 +9,9 @@ Try our site here: https://code-typr.netlify.app/
 
 If you would like to deploy locally:
 
-    import project
-    # Get your stuff done
-    project.do_stuff()
+    clone the project to a local folder
+    run npm install inside both the client folder and the server folder
+    run npm start in separate terminals from the server folder and then the client folder
 
 Features
 --------
