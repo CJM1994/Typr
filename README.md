@@ -6,6 +6,7 @@ Typr is a full-stack web application designed for new developers to improve thei
 Deployment
 --------
 Try our site here: https://code-typr.netlify.app/
+(Please give the heroku backend a few seconds to start up, it is on the free plan)
 
 App in Action
 --------
