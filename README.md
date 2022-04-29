@@ -1,10 +1,13 @@
 Typr
 ========
 
-$project will solve your problem of where to start with documentation,
-by providing a basic explanation of how to do it easily.
+Typr is a full-stack web application designed for new developers to improve their typing skills. It includes Javascript, Ruby and Python typing prompts with contextual highlighting using PrismJS. Users can sign up with our Auth0 authentication in order to track user statistics. There is also a Multiplayer mode where users can race, this was implemented with socketIO.
 
-Look how easy it is to use:
+Deployed
+--------
+Try our site here: https://code-typr.netlify.app/
+
+If you would like to deploy locally:
 
     import project
     # Get your stuff done
