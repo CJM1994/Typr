@@ -9,7 +9,15 @@ Try our site here: https://code-typr.netlify.app/
 
 App in Action
 --------
-!["Adding and checking off items"](https://github.com/ShahrukhFaqiri/Smart_ToDo_App/blob/master/docs/adding%E2%81%84checking.gif)
+!["Logging In"](https://github.com/CJM1994/Typr/blob/main/docs/login.png)
+
+!["Python Practice"](https://github.com/CJM1994/Typr/blob/main/docs/practice_python.png)
+
+!["Profile Page"](https://github.com/CJM1994/Typr/blob/main/docs/profile.png)
+
+!["Server Select"](https://github.com/CJM1994/Typr/blob/main/docs/server_select.png)
+
+!["Multiplayer"](https://github.com/CJM1994/Typr/blob/main/docs/multiplayer.png)
 
 Features
 --------
