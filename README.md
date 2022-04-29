@@ -10,14 +10,19 @@ Try our site here: https://code-typr.netlify.app/
 App in Action
 --------
 !["Logging In"](https://github.com/CJM1994/Typr/blob/main/docs/login.png)
+Logging in with Auth0
 
 !["Python Practice"](https://github.com/CJM1994/Typr/blob/main/docs/practice_python.png)
+WPM, Accuracy %, and Score appear once prompt is complete and are saved to mongoDB
 
 !["Profile Page"](https://github.com/CJM1994/Typr/blob/main/docs/profile.png)
+Track Improvements Over Time
 
 !["Server Select"](https://github.com/CJM1994/Typr/blob/main/docs/server_select.png)
+10 Servers to Select, will activate once 4 users have joined (this can be done from 4 windows for testing purposes)
 
 !["Multiplayer"](https://github.com/CJM1994/Typr/blob/main/docs/multiplayer.png)
+Users names will appear over their avatar in multiplayer
 
 Features
 --------
