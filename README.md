@@ -3,7 +3,7 @@ Typr
 
 Typr is a full-stack web application designed for new developers to improve their typing skills. It includes Javascript, Ruby and Python typing prompts with contextual highlighting using PrismJS. Users can sign up with our Auth0 authentication in order to track user statistics. There is also a Multiplayer mode where users can race, this was implemented with socketIO.
 
-Deployed
+Deployment
 --------
 Try our site here: https://code-typr.netlify.app/
 
