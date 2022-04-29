@@ -34,6 +34,6 @@ If you would like to deploy locally:
 Contribute
 ----------
 
-- Issue Tracker: github.com/$project/$project/issues
-- Source Code: github.com/$project/$project
+- Issue Tracker: https://github.com/CJM1994/Typr/issues
+- Source Code: https://github.com/CJM1994/Typr
 
